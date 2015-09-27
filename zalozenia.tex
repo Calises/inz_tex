@@ -1,0 +1,92 @@
+\chapter{Za³o¿enia koncepcyjne} \label{zalozenia}
+W tym rozdziale chcia³bym szeczó³owo opisaæ poszczególne elementy zastosowane w robocie. 
+\begin{enumerate}
+\item Napêd : \\
+Pojazd poruszaæ siê bêdzie na dwóch g¹siennicach napêdzanych dwoma silnikami pr¹du sta³ego. 
+\item Zasilanie : \\
+Pojazd zasilany bêdzie z 6 V akumulatora ¿elowego ze wzglêdu na jego du¿¹ wyjadnoœæ pr¹dow¹, stosunkowo spor¹ pojemnoœæ oraz mo¿liwoœæ prostego, wielokrotnego ³adowania. 
+\item Wie¿yczka i dzia³o: \\
+Pozycjonowanie tych elementów musi odbywaæ siê przy u¿yciu silniczków, pozwalaj¹cych w sposób precyzyjny okreœliæ aktualne po³o¿enie elementów. W tym celu wykorzystane zostan¹ silniki krokowe z odpowiednimi przek³adniami. Dzia³o wyposa¿one zostanie w mechanizm pozwalaj¹cy na oddanie conajmniej jednego strza³u.
+\item Komputer : \\
+Przetwarzanie obrazów w czasie rzeczywistym jest bardzo wymagaj¹cym sprzêtowo procesem. Wynika to z faktu, i¿ urz¹dzenie musi mo¿liwie jak najszybciej analizowaæ zdjêcia o wysokiej rozdzielczoœci aby móc precyzyjnie namierzyæ cel. Przedstawione kryteria sta³y siê g³ównymi argumentami przy wyborze komputera - Raspberry Pi 2, Model B, którego parametry zosta³y przedstawione poni¿ej : 
+
+\begin{table}[h]
+\label{par_raps}
+\begin{flushright}
+\begin{tabular}{|p{3cm}|p{10cm}|} \hline
+SoC & Broadcom BCM2836 \\ \hline
+CPU & 900 MHz Quad-core ARM Cortex-A7 \\ \hline
+GPU & Dual Core VideoCore IV® Multimedia\\ 
+&Open GL ES 2.0 \\
+&OpenVG \\
+&DMA \\ \hline
+Pamiêæ & 1GB LPDDR2 \\ \hline 
+Wymiary & 85 x 56 x 17 mm \\ \hline
+Zasilanie & Micro USB 5V, 2A \\ \hline
+Ganiazdo internetowe & 10/100 BaseT Ethernet \\ \hline
+Wyjœcie video & HDMI (rev 1.3 , 1.4) \\ \hline
+Wyjœcie audio & 3.5mm jack, HDMI  \\ \hline
+USB & 4 x USB 2.0 \\ \hline
+Z³¹cza GPIO & 40-pin 2.54 mm (100 mil) \\ \hline
+Z³¹cze kamery & 15-pin MIPI Camera Serial Interface (CSI-2) \\ \hline
+Slot kart pamiêci & Micro SDIO \\ \hline
+\end{tabular}
+\caption{Dane techniczne Rapsberry Pi 2, Model B}
+\end{flushright}
+\end{table}
+
+\newpage
+Wyjaœnienia skrótów :
+\begin{itemize}
+\item 
+\textbf{SoC} - \textit{System On Chip} - uk³ad scalony bêd¹cy kompletnym systemem elektronicznym (zawiera w sobie urz¹dzenia peryferyjne).
+\item 
+\textbf{CPU} - \textit{Central Processing Unit} - jednostka obliczeniowa.
+\item 
+\textbf{GPU} - \textit{Graphics Processing Unit} - jednostka odpowiedziala za przetwarzanie grafiki.
+\item 
+\textbf{OpenGL ES} - \textit{OpenGL for Embedded Systems} - zestaw funkcji pozwalaj¹cy na tworzenie obrazów graficznych dla urz¹dzeñ mobilnych.
+\item 
+\textbf{OpenVG} - zbiór funkcji pozwalaj¹cy obs³u¿yæ grafikê wektorowa.
+\item 
+\textbf{DMA} - \textit{Direct Memory Access} - bezpoœredni dostêp do pamiêci.
+\item 
+\textbf{LPDDR2} - \textit{Low Power Double Data Rate} - energooszczêdna pamiêæ operacyjna.
+\item
+\textbf{USB} - \textit{Universal Serial Bus} - uniwersalna magistrala szeregowa.
+\item
+\textbf{HDMI} - \textit{High Definition Multimedia Interface} - multimedialny interfejs wysokiej rozdzielczoœci.
+\item
+\textbf{GPIO} - \textit{General Purpose Input/Output} - interfejs wejœciowo-wyjœciowy systemu komputerowego.
+\item
+\textbf{MIPI} - interfejs realizuj¹cy ³¹cznoœæ z kamer¹.
+\item
+\textbf{SDIO} - \textit{Secure Digital Card Input/Output} - standard pozwalaj¹cy urz¹dzeniom peryferyjnym na korzystanie z karty SD.
+\end{itemize}
+
+\item Kamera : \\
+Dedykowana do Rapsberry Pi kamera o rozdzielczoœci 5Mpx dzia³aj¹cej w trybach :
+\begin{itemize}
+\item HD 1020p - 1920x1080,
+\item 720p - 1280x720,
+\item 480p - 640 x 480.\\
+Kamera zostanie zamocowana na korpusie czo³gu i bêdzie mia³a zapewnion¹ mo¿liwoœæ obrotu wokó³ pionowej osi.
+\end{itemize}
+
+\item Dalmierz : \\
+Czujnik laserowy b¹dŸ ultradŸwiêkowy pozwalaj¹cy na ustalenie odleg³oœci pojazdu od celu.
+
+\end{enumerate}
+
+\section{Etapy realizacji}
+\begin{enumerate}
+\item Wykrywanie celu przy pomocy Rapsberry Pi 2, Model B i dedykowanej kamery.
+\item Zamocowanie kamery oraz czujnika odleg³oœci na obrotowym trzpieniu, lokalizacja celu wzglêdem korpusu pojazdu.
+\item Budowa platformy czo³gu (g¹siennice oraz system napêdowy). Synteza napêdu z komputerem pok³adowym - realizacja prostych ruchów. 
+\item Po³¹czenie systemu namierzania celu z systemem jezdnym - czo³g podje¿d¿a na zadan¹ odleg³oœæ wzglêdem celu.
+\item Budowa wie¿yczki, która przy pomocy wskaŸnika laserowego bêdzie pod¹¿aæ za celem.
+\item Dodanie mo¿liwoœci wyboru celu.
+\item Budowa i uruchomienie dzia³a.
+
+\end{enumerate}
+ 
