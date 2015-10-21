@@ -1,63 +1,69 @@
 \chapter{Stan obecnej wiedzy}
-\section{Rozwój robotyki}
-Mówi siê ¿e, ¿e robotyka jest owocem wszystkich dotychczasowych osi¹gniêæ ludzkoœci w ka¿dej dziedzinie. £¹czy w sobie przede wszystkim elementy : mechaniki, automatyki, elektroniki, sensoryki oraz cybernetyki.
-Jej poszczególne elementy by³y rozwijane na przestrzeni setek a nawet tysiêcy lat. Pierwsze wzmianki historyczne dotycz¹ce budowy robotów siêgaj¹ oko³o 350 roku p.n.e. i dotycz¹ greckiego matematyka Archtasa z Tarentu, który rzekomo zbudowa³ ptaka napêdzanego sprê¿onym powietrzem oraz potrafi¹cego lataæ. Niestety ale zweryfikowanie tej wiadomoœci jest bardzo skomplikowane i nie daje jednoznacznej odpowiedzi. Wskazuje ona jednak na zainteresowanie ludzkoœci budow¹ maszyn-robotów, które pierwotnie mia³y naœladowaæ naturê. Za pocz¹tek rozwoju robotyki uwa¿a siê prze³om XV oraz XVI wieku, w którym za spraw¹ wielkiego wynalazcy - Leonadra da Vinci powsta³o wiele interesuj¹cych projektów oraz konstrukcji. Jego wizje niejednokrotnie znacznie wykracza³y poza czasy, w których ¿y³. Na ilustracji \ref{czolg_leon} przedstawiony zosta³ szkic przedstawiaj¹cych jedn¹ z zaprojektowanych przez Leonarda maszyn wojennych - przodek wspó³czesnego czo³gu, który mia³ miotaæ kamienie oraz byæ napêdzany si³¹ ludzkich miêœni.
+\section{Historia robotyki}
+S³owo ,,robot" wywodzi siê z jêzyka czeskiego, gdzie oznacza ciê¿k¹ pracê. 
+Wed³ug s³ownika jêzyka polskiego s³owo to oznacza urz¹dzenie zastêpuj¹ce cz³owieka przy wykonywaniu niektórych czynnoœci\cite{SJP}. Po raz pierwszy, w tym kontekœcie, zosta³o ono u¿yte w 1920 r. przez czeskiego pisarza Karela \newtie{C}apka w komedii R.U.R.(Rossum Universal Robots)\cite{Czech}. Precyzyjn¹ definicjê tego s³owa przedstawi³a w 1979 roku grupa \textit{Robotics Industries Association} okreœlaj¹c robota jako : ,,Programowalny, wielofunkcyjny manipulator zaprojektowany do przenoszenia materia³ów, czêœci, narzêdzi lub specjalizowanych urz¹dzeñ poprzez ró¿ne programowalne ruchy, w celu realizacji ró¿norodnych zadañ."\cite{def_robota}.
+Temat robotyki by³ bardzo czêsto i szeroko poruszany przez pisarzy fantastyki naukowej, którzy w swoich dzie³ach wykorzystywali motyw buntu maszyn przeciwko ludzkoœci. Efektem tego by³o pojawienie siê trendu filozoficznego mówi¹cego o etyce robotów. Jednym z twórców tego nurtu, Isaac Asimow, zaproponowa³ kilka praw\cite{prawa_robota} :
+\begin{enumerate}
+\item Robot nie mo¿e skrzywdziæ cz³owieka, ani przez zaniechanie dzia³ania dopuœciæ, aby cz³owiek dozna³ krzywdy.
+\item Robot musi byæ pos³uszny rozkazom cz³owieka, chyba ¿e stoj¹ one w sprzecznoœci z Pierwszym Prawem.
+\item Robot musi chroniæ sam siebie, jeœli tylko nie stoi to w sprzecznoœci z Pierwszym lub Drugim Prawem.
+\end{enumerate}
+Mówi siê ¿e, robotyka jest owocem wszystkich dotychczasowych osi¹gniêæ ludzkoœci w ka¿dej dziedzinie. £¹czy w sobie przede wszystkim elementy : mechaniki, automatyki, elektroniki, sensoryki oraz cybernetyki.
+Jej poszczególne elementy by³y rozwijane na przestrzeni setek a nawet tysiêcy lat. Pierwsze wzmianki historyczne dotycz¹ce budowy robotów siêgaj¹ oko³o 350 roku p.n.e. i dotycz¹ greckiego matematyka Archtasa z Tarentu, który rzekomo zbudowa³ ptaka napêdzanego sprê¿onym powietrzem oraz potrafi¹cego lataæ. Niestety ale zweryfikowanie tej wiadomoœci jest bardzo skomplikowane i nie daje jednoznacznej odpowiedzi. Wskazuje ona jednak na zainteresowanie ludzkoœci budow¹ maszyn-robotów, które pierwotnie mia³y naœladowaæ naturê. Za pocz¹tek rozwoju robotyki uwa¿a siê prze³om XV oraz XVI wieku, w którym za spraw¹ wielkiego wynalazcy - Leonadra da Vinci powsta³o wiele interesuj¹cych projektów oraz konstrukcji. Jego wizje niejednokrotnie znacznie wykracza³y poza czasy, w których ¿y³. W swoich badaniach pozostawa³ wierny aforyzmowi ,,M¹droœæ jest
+córk¹ doœwiadczenia" - w zwi¹zku z czym zaprojektowane przez niego konstrukcje nie opiera³y siê na dotychczasowych teoretycznych osi¹gniêæ ówczesnej Europy a na w³asnych badaniach, pomiarach oraz próbach\cite{da_vinci}.  Na ilustracji \ref{czolg_leon} przedstawiony zosta³ szkic przedstawiaj¹cych jedn¹ z zaprojektowanych przez Leonarda maszyn wojennych - przodek wspó³czesnego czo³gu, który mia³ miotaæ kamienie oraz byæ napêdzany si³¹ ludzkich miêœni.
 
-\begin{figure}[h] \label{czolg_leon}
-\centering
-\includegraphics[scale=0.3]{imgs/Leonardo_tank.jpg}
-\caption{Szkic Leonarda da Vinci przedstawiaj¹cy jego koncepcjê czo³gu.}
-\end{figure}
+\afterpage{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[scale=0.3]{imgs/Leonardo_tank.jpg}
+        \caption{\small{Szkic Leonarda da Vinci przedstawiaj¹cy jego koncepcjê czo³gu.\protect\footnotemark}}
+    \label{czolg_leon}
+    \end{center}
+  \end{figure}
+  \footnotetext{\emph{Czo³g Leonarda da Vinci}, http://www.italoteka.blogspot.com,  (data dostêpu 21.04.2015 r.)}
+}
 
 Kolejny prze³om w tej dziedzinie przypada na po³owê XVIII wieku, w której to francuz Jacques de Vaucanson buduje swoje automaty. Z jego licznych konstrukcji pragnê wyró¿niæ 3 najbardziej znane, tzn. : mechaniczny ch³opiec graj¹cy na flecie, mechaniczny ch³opiec dodatkowo graj¹cy na tamburynie, mechaniczn¹ kaczkê, potrafi¹c¹ poruszaæ siê, wydawaæ odg³osy, poruszaæ skrzyd³ami oraz symulowaæ uk³ad trawienny.
 
-Jednak¿e prawdziwy prze³om w robotyce dokonuje siê w 1821 roku, w którym Michael Faraday zbudowa³ pierwszy silnik elektryczny, którego dalszy rozwój wywar³ ogromny wp³yw na koncepcjê konstrukcji robotów. Mechaniczne (np. sprê¿yny) oraz chemiczne (spalanie paliw) Ÿród³a energii bêd¹ powoli wypierane z tej dziedziny nauki na rzecz rozwi¹zañ elektrycznych, pozwalaj¹cych na prostsze, bezpieczniejsze oraz wydajniejsze magazynowanie oraz bardziej elastyczne wykorzystanie.
+\afterpage{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[scale=0.35]{imgs/MechaDuck.png}
+        \caption{\small{Projekt mechanicznej kaczki zbudowanej przez Jacques de Vaucansona.\protect\footnotemark}}
+    \label{kaczka}
+    \end{center}
+  \end{figure}
+  \footnotetext{\emph{Kaczka Jaques de Vaucansona}, http://www.technologie.gazeta.pl,  (data dostêpu 19.09.2015 r.)}
+}
+
+\afterpage{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[scale=1]{imgs/automaty.jpg}
+        \caption{\small{Roboty zaprezentowane przez Jaques da Vaucansona (od lewej strony): flecista, mechaniczna kaczka oraz ch³opiec graj¹cy na tamburynie.\protect\footnotemark}}
+    \label{robotyJaq}
+    \end{center}
+  \end{figure}
+  \footnotetext{\emph{Roboty Jaques de Vaucansona}, http://www.science.howstuffworks.com,  (data dostêpu 20.09.2015 r.)}
+}
+
+W 1788 James Watt zbudowa³ pierwszy regulator, który regulowa³ prêdkoœæ obrotow¹ silnika. Owe sprzê¿enie zwrotne uzyskano poprzez wykorzystanie prêdkoœci obrotowej wa³u silnika do sterowanie po³o¿eniem przepustnicy silnika. Zamiana prêdkoœci obrotowej na ruch posuwisty przepustnicy uzyskano przy wykorzystaniu si³y odœrodkowej dzia³aj¹cej na obci¹¿niki zawieszone wzd³u¿ osi wa³u - schemat przedstawiono na rysunku \ref{reg_watt}.
+
+\afterpage{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[scale=0.6]{imgs/regulator.jpg}
+        \caption{\small{Regulator zaprojektowany przez Jamesa Watta. Na rysunku  mo¿emy wyró¿niæ takie elementy jak : A - wa³ silnika, B - przepustnica, C - strumieñ paliwa, D - obci¹¿niki.\protect\footnotemark}}
+    \label{reg_watt}
+    \end{center}
+  \end{figure}
+  \footnotetext{\emph{Regulator Jamesa Watta}, http://www.http://images.books24x7.com/,  (data dostêpu 21.09.2015 r.)}
+}
+
+Jednak¿e prawdziwy prze³om w robotyce dokonuje siê w 1821 roku, w którym Michael Faraday zbudowa³ pierwszy silnik elektryczny, którego dalszy rozwój coraz bardziej przyspiesza³ rozwój tej dziedziny. Mechaniczne (np. sprê¿yny) oraz chemiczne (spalanie paliw) Ÿród³a energii bêd¹ powoli wypierane na korzyœæ rozwi¹zañ elektrycznych, pozwalaj¹cych na prostsze, bezpieczniejsze oraz wydajniejsze magazynowanie oraz bardziej elastyczne wykorzystanie.
 
 Upowszechnianie siê elektrycznoœci niesie za sob¹ szereg innych, znacz¹cych wynalazków do jakich zaliczamy: wynalezienie przekaŸnika elektrycznego przez Joseph'a Henry'ego w 1835 r., matematyczne zdefiniowanie przez George'a Bool'a zasad logiki, bêd¹cej po dzieñ dzisiejszy podstawowym narzêdziem matematycznym w teorii sterowania, konstrukcja zdalnie sterowanej ³odzi skonstruowanej przez Nikola Teslê w 1896 r.
 
-Wiek XX niesie za sob¹ jeszcze gwa³towniejszy rozwój tej dziedziny, który rozpocz¹³ siê w momencie skonstruowania w latach 40-tych pierwszego komputera. Ich rozwój by³ dodatkowo spotêgowany poprzez wybuch II wojny œwiatowej oraz potrzebê ³amania szyfrów dyplomatycznych. W latach 50-tych wynaleziony zosta³ tranzystor, który aktualnie jest podstawowym elementem ka¿dego urz¹dzenia. Pozwoli³ on w znacznej mierze na zmniejszenie gabarytów komputerów (jednostek obliczeniowych), zmniejszenie zapotrzebowania na energiê oraz wzrost mocy obliczeniowej co pozwoli³o na konstrukcjê autonomicznych robotów mobilnych.
+Wiek XX niesie za sob¹ jeszcze gwa³towniejszy rozwój tej dziedziny, który rozpocz¹³ siê w momencie skonstruowania w latach 40-tych pierwszego komputera. Ich rozwój by³ dodatkowo spotêgowany poprzez wybuch II wojny œwiatowej oraz potrzebê ³amania szyfrów dyplomatycznych. 
 
-\section{Historia czo³gu}
-I wojna œwiatowa by³a jednym z najwiêkszych konfliktów zbrojnych w dziejach ludzkoœci, który walkami ogarn¹³ niemal¿e ca³¹ Europê. Do jej wybuchu przyczyni³a siê nie tylko sytuacja polityczna ale tak¿e nastroje panuj¹ce wówczas w spo³eczeñstwie, które "chcia³o wojny". Od zarania dziejów za wojnami kry³ siê najszybszy oraz najgwa³towniejszy rozwój technologiczny. Rozwój cywilizacyjny nastêpuje nieco póŸniej, poniewa¿ ka¿da nowa technologia (jak np. GPS) najpierw wprowadzana jest na potrzeby wojska a dopiero w póŸniejszych latach wprowadzana jest do u¿ytku dla ludnoœci cywilnej. I Wojna Œwiatowa niew¹tpliwie na zawsze odmieni³a pola walki. Podczas jej trwania nast¹pi³ bardzo gwa³towny rozwój broni palnych, takich jak pistolety oraz karabiny. Du¿e konflikty zbrojne s¹ wspania³ym poligonem do testowania wszelakiego rodzaju nowych broni, które sia³y spustoszenie w piechocie przeciwnika. W efekcie czego morale ¿o³nierzy bardzo szybko podupad³y i nie chcieli oni ju¿ gin¹æ w imiê wy¿szoœci racji politycznych. Pierwsza wojna œwiatowa przekszta³ci³a siê w wojnê pozycyjn¹, w której piechota wiêcej czasu spêdza³a w okopach ni¿eli walczy³a. Aby wygraæ wojnê nale¿a³o w jakiœ sposób dostaæ siê bli¿ej przeciwnika. W celu przedarcia siê przez "ziemiê niczyj¹" czyli strefê pomiêdzy okopami skonstruowano g¹sienicowy pojazd opancerzony. Zadaniem pierwotnym czo³gów by³ jedynie bezpieczny transport. Przyk³adem tego typu pojazdów jest przedstawiony na ilustracji \ref{czolg_ws} pojazd \textit{Mark I} ,którego specjalnie uformowane g¹sienice (w kszta³t równoleg³oboku) pozwala³y ³atwiej pokonywaæ zasieki wroga. 
-
-\begin{figure}[h] \label{czolg_ws}
-\centering
-\includegraphics[scale=0.3]{imgs/ws_czolg.jpg}
-\caption{Czo³g Mark I u¿yty pierwszy raz w bitwie pod Somm¹ w 1916 r.}
-\end{figure}
-
-\begin{figure}[h] \label{czolg_ws}
-\centering
-\includegraphics[scale=0.3]{imgs/markviii.jpg}
-\caption{Unowoczeœniona wersja }
-\end{figure}
-
-Zastosowanie czo³gów pozwoli³o na szybkie zakoñczenie konfliktu. Jednak¿e pocz¹tkowo nie wszyscy dostrzegli w tych pojazdach potencja³ militarny. Wynika³o to z faktu, ¿e by³y one bardzo powolne i s³abo uzbrojone - o niewielkiej wartoœci bojowej. Pocz¹tkowo, skoro tylko wojska alianckie posiada³y czo³gi, nie by³o potrzeby montowania w nich wielkiego dzia³a gdy¿ by³y one przeznaczone do zwalczania piechoty. 
-
-Po zakoñczeniu dzia³añ zbrojnych prawie wszystkie pañstwa przyst¹pi³y do projektowania w³asnych pojazdów bojowych. Zaczêto zatem braæ pod uwagê mo¿liwoœæ walk typu czo³g-czo³g (a nie jak w przypadku I WŒ jedynie czo³g-piechota). Efektem tego by³o tworzenie czo³gów o mo¿liwe dobrym pancerzu oraz dziale. Pierwsze konstrukcje tzw. czo³gów lekkich pojawi³y siê w okolicy 1930 r. Przyk³adem takiego pojazdu mo¿e byæ radziecki T-26
-
- 
-
-Zosta³y one rozwijane oraz modernizowane. Pocz¹tkowo wozy te walczy³y jedynie z piechot¹ oraz artyleri¹. Podczas II wojny œwiatowej dochodzi³o ju¿ do walk typu czo³g-czo³g co wymusi³o na konstruktorach wyposa¿enie ich w potê¿ne armaty zdolne do zniszczenia przeciwnika. 
-
-\section{Roboty mobilne}
-
-Robotami mobilnymi nazywamy pojazdy, mog¹ce zmieniaæ swoje po³o¿enie w przestrzeni. Dotyczy to nie tylko pojazdów jezdnych, ale tak¿e krocz¹cych oraz lataj¹cych. Ich g³ówn¹ zalet¹ jest to ,¿e mo¿emy nimi sterowaæ na odleg³oœæ. Pozwala to doprowadziæ je do miejsc ,które dla cz³owieka s¹ niedostêpne lub wykonywaæ zadania w œrodowisku zagra¿aj¹cym naszemu ¿yciu. Maszyny te s¹ aktualnie szeroko wykorzystywane przez~:
-\begin{itemize}
-\item  
-s³u¿by specjalnie np. wojsko, gdzie mog¹ pe³niæ rolê bezza³ogowych pojazdów bojowych lub szpiegowskich,
-\item 
-agencje kosmiczne, gdzie prowadz¹ badania badania na innych cia³ach niebieskich (np. eksploracja Marsa przez ³azik Curiosity Rover),
-\item 
-ratownictwo medyczne, gdzie rozwa¿a siê wprowadzenie robotów lataj¹cych (typu quadrocopter) do szybkiego dostarczenia pierwszej pomocy w przypadku ataku serca,
-\item
-geologów oraz meteorologów do zdalnego dokonywania pomiarów.
-\end{itemize}
-
-\begin{figure}[h]
-\centering
-\includegraphics{imgs/curiosity.png}
-\caption{Zdjêcie ³azika Curiosity Rover jeszcze przed wys³aniem w kosmos.}
-\end{figure}
-
-Omawiane maszyny mo¿emy dodatkowo wyposa¿yæ w inteligentne algorytmy pozwalaj¹ce na autonomiczn¹, czyli pozbawion¹ wp³ywu cz³owieka, pracê. Dziêki wykorzystaniu czujników pomiarowych oraz przy pomocy odpowiedniego oprogramowania mog¹ one samoistnie rozwi¹zywaæ niektóre, z góry za³o¿one, zadania.
+W latach 50-tych wynaleziony zosta³ tranzystor, który aktualnie jest podstawowym elementem ka¿dego urz¹dzenia. Pozwoli³ on w znacznej mierze na zmniejszenie gabarytów komputerów (jednostek obliczeniowych), zmniejszenie zapotrzebowania na energiê oraz wzrost mocy obliczeniowej co pozwoli³o na konstrukcjê autonomicznych robotów mobilnych.
