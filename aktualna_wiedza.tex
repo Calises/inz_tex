@@ -2,3 +2,29 @@
 %w tym miejscu ja skupiê siê na omówieniu budowy czo³gu, jakieœ przekroje, mo¿e szkice - przede wszystkim skupie siê na omówieniu sterowania wie¿yczk¹ no i napêdem
 \section{Analiza obrazu}
 %w tym miejscu jakiœ kilka s³ów wprowadzenia czym jest przetwarzanie obrazu, a potem przejœæ do omówienia jakiegoœ sposobu, algorytmu, generanie omówiæ z czym to siê "je" itd. inwencja w³asna ;) Oczywiœcie tutaj ju¿ staramy siê nie laæ wody - zwiêŸle i konkretne. wzory? w sumie je¿eli coœ siê znajdzie to czemu nie :)
+
+Obraz cyfrowy, w dalszej czêœci pracy nazywany po prostu obrazem, jest graficzn¹ reprezentacj¹ tablicy, któr¹ mo¿na tak¿e przedstawiæ za pomoc¹ funkcji:
+\begin{equation}
+\label{funkcja_obrazu}
+    z = f(x,y), dla: x = 0, 1, 2, ..., N-1; y = 0, 1, 2, ..., M-1
+\end{equation}
+gdzie:\\
+$N$ - szerokoœæ obrazu,\\
+$M$ - wysokoœæ obrazu\\
+$z$ - wartoœæ funkcji w punkcie.\\
+W najprostszym przypadku obrazów czarno-bia³ych wartoœci¹ wyra¿ana przez t¹ funkcjê jest stopieñ szaroœci ka¿dego piksela (tj. najmniejszej sk³adowej obrazu cyfrowego, charakteryzuj¹cej siê jednolit¹ barw¹). Obraz sk³ada siê wtedy z jednej, dwuwymiarowej tablicy o wymiarach $N$ na $M$.
+
+W przypadku obrazów kolorowych jednak do przedstawienia obrazu stosuje siê kilka takich funkcji. Najpopularniejszym sposobem przedstawiania kolorów w grafice komputerowej jest model RGB. Skrót ten tworz¹ pierwsze litery angielskich nazw kolorów bêd¹cych baz¹ w tym modelu: \textit{red} (czerwony), \textit{green} (zielony) oraz \textit{blue} (niebieski), których odpowiednia kombinacja umo¿liwia uzyskanie ka¿dego koloru. W przypadku wykorzystania tego modelu obraz zapisany jest jako trzy tablice, przechowuj¹ce odpowiednio natê¿enia kolorów czerwonego, zielonego i niebieskiego.
+
+Obrazy, na których bêd¹ wykonywane operacje na potrzeby tego projektu bêd¹ obrazami rejestrowanymi przez kamerê zamontowan¹ na robocie, a wiêc odzwierciedlaj¹cymi rzeczywiste otoczenie. Rejestracja rzeczywistego obrazu na postaæ cyfrow¹ polega na dyskretyzacji obrazu oraz kwantyzacji jasnoœci/koloru\ref{Malina}. Dyskretyzacja obrazu rzeczywistego polega na próbkowaniu go w dwóch wymiarach. W ka¿dym polu tabeli, odpowiadaj¹cej za jeden kolor, zapisywana jest wartoœæ natê¿enia danego koloru dla wycinka obrazu rzeczywistego, któremu odpowiada adres danego pola. Rejestrowane natê¿enie ka¿dego z kolorów jest wartoœci¹ ci¹g³¹ i w celu zapisania jej w pamiêci komputera stosuje siê kwantyzacjê, tj. podzieleniu ca³ego zakresu jasnoœci na przedzia³y i przypisywaniu wartoœci rejestrowanej do jednego z tych przedzia³ów. Wynik tej operacji jest najczêœciej zapisywany na 8 bitach, a wiêc posiada wartoœci od 0 do 255 ($2^8$ daje 256 kombinacji). Pamiêtaj¹c, ¿e tworzone s¹ trzy tablice, osobna dla ka¿dego z kolorów RGB, a wiêc dane ka¿dego piksela zapisywane s¹ na $3 x 8 = 24$ bitach. Daje to kombinacjê $2^24 = 16777216$ kolorów, czyli przekraczaj¹c¹ ju¿ mo¿liwoœci percepcji ludzkiego oka.
+
+
+
+
+
+
+%\textit{Celem sztucznego przetwarzania lub analizy obrazu jest takie automatyczne przetworzenie i przeanalizowanie obrazu obiektów lub ca³ego otoczenia systemu zautomatyzowane, aby uzyskaæ u¿yteczn¹ informacjê na temat interesuj¹cych obiektów (...) lub na temat otoczenia, które mo¿e wp³ywaæ (...) na sterowany automatycznie proces.}\cite{Tadeusiewicz}
+
+
+
+%- nadmiarowoœæ informacji w obrazie
