@@ -1,68 +1,29 @@
-\chapter{Stan obecnej wiedzy}
-\section{Historia robotyki}
-S³owo ,,robot" wywodzi siê z jêzyka czeskiego, gdzie oznacza ciê¿k¹ pracê. 
-Wed³ug s³ownika jêzyka polskiego s³owo to oznacza urz¹dzenie zastêpuj¹ce cz³owieka przy wykonywaniu niektórych czynnoœci\cite{SJP}. Po raz pierwszy, w tym kontekœcie, zosta³o ono u¿yte w 1920 r. przez czeskiego pisarza Karela \newtie{C}apka w komedii R.U.R.(Rossum Universal Robots)\cite{Czech}. Precyzyjn¹ definicjê tego s³owa przedstawi³a w 1979 roku grupa \textit{Robotics Industries Association} okreœlaj¹c robota jako: ,,Programowalny, wielofunkcyjny manipulator zaprojektowany do przenoszenia materia³ów, czêœci, narzêdzi lub specjalizowanych urz¹dzeñ poprzez ró¿ne programowalne ruchy, w celu realizacji ró¿norodnych zadañ."\cite{def_robota}.
-Temat robotyki by³ bardzo czêsto i szeroko poruszany przez pisarzy fantastyki naukowej, którzy w swoich dzie³ach wykorzystywali motyw buntu maszyn przeciwko ludzkoœci. Efektem tego by³o pojawienie siê trendu filozoficznego mówi¹cego o etyce robotów. Jednym z twórców tego nurtu, Isaac Asimow, zaproponowa³ kilka regu³, którymi powinna kierowaæ siê ka¿da inteligentna maszyna\cite{prawa_robota}:
+\namedchapter{Rys historyczny}
+\namedsection[Adam ZieliÅ„ski]{Historia robotyki}
+SÅ‚owo ,,robot" wywodzi siÄ™ z jÄ™zyka czeskiego, gdzie oznacza ciÄ™Å¼kÄ… pracÄ™. 
+WedÅ‚ug sÅ‚ownika jÄ™zyka polskiego sÅ‚owo to oznacza urzÄ…dzenie zastÄ™pujÄ…ce czÅ‚owieka przy wykonywaniu niektÃ³rych czynnoÅ›ci\cite{SJP}. Po raz pierwszy, w tym kontekÅ›cie, zostaÅ‚o ono uÅ¼yte w 1920 r. przez czeskiego pisarza Karela \newtie{C}apka w komedii R.U.R.(Rossum Universal Robots)\cite{Czech}. PrecyzyjnÄ… definicjÄ™ tego sÅ‚owa przedstawiÅ‚a w 1979 roku grupa \textit{Robotics Industries Association} okreÅ›lajÄ…c robota jako: ,,Programowalny, wielofunkcyjny manipulator zaprojektowany do przenoszenia materiaÅ‚Ã³w, czÄ™Å›ci, narzÄ™dzi lub specjalizowanych urzÄ…dzeÅ„ poprzez rÃ³Å¼ne programowalne ruchy, w celu realizacji rÃ³Å¼norodnych zadaÅ„."\cite{def_robota}.
+Temat robotyki byÅ‚ bardzo czÄ™sto i szeroko poruszany przez pisarzy fantastyki naukowej, ktÃ³rzy w swoich dzieÅ‚ach wykorzystywali motyw buntu maszyn przeciwko ludzkoÅ›ci. Efektem tego byÅ‚o pojawienie siÄ™ trendu filozoficznego mÃ³wiÄ…cego o etyce robotÃ³w. Jednym z twÃ³rcÃ³w tego nurtu, Isaac Asimow, zaproponowaÅ‚ kilka reguÅ‚, ktÃ³rymi powinna kierowaÄ‡ siÄ™ kaÅ¼da inteligentna maszyna\cite{prawa_robota}:
 \begin{enumerate}
-\item Robot nie mo¿e skrzywdziæ cz³owieka, ani przez zaniechanie dzia³ania dopuœciæ, aby cz³owiek dozna³ krzywdy.
-\item Robot musi byæ pos³uszny rozkazom cz³owieka, chyba ¿e stoj¹ one w sprzecznoœci z Pierwszym Prawem.
-\item Robot musi chroniæ sam siebie, jeœli tylko nie stoi to w sprzecznoœci z Pierwszym lub Drugim Prawem.
+\item Robot nie moÅ¼e skrzywdziÄ‡ czÅ‚owieka, ani przez zaniechanie dziaÅ‚ania dopuÅ›ciÄ‡, aby czÅ‚owiek doznaÅ‚ krzywdy.
+\item Robot musi byÄ‡ posÅ‚uszny rozkazom czÅ‚owieka, chyba Å¼e stojÄ… one w sprzecznoÅ›ci z Pierwszym Prawem.
+\item Robot musi chroniÄ‡ sam siebie, jeÅ›li tylko nie stoi to w sprzecznoÅ›ci z Pierwszym lub Drugim Prawem.
 \end{enumerate}
-Mówi siê ¿e, robotyka jest owocem wszystkich dotychczasowych osi¹gniêæ ludzkoœci w ka¿dej dziedzinie. £¹czy w sobie przede wszystkim elementy : mechaniki, automatyki, elektroniki, sensoryki oraz cybernetyki.
-Jej poszczególne elementy by³y rozwijane na przestrzeni setek a nawet tysiêcy lat. Pierwsze wzmianki historyczne dotycz¹ce budowy robotów siêgaj¹ oko³o 350 roku p.n.e. i dotycz¹ greckiego matematyka Archtasa z Tarentu, który rzekomo zbudowa³ ptaka napêdzanego sprê¿onym powietrzem oraz potrafi¹cego lataæ. Niestety ale zweryfikowanie tej wiadomoœci jest bardzo skomplikowane i nie daje jednoznacznej odpowiedzi. Wskazuje ona jednak na zainteresowanie ludzkoœci budow¹ maszyn-robotów, które pierwotnie mia³y naœladowaæ naturê. Za pocz¹tek rozwoju robotyki uwa¿a siê prze³om XV oraz XVI wieku, w którym za spraw¹ wielkiego wynalazcy - Leonadra da Vinci powsta³o wiele interesuj¹cych konstrukcji. Jego projekty niejednokrotnie znacznie wykracza³y poza czasy, w których ¿y³. W swoich badaniach pozostawa³ wierny aforyzmowi ,,M¹droœæ jest
-córk¹ doœwiadczenia" - w zwi¹zku z czym zaprojektowane przez niego konstrukcje nie opiera³y siê na dotychczasowych teoretycznych osi¹gniêciach ówczesnej Europy a na w³asnych badaniach, pomiarach oraz próbach\cite{da_vinci}.  Na ilustracji \ref{czolg_leon} przedstawiony zosta³ szkic przedstawiaj¹cy jedn¹ z wymyœlonych przez Leonarda da Vinci maszyn wojennych - przodek wspó³czesnego czo³gu, który mia³ miotaæ kamieniami w wroga oraz byæ napêdzany si³¹ ludzkich miêœni.
+MÃ³wi siÄ™ Å¼e, robotyka jest owocem wszystkich dotychczasowych osiÄ…gniÄ™Ä‡ ludzkoÅ›ci w kaÅ¼dej dziedzinie. ÅÄ…czy w sobie przede wszystkim elementy : mechaniki, automatyki, elektroniki, sensoryki oraz cybernetyki.
+Jej poszczegÃ³lne elementy byÅ‚y rozwijane na przestrzeni setek a nawet tysiÄ™cy lat. Pierwsze wzmianki historyczne dotyczÄ…ce budowy robotÃ³w siÄ™gajÄ… okoÅ‚o 350 roku p.n.e. i dotyczÄ… greckiego matematyka Archtasa z Tarentu, ktÃ³ry rzekomo zbudowaÅ‚ ptaka napÄ™dzanego sprÄ™Å¼onym powietrzem oraz potrafiÄ…cego lataÄ‡. Niestety ale zweryfikowanie tej wiadomoÅ›ci jest bardzo skomplikowane i nie daje jednoznacznej odpowiedzi. Wskazuje ona jednak na zainteresowanie ludzkoÅ›ci budowÄ… maszyn-robotÃ³w, ktÃ³re pierwotnie miaÅ‚y naÅ›ladowaÄ‡ naturÄ™. Za poczÄ…tek rozwoju robotyki uwaÅ¼a siÄ™ przeÅ‚om XV oraz XVI wieku, w ktÃ³rym za sprawÄ… wielkiego wynalazcy - Leonadra da Vinci powstaÅ‚o wiele interesujÄ…cych konstrukcji. Jego projekty niejednokrotnie znacznie wykraczaÅ‚y poza czasy, w ktÃ³rych Å¼yÅ‚. W swoich badaniach pozostawaÅ‚ wierny aforyzmowi ,,MÄ…droÅ›Ä‡ jest
+cÃ³rkÄ… doÅ›wiadczenia" - w zwiÄ…zku z czym zaprojektowane przez niego konstrukcje nie opieraÅ‚y siÄ™ na dotychczasowych teoretycznych osiÄ…gniÄ™ciach Ã³wczesnej Europy a na wÅ‚asnych badaniach, pomiarach oraz prÃ³bach\cite{da_vinci}.  Na ilustracji \ref{czolg_leon} przedstawiony zostaÅ‚ szkic przedstawiajÄ…cy jednÄ… z wymyÅ›lonych przez Leonarda da Vinci maszyn wojennych - przodek wspÃ³Å‚czesnego czoÅ‚gu, ktÃ³ry miaÅ‚ miotaÄ‡ kamieniami w wroga oraz byÄ‡ napÄ™dzany siÅ‚Ä… ludzkich miÄ™Å›ni.
 
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.3]{imgs/Leonardo_tank.jpg}
- 	\caption[Czo³g Leonarda da Vinci]{\small{Szkic Leonarda da Vinci przedstawiaj¹cy jego koncepcjê czo³gu.}\footnotemark}
+ 	\caption[CzoÅ‚g Leonarda da Vinci]{\small{Szkic Leonarda da Vinci przedstawiajÄ…cy jego koncepcjÄ™ czoÅ‚gu.}\footnotemark}
 	\label{czolg_leon}
     \end{center}
   \end{figure}
-  \footnotetext{\emph{Czo³g Leonarda da Vinci}, http://italoteka.blogspot.com,  (data dostêpu 21.04.2015r.)}
-
-Kolejny prze³om w tej dziedzinie przypada na po³owê XVIII wieku, w której to francuz Jacques de Vaucanson buduje humanoidalne automaty. Z jego licznych konstrukcji mo¿na wyró¿niæ 3 najbardziej znane (rysunek \ref{robotyJaq}), tzn.: mechaniczny ch³opiec graj¹cy na flecie, mechaniczny ch³opiec dodatkowo graj¹cy na tamburynie, mechaniczn¹ kaczkê (rysunek \ref{kaczka}), potrafi¹c¹ poruszaæ siê, wydawaæ odg³osy, poruszaæ skrzyd³ami oraz symulowaæ uk³ad trawienny.
-
-  \begin{figure}[H]
-    \begin{center}
-      \includegraphics[scale=0.35]{imgs/MechaDuck.png}
- \caption[Mechaniczka kaczka Jacquesa de Vaucansona]{\small{Projekt mechanicznej kaczki zbudowanej przez Jacquesa de Vaucansona.}\footnotemark}
-	\label{kaczka}
-    \end{center}
-  \end{figure}
-  \footnotetext{\emph{Kaczka Jaquesa de Vaucansona}, http://technologie.gazeta.pl,  (data dostêpu 19.09.2015r.)}
-
-  \begin{figure}[H]
-    \begin{center}
-      \includegraphics[scale=1]{imgs/automaty.jpg}
- \caption[Roboty Jacquesa de Vaucansona]{\small{Roboty zaprezentowane przez Jaquesa da Vaucansona (od lewej strony): flecista, mechaniczna kaczka oraz ch³opiec graj¹cy na tamburynie.}\footnotemark[3]}
-	\label{robotyJaq}
-    \end{center}
-  \end{figure}
-  \footnotetext[3]{\emph{Roboty Jaques de Vaucansona}, http://science.howstuffworks.com,  (data dostêpu 20.09.2015r.)}
-
-W 1788 James Watt zbudowa³ pierwszy sterownik, który regulowa³ prêdkoœæ obrotow¹ silnika. Owe sprzê¿enie zwrotne uzyskano poprzez wykorzystanie prêdkoœci obrotowej wa³u napêdowego do sterowanie po³o¿eniem przepustnicy silnika. Zamianê ruchu obrotowego na ruch posuwisty przepustnicy uzyskano przy wykorzystaniu si³y odœrodkowej dzia³aj¹cej na obci¹¿niki zawieszone wzd³u¿ osi wa³u - schemat urz¹dzenia przedstawiono na rysunku \ref{reg_watt}.
-
-  \begin{figure}[H]
-    \begin{center}
-      \includegraphics[scale=0.6]{imgs/regulator.jpg}
- \caption[Regulator Jamesa Watta]{\small{Regulator zaprojektowany przez Jamesa Watta. Na rysunku  mo¿emy wyró¿niæ takie elementy jak : A - wa³ silnika, B - przepustnica, C - strumieñ paliwa, D - obci¹¿niki.}\footnotemark}
-	\label{reg_watt}
-    \end{center}
-  \end{figure}
-  \footnotetext{\emph{Regulator Jamesa Watta}, http://images.books24x7.com/,  (data dostêpu 21.09.2015r.)}
-
-Jednak¿e prawdziwy prze³om w robotyce dokonuje siê w 1821 roku, w którym Michael Faraday zbudowa³ pierwszy silnik elektryczny, którego dalszy rozwój coraz bardziej przyspiesza³ rozwój tej dziedziny. Mechaniczne (np. sprê¿yny) oraz chemiczne (spalanie paliw) Ÿród³a energii bêd¹ powoli wypierane na korzyœæ rozwi¹zañ elektrycznych, pozwalaj¹cych na prostsze, bezpieczniejsze i szersze wykorzystanie.
-
-Upowszechnianie siê elektrycznoœci niesie za sob¹ szereg innych, znacz¹cych wynalazków do jakich zaliczamy: wynalezienie przekaŸnika elektrycznego przez Josepha Henry'ego w 1835 r., matematyczne zdefiniowanie przez George'a Boola zasad logiki, bêd¹cej po dzieñ dzisiejszy podstawowym narzêdziem matematycznym w teorii sterowania, konstrukcja zdalnie sterowanej ³odzi skonstruowanej przez Nikola Teslê w 1896 r.
-
-Wiek XX niesie za sob¹ jeszcze gwa³towniejszy rozwój robotyki, który rozpocz¹³ siê w momencie skonstruowania w latach 40-tych pierwszego komputera. Ich rozwój by³ dodatkowo spotêgowany poprzez wybuch II wojny œwiatowej i potrzebê ³amania szyfrów dyplomatycznych.
-
-W latach 50-tych wynaleziony zosta³ tranzystor, który aktualnie jest podstawowym elementem ka¿dego urz¹dzenia. Pozwoli³ on w znacznej mierze na zmniejszenie gabarytów komputerów (jednostek obliczeniowych), zmniejszenie zapotrzebowania na energiê oraz wzrost mocy obliczeniowej co pozwoli³o na konstrukcjê autonomicznych robotów mobilnych.
-
-Robotami mobilnymi nazywamy pojazdy, mog¹ce zmieniaæ swoje po³o¿enie w przestrzeni. Dotyczy to nie tylko pojazdów jezdnych, ale tak¿e krocz¹cych oraz lataj¹cych. 
-
-W 1956 r. ukoñczona zosta³a budowa elektrycznej wiewiórki\cite{robot_squee} (rysunek \ref{squee}), która posiada³a dwa ,,zmys³y": wzroku - zrealizowanego przy wykorzystaniu dwóch lamp fotoelektronowych oraz dotyku - dwóch krañcówek.  Napêd zosta³ zbudowany w oparciu o silniki elektryczne. Zwierzak, gdy zobaczy³ ¿o³êdzia (w tym przypadku jasno oœwietlony punkt) kierowa³ siê w jego stronê, podnosi³ owoc przy pomocy ,,szufli" a nastêpnie kierowa³ siê ,,do gniazda" - czyli miejsca, gdzie znajdowa³o siê pulsacyjne Ÿród³o œwiat³a. Mimo ,i¿ realizowane zadanie jest bardzo proste to mo¿emy mówiæ tutaj o pewnego rodzaju intelgencji poniewa¿ wiewiórka wykonywa³a pewn¹ sekwencjê ruchow¹ bez interwencji cz³owieka ale w zale¿noœci od tego, co dzia³o sie w jej otoczeniu.
+  \footnotetext{\emph{CzoÅ‚g Leonarda da Vinci}, http://italoteka.blogspot.com,  (data dostÄ™pu 21.04.2015r.)}
+Wiek XX niesie za sobÄ… bardzo gwaÅ‚towny rozwÃ³j robotyki, ktÃ³ry rozpoczÄ…Å‚ siÄ™ w momencie skonstruowania w latach 40-tych pierwszego komputera. Ich rozwÃ³j byÅ‚ dodatkowo spotÄ™gowany poprzez wybuch II wojny Å›wiatowej i potrzebÄ™ Å‚amania szyfrÃ³w dyplomatycznych.
+W latach 50-tych wynaleziony zostaÅ‚ tranzystor, ktÃ³ry aktualnie jest podstawowym elementem kaÅ¼dego urzÄ…dzenia. PozwoliÅ‚ on w znacznej mierze na zmniejszenie gabarytÃ³w komputerÃ³w (jednostek obliczeniowych), zmniejszenie zapotrzebowania na energiÄ™ oraz wzrost mocy obliczeniowej co pozwoliÅ‚o na konstrukcjÄ™ autonomicznych robotÃ³w mobilnych.
+Robotami mobilnymi nazywamy pojazdy, mogÄ…ce zmieniaÄ‡ swoje poÅ‚oÅ¼enie w przestrzeni. Dotyczy to nie tylko pojazdÃ³w jezdnych, ale takÅ¼e kroczÄ…cych oraz latajÄ…cych. 
+W 1956 r. ukoÅ„czona zostaÅ‚a budowa elektrycznej wiewiÃ³rki\cite{robot_squee} (rysunek \ref{squee}), ktÃ³ra posiadaÅ‚a dwa ,,zmysÅ‚y": wzroku - zrealizowanego przy wykorzystaniu dwÃ³ch lamp fotoelektronowych oraz dotyku - dwÃ³ch kraÅ„cÃ³wek.  NapÄ™d zostaÅ‚ zbudowany w oparciu o silniki elektryczne. Zwierzak, gdy zobaczyÅ‚ Å¼oÅ‚Ä™dzia (w tym przypadku jasno oÅ›wietlony punkt) kierowaÅ‚ siÄ™ w jego stronÄ™, podnosiÅ‚ owoc przy pomocy ,,szufli" a nastÄ™pnie kierowaÅ‚ siÄ™ ,,do gniazda" - czyli miejsca, gdzie znajdowaÅ‚o siÄ™ pulsacyjne ÅºrÃ³dÅ‚o Å›wiatÅ‚a. Mimo ,iÅ¼ realizowane zadanie jest bardzo proste to moÅ¼emy mÃ³wiÄ‡ tutaj o pewnego rodzaju intelgencji poniewaÅ¼ wiewiÃ³rka wykonywaÅ‚a pewnÄ… sekwencjÄ™ ruchowÄ… bez interwencji czÅ‚owieka ale w zaleÅ¼noÅ›ci od tego, co dziaÅ‚o sie w jej otoczeniu.
 
   \begin{figure}[H]
     \begin{center}
@@ -71,9 +32,9 @@ W 1956 r. ukoñczona zosta³a budowa elektrycznej wiewiórki\cite{robot_squee} (rys
         \label{squee}
     \end{center}
   \end{figure}
-  \footnotetext{\emph{Robot Squee}, http://cyberneticzoo.com/,  (data dostêpu 21.09.2015r.)}
+  \footnotetext{\emph{Robot Squee}, http://cyberneticzoo.com/,  (data dostÄ™pu 21.09.2015r.)}
 
-Kolejne lata nios¹ za sob¹ coraz wiêksz¹ miniaturyzacjê wszelkich podzespów elektronicznych. Nie tylko zamykane s¹ one w coraz mniejszych obudowach (pierwszy uk³ad scalony - Jack St. Clair Kilby w 1958 r.) ale tak¿e charakteryzuj¹ siê coraz wy¿sz¹ sprawnoœci¹. Doprowadza to do tego, ¿e pojazdy mobilne staj¹ siê obiektem zainteresowania s³u¿b specjalnych. W ten sposób w 1984 r. powstaje Prowler (rysunek \ref{state}) - pierwszy zdalnie sterowany robot o przeznaczeniu militarnym. Platforma ta mog³a pe³niæ ró¿ne funkcje: od roli wsparcia - wyposa¿ona w karabiny maszynowe, po funkcje rozpoznawcze - wyposa¿ona w kamery.
+Kolejne lata niosÄ… za sobÄ… coraz wiÄ™kszÄ… miniaturyzacjÄ™ wszelkich podzespÃ³w elektronicznych. Nie tylko zamykane sÄ… one w coraz mniejszych obudowach (pierwszy ukÅ‚ad scalony - Jack St. Clair Kilby w 1958 r.) ale takÅ¼e charakteryzujÄ… siÄ™ coraz wyÅ¼szÄ… sprawnoÅ›ciÄ…. Doprowadza to do tego, Å¼e pojazdy mobilne stajÄ… siÄ™ obiektem zainteresowania sÅ‚uÅ¼b specjalnych. W ten sposÃ³b w 1984 r. powstaje Prowler (rysunek \ref{state}) - pierwszy zdalnie sterowany robot o przeznaczeniu militarnym. Platforma ta mogÅ‚a peÅ‚niÄ‡ rÃ³Å¼ne funkcje: od roli wsparcia - wyposaÅ¼ona w karabiny maszynowe, po funkcje rozpoznawcze - wyposaÅ¼ona w kamery.
 
   \begin{figure}[H]
     \begin{center}
@@ -82,71 +43,72 @@ Kolejne lata nios¹ za sob¹ coraz wiêksz¹ miniaturyzacjê wszelkich podzespów elek
         \label{state}
     \end{center}
   \end{figure}
-  \footnotetext{\emph{Robot Defense Systems Prowler 1985}, https://youtube.com/,  (data dostêpu 22.09.2015r.)}
+  \footnotetext{\emph{Robot Defense Systems Prowler 1985}, https://youtube.com/,  (data dostÄ™pu 22.09.2015r.)}
 
-Aktualnie najbardziej zaawansowanymi robotami mobilnymi s¹ pojazdy wykorzystywane przez agencje kosmiczne do eksploracji kosmosu. Ich zaawansowana konstrukcja jest efektem bardzo rygorystycznych za³o¿eñ jakie s¹ im stawiane, tzn.: mo¿liwie jak najmniejsze rozmiary, waga, wysoka mobilnoœæ oraz niezawodnoœæ, mo¿liwoœæ pracy w ciê¿kich, nieznanych warunkach œrodowiskowych. Na dodatek musz¹ one byæ zdolne do prowadzenia badañ oraz zbierania próbek. Przyk³adem tej klasy robota mo¿e byæ marsjañski ³azik Curiosity Rover (rysunek \ref{lazik}).
+Aktualnie najbardziej zaawansowanymi robotami mobilnymi sÄ… pojazdy wykorzystywane przez agencje kosmiczne do eksploracji kosmosu. Ich zaawansowana konstrukcja jest efektem bardzo rygorystycznych zaÅ‚oÅ¼eÅ„ jakie sÄ… im stawiane, tzn.: moÅ¼liwie jak najmniejsze rozmiary, waga, wysoka mobilnoÅ›Ä‡ oraz niezawodnoÅ›Ä‡, moÅ¼liwoÅ›Ä‡ pracy w ciÄ™Å¼kich, nieznanych warunkach Å›rodowiskowych. Na dodatek muszÄ… one byÄ‡ zdolne do prowadzenia badaÅ„ oraz zbierania prÃ³bek. PrzykÅ‚adem tej klasy robota moÅ¼e byÄ‡ marsjaÅ„ski Å‚azik Curiosity Rover (rysunek \ref{lazik}).
 
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.8]{imgs/curiosity.png}
- \caption[£azik marsjañski \textit{Curiosity}]{\small{£azik marsjañski Curiosity.}\footnotemark}
+ \caption[Åazik marsjaÅ„ski \textit{Curiosity}]{\small{Åazik marsjaÅ„ski Curiosity.}\footnotemark}
         \label{lazik}
     \end{center}
   \end{figure}
-  \footnotetext{\emph{\textit{Curiosity}}, http://i.space.com/,  (data dostêpu 22.09.2015r.)}
+  \footnotetext{\emph{\textit{Curiosity}}, http://i.space.com/,  (data dostÄ™pu 22.09.2015r.)}
 
-\section{Historia czo³gu}
-Od zarania dziejów za wojnami kry³ siê najszybszy oraz najgwa³towniejszy rozwój technologiczny. Rozwój cywilizacyjny nastêpuje nieco póŸniej, poniewa¿ ka¿da nowa technologia (jak np. GPS czy Internet) najpierw wprowadzana jest na potrzeby wojska a dopiero w póŸniejszych latach wprowadzana jest do u¿ytku dla ludnoœci cywilnej. Podobnie mia³a siê sytuacja z I wojn¹ œwiatow¹ - konflikt ten da³ pocz¹tek m.in. bojowym pojazdom opancerzonym, które otrzyma³y nazwê czo³gów.
+\namedsection[Daniel ÅukwiÅ„ski]{Historia czoÅ‚gu}
+Od zarania dziejÃ³w za wojnami kryÅ‚ siÄ™ najszybszy oraz najgwaÅ‚towniejszy rozwÃ³j technologiczny. RozwÃ³j cywilizacyjny nastÄ™puje nieco pÃ³Åºniej, poniewaÅ¼ kaÅ¼da nowa technologia (jak np. GPS czy Internet) najpierw wprowadzana jest na potrzeby wojska a dopiero w pÃ³Åºniejszych latach wprowadzana jest do uÅ¼ytku dla ludnoÅ›ci cywilnej. Podobnie miaÅ‚a siÄ™ sytuacja z I wojnÄ… Å›wiatowÄ… - konflikt ten daÅ‚ poczÄ…tek m.in. bojowym pojazdom opancerzonym, ktÃ³re otrzymaÅ‚y nazwÄ™ czoÅ‚gÃ³w.
 
-I wojna œwiatowa by³a jednym z najwiêkszych konfliktów zbrojnych w dziejach ludzkoœci, który walkami ogarn¹³ niemal¿e ca³¹ Europê. Do jej wybuchu przyczyni³a siê nie tylko sytuacja polityczna ale tak¿e nastroje panuj¹ce wówczas w spo³eczeñstwie, które ,,chcia³o wojny". I Wojna Œwiatowa niew¹tpliwie na zawsze odmieni³a pola walki. Jeszcze przed jej rozpoczêciem nast¹pi³ intensywny rozwój broni maszynowej - jednym z pierwszych, w pe³ni sprawnych, karabinów maszynowych by³a tak zwana kartaczownica Gatlinga, skonstruowana ju¿ w 1861 roku. Jednak dopiero podczas I wojny œwiatowej broñ maszynowa rozpowszechni³a siê na tyle, ¿eby diametralnie zmieniæ oblicze pola walki. Linie obronne zosta³y gêsto obsadzone ciê¿kimi karabinami maszynowymi, takimi jak brytyjski Vickers czy wiele wersji karabinów Maxima, które osi¹ga³y praktyczn¹ szybkostrzelnoœæ na poziomie 500-600 pocisków na minutê oraz zasiêg przekraczaj¹cy kilometr. Z kolei oddzia³y piechoty otrzyma³y broñ l¿ejsz¹ (np. francuski rêczny karabin maszynowy Chauchat czy brytyjski lekki karabin Lewis), która, mimo gorszych parametrów od wspomnianych wczeœniej konstrukcji, by³a rewolucyjn¹ zmian¹ na tle karabinów powtarzalnych, bêd¹cych do tej pory jedyn¹ broni¹ piechoty. I wojna œwiatowa by³a konfliktem, w którym atakuj¹ca piechota by³a zasypywana zbieraj¹cym œmiertelne ¿niwo gradem pocisków. W efekcie tego morale ¿o³nierzy bardzo szybko podupad³o i nie chcieli oni ju¿ gin¹æ w imiê wy¿szoœci racji politycznych. Konflikt przekszta³ci³ siê w wojnê pozycyjn¹, w której piechota wiêcej czasu spêdza³a w okopach ni¿ walcz¹c. Wszelkie znane metody walki zawodzi³y w tej nowej sytuacji: atak kawalerii mia³ jeszcze mniejsze szanse powodzenia ni¿ piechoty, a stosowane na wielk¹ skalê nawa³y artyleryjskie nie by³y w stanie wystarczaj¹co zmiêkczyæ linii obronnych.
-Aby wygraæ wojnê nale¿a³o w jakiœ sposób dostaæ siê bli¿ej przeciwnika. Ju¿ w pierwszym okresie wojny stosowano na ma³¹ skalê pojazdy opancerzone. Jednak by³y to pojazdy ko³owe, które nie mia³y racji bytu poza utwardzonymi drogami. W celu przedarcia siê przez ,,ziemiê niczyj¹", czyli strefê pomiêdzy okopami, skonstruowano g¹sienicowy pojazd opancerzony. Co ciekawe, zadania tego podjê³o siê \textit{Royal Navy}, czyli marynarka wojenna Wielkiej Brytanii. Jej wp³yw na projekty by³ silnie widoczny: pierwsze pojazdy nazywano Okrêtami L¹dowymi (\textit{Land Ships}), a uzbrojenie znajdowa³o siê w sponsonach (tj. wystêpach z boku kad³uba, s³u¿¹cych w³aœnie do mocowania uzbrojenia) \cite{wojna_pancerna}. Przyk³adem tego typu pojazdów jest przedstawiony na ilustracji \ref{czolg_ws} Mark I, którego specjalnie uformowane g¹sienice (w kszta³t równoleg³oboku) pozwala³y ³atwiej pokonywaæ zasieki wroga. Inne kraje bior¹ce udzia³ w walkach na froncie zachodnim szybko podchwyci³y ideê opancerzonych pojazdów g¹sienicowych, co zaowocowa³o mnogoœci¹ koncepcji konstrukcyjnych i szukania, czêsto metod¹ prób i b³êdów, najefektywniejszych rozwi¹zañ. Przyk³adem zupe³nie innego podejœcia do konstrukcji czo³u jest przedstawiony na ilustracji \ref{czolg_ft} francuski Renault FT.
+I wojna Å›wiatowa byÅ‚a jednym z najwiÄ™kszych konfliktÃ³w zbrojnych w dziejach ludzkoÅ›ci, ktÃ³ry walkami ogarnÄ…Å‚ niemalÅ¼e caÅ‚Ä… EuropÄ™. Do jej wybuchu przyczyniÅ‚a siÄ™ nie tylko sytuacja polityczna ale takÅ¼e nastroje panujÄ…ce wÃ³wczas w spoÅ‚eczeÅ„stwie, ktÃ³re ,,chciaÅ‚o wojny". I Wojna Åšwiatowa niewÄ…tpliwie na zawsze odmieniÅ‚a pola walki. Jeszcze przed jej rozpoczÄ™ciem nastÄ…piÅ‚ intensywny rozwÃ³j broni maszynowej - jednym z pierwszych, w peÅ‚ni sprawnych, karabinÃ³w maszynowych byÅ‚a tak zwana kartaczownica Gatlinga, skonstruowana juÅ¼ w 1861 roku. Jednak dopiero podczas I wojny Å›wiatowej broÅ„ maszynowa rozpowszechniÅ‚a siÄ™ na tyle, Å¼eby diametralnie zmieniÄ‡ oblicze pola walki. Linie obronne zostaÅ‚y gÄ™sto obsadzone ciÄ™Å¼kimi karabinami maszynowymi, takimi jak brytyjski Vickers czy wiele wersji karabinÃ³w Maxima, ktÃ³re osiÄ…gaÅ‚y praktycznÄ… szybkostrzelnoÅ›Ä‡ na poziomie 500-600 pociskÃ³w na minutÄ™ oraz zasiÄ™g przekraczajÄ…cy kilometr. Z kolei oddziaÅ‚y piechoty otrzymaÅ‚y broÅ„ lÅ¼ejszÄ… (np. francuski rÄ™czny karabin maszynowy Chauchat czy brytyjski lekki karabin Lewis), ktÃ³ra, mimo gorszych parametrÃ³w od wspomnianych wczeÅ›niej konstrukcji, byÅ‚a rewolucyjnÄ… zmianÄ… na tle karabinÃ³w powtarzalnych, bÄ™dÄ…cych do tej pory jedynÄ… broniÄ… piechoty. I wojna Å›wiatowa byÅ‚a konfliktem, w ktÃ³rym atakujÄ…ca piechota byÅ‚a zasypywana zbierajÄ…cym Å›miertelne Å¼niwo gradem pociskÃ³w. W efekcie tego morale Å¼oÅ‚nierzy bardzo szybko podupadÅ‚o i nie chcieli oni juÅ¼ ginÄ…Ä‡ w imiÄ™ wyÅ¼szoÅ›ci racji politycznych. Konflikt przeksztaÅ‚ciÅ‚ siÄ™ w wojnÄ™ pozycyjnÄ…, w ktÃ³rej piechota wiÄ™cej czasu spÄ™dzaÅ‚a w okopach niÅ¼ walczÄ…c. Wszelkie znane metody walki zawodziÅ‚y w tej nowej sytuacji: atak kawalerii miaÅ‚ jeszcze mniejsze szanse powodzenia niÅ¼ piechoty, a stosowane na wielkÄ… skalÄ™ nawaÅ‚y artyleryjskie nie byÅ‚y w stanie wystarczajÄ…co zmiÄ™kczyÄ‡ linii obronnych.
+Aby wygraÄ‡ wojnÄ™ naleÅ¼aÅ‚o w jakiÅ› sposÃ³b dostaÄ‡ siÄ™ bliÅ¼ej przeciwnika. JuÅ¼ w pierwszym okresie wojny stosowano na maÅ‚Ä… skalÄ™ pojazdy opancerzone. Jednak byÅ‚y to pojazdy koÅ‚owe, ktÃ³re nie miaÅ‚y racji bytu poza utwardzonymi drogami. W celu przedarcia siÄ™ przez ,,ziemiÄ™ niczyjÄ…", czyli strefÄ™ pomiÄ™dzy okopami, skonstruowano gÄ…sienicowy pojazd opancerzony. Co ciekawe, zadania tego podjÄ™Å‚o siÄ™ \textit{Royal Navy}, czyli marynarka wojenna Wielkiej Brytanii. Jej wpÅ‚yw na projekty byÅ‚ silnie widoczny: pierwsze pojazdy nazywano OkrÄ™tami LÄ…dowymi (\textit{Land Ships}), a uzbrojenie znajdowaÅ‚o siÄ™ w sponsonach (tj. wystÄ™pach z boku kadÅ‚uba, sÅ‚uÅ¼Ä…cych wÅ‚aÅ›nie do mocowania uzbrojenia) \cite{wojna_pancerna}. PrzykÅ‚adem tego typu pojazdÃ³w jest przedstawiony na ilustracji \ref{czolg_ws} Mark I, ktÃ³rego specjalnie uformowane gÄ…sienice (w ksztaÅ‚t rÃ³wnolegÅ‚oboku) pozwalaÅ‚y Å‚atwiej pokonywaÄ‡ zasieki wroga. Inne kraje biorÄ…ce udziaÅ‚ w walkach na froncie zachodnim szybko podchwyciÅ‚y ideÄ™ opancerzonych pojazdÃ³w gÄ…sienicowych, co zaowocowaÅ‚o mnogoÅ›ciÄ… koncepcji konstrukcyjnych i szukania, czÄ™sto metodÄ… prÃ³b i bÅ‚Ä™dÃ³w, najefektywniejszych rozwiÄ…zaÅ„. PrzykÅ‚adem zupeÅ‚nie innego podejÅ›cia do konstrukcji czoÅ‚u jest przedstawiony na ilustracji \ref{czolg_ft} francuski Renault FT.
 
   \begin{figure}[H]
     \begin{center}
 \includegraphics[scale=1.5]{imgs/ws_czolg.jpg}
- \caption[Czo³g \textit{Mark I}]{\small{Czo³g Mark I u¿yty pierwszy raz w bitwie pod Somm¹ w 1916 r.}\footnotemark}
+ \caption[CzoÅ‚g \textit{Mark I}]{\small{CzoÅ‚g Mark I uÅ¼yty pierwszy raz w bitwie pod SommÄ… w 1916 r.}\footnotemark}
         \label{czolg_ws}
     \end{center}
   \end{figure}
-\footnotetext{\emph{Czo³g Mark I}, http://mtg.domek.org/, (data dostêpu 22.10.2015 r.)}
+\footnotetext{\emph{CzoÅ‚g Mark I}, http://mtg.domek.org/, (data dostÄ™pu 22.10.2015 r.)}
 
   \begin{figure}[H]
     \begin{center}
 \includegraphics[scale=1.5]{imgs/ft17.jpg}
- \caption[Czo³g \textit{Renault FT}]{\small{Renault FT, lekki czo³g francuski z okresu I wojny œwiatowej.}\footnotemark}
+ \caption[CzoÅ‚g \textit{Renault FT}]{\small{Renault FT, lekki czoÅ‚g francuski z okresu I wojny Å›wiatowej.}\footnotemark}
         \label{czolg_ft}
     \end{center}
   \end{figure}
-\footnotetext{\emph{Czo³g Renault FT}, https://pibwl.republika.pl/, (data dostêpu 22.10.2015 r.)}
+\footnotetext{\emph{CzoÅ‚g Renault FT}, https://pibwl.republika.pl/, (data dostÄ™pu 22.10.2015 r.)}
 
 
-Wszystkie zastosowane pojazdy mia³y jednak podobne cele na polu walki - wspieraæ nacieraj¹c¹ piechotê, s³u¿yæ dla niej jako os³ona i niszczyæ umocnienia przeciwnika. Ostatecznie zastosowanie czo³gów pozwoli³o na szybsze zakoñczenie I wojny œwiatowej, jednak¿e pocz¹tkowo wiêkszoœæ wojskowych nie dostrzega³a w tych pojazdach szerszego potencja³u militarnego. Wynika³o to z faktu, ¿e czo³gi w tamtym okresie by³y bardzo powolne i s³abo opancerzone - gwa³towny rozwój techniki w tej dziedzinie mia³ dopiero nast¹piæ. Pojazdy z okresu I wojny œwiatowej dysponowa³y pancerzem mog¹cym powstrzymaæ co najwy¿ej ogieñ z karabinów maszynowych (a i to nie zawsze) oraz prêdkoœci¹ jazdy porównywaln¹ z tempem nacieraj¹cej piechoty. Jednak ju¿ w 1928 roku, amerykañski in¿ynier i wynalazca Walter Christie, opatentowa³ zawieszenie g¹sienicowe oparte o du¿e, niezale¿ne zawieszone ko³a noœne, na których rozpiête by³y g¹sienice \cite{wojna_pancerna}. Patent ten, zakupiony m.in. przez Wielk¹ Brytaniê oraz Rosjê, umo¿liwi³ budowê rodziny czo³gów rozwijaj¹cych prêdkoœci przekraczaj¹ce 60 km/h.
+Wszystkie zastosowane pojazdy miaÅ‚y jednak podobne cele na polu walki - wspieraÄ‡ nacierajÄ…cÄ… piechotÄ™, sÅ‚uÅ¼yÄ‡ dla niej jako osÅ‚ona i niszczyÄ‡ umocnienia przeciwnika. Ostatecznie zastosowanie czoÅ‚gÃ³w pozwoliÅ‚o na szybsze zakoÅ„czenie I wojny Å›wiatowej, jednakÅ¼e poczÄ…tkowo wiÄ™kszoÅ›Ä‡ wojskowych nie dostrzegaÅ‚a w tych pojazdach szerszego potencjaÅ‚u militarnego. WynikaÅ‚o to z faktu, Å¼e czoÅ‚gi w tamtym okresie byÅ‚y bardzo powolne i sÅ‚abo opancerzone - gwaÅ‚towny rozwÃ³j techniki w tej dziedzinie miaÅ‚ dopiero nastÄ…piÄ‡. Pojazdy z okresu I wojny Å›wiatowej dysponowaÅ‚y pancerzem mogÄ…cym powstrzymaÄ‡ co najwyÅ¼ej ogieÅ„ z karabinÃ³w maszynowych (a i to nie zawsze) oraz prÄ™dkoÅ›ciÄ… jazdy porÃ³wnywalnÄ… z tempem nacierajÄ…cej piechoty. Jednak juÅ¼ w 1928 roku, amerykaÅ„ski inÅ¼ynier i wynalazca Walter Christie, opatentowaÅ‚ zawieszenie gÄ…sienicowe oparte o duÅ¼e, niezaleÅ¼ne zawieszone koÅ‚a noÅ›ne, na ktÃ³rych rozpiÄ™te byÅ‚y gÄ…sienice \cite{wojna_pancerna}. Patent ten, zakupiony m.in. przez WielkÄ… BrytaniÄ™ oraz RosjÄ™, umoÅ¼liwiÅ‚ budowÄ™ rodziny czoÅ‚gÃ³w rozwijajÄ…cych prÄ™dkoÅ›ci przekraczajÄ…ce 60 km/h.
 
   \begin{figure}[H]
     \begin{center}
 \includegraphics[scale=0.4]{imgs/covenanter.jpg}
- \caption[Czo³g \textit{Cruiser Mk V ,,Covenanter"}]{\small{Brytyjski czo³g Cruiser Mk V ,,Covenanter", zbudowany w oparciu o zawieszenie Christiego.}\footnotemark[10]}
+ \caption[CzoÅ‚g \textit{Cruiser Mk V ,,Covenanter"}]{\small{Brytyjski czoÅ‚g Cruiser Mk V ,,Covenanter", zbudowany w oparciu o zawieszenie Christiego.}\footnotemark[7]}
         \label{covenanter}
     \end{center}
   \end{figure}
-\footnotetext[10]{\emph{Czo³g Cruiser Mk V}, http://worldwar2headquarters.com/, (data dostêpu 12.10.2015 r.)}
+\footnotetext[7]{\emph{CzoÅ‚g Cruiser Mk V}, http://worldwar2headquarters.com/, (data dostÄ™pu 12.10.2015 r.)}
 
 
-Rozwój nowych systemów zawieszenia, napêdu czy amortyzacji, umo¿liwia³ tworzenie coraz bardziej mobilnych pojazdów. Rozwija³a siê tak¿e technika metalurgiczna, umo¿liwiaj¹ce produkcjê coraz grubszych p³yt pancernych, dziêki czemu czo³gi stawa³y siê odporne na broñ coraz wiêkszego kalibru. Ten rozwój poci¹gn¹³ z kolei za sob¹ potrzebê montowania w pojazdach coraz silniejszych dzia³. Ca³oœæ przedstawionego tutaj postêpu czyni³a z czo³gu broñ coraz bardziej kompletn¹ i wszechstronn¹. Wiêkszoœæ decydentów w armiach œwiata nie dostrzega³o jednak potencja³u tej, nowej jeszcze, broni. Jednym z wyj¹tków by³a III Rzesza, która w latach 30-tych zaczê³a formowaæ niezale¿ne dywizje pancerne.
+RozwÃ³j nowych systemÃ³w zawieszenia, napÄ™du czy amortyzacji, umoÅ¼liwiaÅ‚ tworzenie coraz bardziej mobilnych pojazdÃ³w. RozwijaÅ‚a siÄ™ takÅ¼e technika metalurgiczna, umoÅ¼liwiajÄ…ce produkcjÄ™ coraz grubszych pÅ‚yt pancernych, dziÄ™ki czemu czoÅ‚gi stawaÅ‚y siÄ™ odporne na broÅ„ coraz wiÄ™kszego kalibru. Ten rozwÃ³j pociÄ…gnÄ…Å‚ z kolei za sobÄ… potrzebÄ™ montowania w pojazdach coraz silniejszych dziaÅ‚. CaÅ‚oÅ›Ä‡ przedstawionego tutaj postÄ™pu czyniÅ‚a z czoÅ‚gu broÅ„ coraz bardziej kompletnÄ… i wszechstronnÄ…. WiÄ™kszoÅ›Ä‡ decydentÃ³w w armiach Å›wiata nie dostrzegaÅ‚o jednak potencjaÅ‚u tej, nowej jeszcze, broni. Jednym z wyjÄ…tkÃ³w byÅ‚a III Rzesza, ktÃ³ra w latach 30-tych zaczÄ™Å‚a formowaÄ‡ niezaleÅ¼ne dywizje pancerne.
 
-We wrzeœniu 1939 roku rozpêta³a siê II wojna œwiatowa, która pokaza³a, jak skuteczn¹ broni¹ mo¿e byæ czo³g w rêkach kompetentnego dowódcy. Podczas inwazji na Francjê obie strony dysponowa³y znacznymi si³ami pancernymi, jednak mobilne i niezale¿ne zgrupowania pancerne Wehrmachtu rozbi³y rozproszone i przywi¹zane do piechoty czo³gi francuskie. W tym momencie rozpocz¹³ siê niezwykle szybki rozwoju broni pancernej, bêd¹cy wyœcigiem zbrojeñ pomiêdzy stronami konfliktu. Wszystkie istotne parametry wozów bojowych ros³y, a trafne koncepcje szybko rozprzestrzenia³y siê miêdzy biurami projektowymi. Koniec II wojny œwiatowej przyniós³ du¿o bardziej ujednolicon¹ koncepcjê czo³gu jako uniwersalnej broni na polu bitwy. Zaowocowa³o to powstaniem pojêcia MBT (\textit{Main Battle Tank}), a wiêc czo³gu podstawowego, który sta³ siê po wojnie podstaw¹ do tworzenia wojsk pancernych we wszystkich armiach œwiata, a¿ do dnia dzisiejszego.
+We wrzeÅ›niu 1939 roku rozpÄ™taÅ‚a siÄ™ II wojna Å›wiatowa, ktÃ³ra pokazaÅ‚a, jak skutecznÄ… broniÄ… moÅ¼e byÄ‡ czoÅ‚g w rÄ™kach kompetentnego dowÃ³dcy. Podczas inwazji na FrancjÄ™ obie strony dysponowaÅ‚y znacznymi siÅ‚ami pancernymi, jednak mobilne i niezaleÅ¼ne zgrupowania pancerne Wehrmachtu rozbiÅ‚y rozproszone i przywiÄ…zane do piechoty czoÅ‚gi francuskie. W tym momencie rozpoczÄ…Å‚ siÄ™ niezwykle szybki rozwoju broni pancernej, bÄ™dÄ…cy wyÅ›cigiem zbrojeÅ„ pomiÄ™dzy stronami konfliktu. Wszystkie istotne parametry wozÃ³w bojowych rosÅ‚y, a trafne koncepcje szybko rozprzestrzeniaÅ‚y siÄ™ miÄ™dzy biurami projektowymi. Koniec II wojny Å›wiatowej przyniÃ³sÅ‚ duÅ¼o bardziej ujednoliconÄ… koncepcjÄ™ czoÅ‚gu jako uniwersalnej broni na polu bitwy. ZaowocowaÅ‚o to powstaniem pojÄ™cia MBT (\textit{Main Battle Tank}), a wiÄ™c czoÅ‚gu podstawowego, ktÃ³ry staÅ‚ siÄ™ po wojnie podstawÄ… do tworzenia wojsk pancernych we wszystkich armiach Å›wiata, aÅ¼ do dnia dzisiejszego.
 
-MBT charakteryzuje siê przede wszystkim wysok¹ mobilnoœci¹ oraz silnym uzbrojeniem, gdy¿ doœwiadczenie pokaza³o, ¿e najlepszym sposobem na przetrwanie na polu walki jest zniszczenie przeciwnika zanim ten bêdzie w stanie zlokalizowaæ ciebie. W tym czasie na œwiecie rozpocz¹³ siê tak¿e gwa³towny rozwój elektroniki, któr¹ zaczêto na coraz szersz¹ skalê stosowaæ w sprzêcie wojskowym, m.in. w czo³gach. Jednym z przyk³adów mo¿e byæ wprowadzenie systemów aktywnej noktowizji do radzieckich czo³gów w latach 60-tych. W³aœnie nowoczesna elektronika sta³a siê jednym z g³ównych obszarów, na którym zaczêli ze sob¹ konkurowaæ konstruktorzy bojowych pojazdów opancerzonych. O tym, jak wielk¹ ró¿nicê potrafi ona zrobiæ na polu walki stanowi chocia¿by przebieg najwiêkszej bitwy pancernej w historii, która mia³a miejsce podczas operacji Pustynna Burza w 1991 roku. Po obu stronach konfliktu wziê³o w niej udzia³ oko³o 8 tysiêcy czo³gów. Rozbudowane sytemu ³¹cznoœci oraz zaawansowana optyka dzienna i nocna (skutecznie wykorzystywana podczas nocnych nataræ) pozwoli³y zminimalizowaæ starty w³asne koalicji pod dowództwem Stanów Zjednoczonych do poziomu ok. 0,4\% strat przeciwnika. Jednym z czo³gów bior¹cych udzia³ w tej operacji by³ brytyjski Challenger I, przedstawiony na ilustracji \ref{challenger}.
+MBT charakteryzuje siÄ™ przede wszystkim wysokÄ… mobilnoÅ›ciÄ… oraz silnym uzbrojeniem, gdyÅ¼ doÅ›wiadczenie pokazaÅ‚o, Å¼e najlepszym sposobem na przetrwanie na polu walki jest zniszczenie przeciwnika zanim ten bÄ™dzie w stanie zlokalizowaÄ‡ ciebie. W tym czasie na Å›wiecie rozpoczÄ…Å‚ siÄ™ takÅ¼e gwaÅ‚towny rozwÃ³j elektroniki, ktÃ³rÄ… zaczÄ™to na coraz szerszÄ… skalÄ™ stosowaÄ‡ w sprzÄ™cie wojskowym, m.in. w czoÅ‚gach. Jednym z przykÅ‚adÃ³w moÅ¼e byÄ‡ wprowadzenie systemÃ³w aktywnej noktowizji do radzieckich czoÅ‚gÃ³w w latach 60-tych. WÅ‚aÅ›nie nowoczesna elektronika staÅ‚a siÄ™ jednym z gÅ‚Ã³wnych obszarÃ³w, na ktÃ³rym zaczÄ™li ze sobÄ… konkurowaÄ‡ konstruktorzy bojowych pojazdÃ³w opancerzonych. O tym, jak wielkÄ… rÃ³Å¼nicÄ™ potrafi ona zrobiÄ‡ na polu walki stanowi chociaÅ¼by przebieg najwiÄ™kszej bitwy pancernej w historii, ktÃ³ra miaÅ‚a miejsce podczas operacji Pustynna Burza w 1991 roku. Po obu stronach konfliktu wziÄ™Å‚o w niej udziaÅ‚ okoÅ‚o 8 tysiÄ™cy czoÅ‚gÃ³w. Rozbudowane sytemu Å‚Ä…cznoÅ›ci oraz zaawansowana optyka dzienna i nocna (skutecznie wykorzystywana podczas nocnych natarÄ‡) pozwoliÅ‚y zminimalizowaÄ‡ starty wÅ‚asne koalicji pod dowÃ³dztwem StanÃ³w Zjednoczonych do poziomu ok. 0,4\% strat przeciwnika. Jednym z czoÅ‚gÃ³w biorÄ…cych udziaÅ‚ w tej operacji byÅ‚ brytyjski Challenger I, przedstawiony na ilustracji \ref{challenger}.
 
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.5]{imgs/chal1.jpg}
- \caption[Czo³g \textit{Challenger I}]{\small{Challenger I, brytyjski czo³g podstawowy (MBT).}\footnotemark[11]}
+ \caption[CzoÅ‚g \textit{Challenger I}]{\small{Challenger I, brytyjski czoÅ‚g podstawowy (MBT).}\footnotemark[8]}
         \label{challenger}
     \end{center}
   \end{figure}
-\footnotetext[11]{\emph{Czo³g Challenger I}, http://military-today.com/, (data dostêpu 22.10.2015 r.)}
+\footnotetext[8]{\emph{CzoÅ‚g Challenger I}, http://military-today.com/, (data dostÄ™pu 22.10.2015 r.)}
 
-W chwili obecnej trwaj¹ dalsze prace nad udoskonaleniem koncepcji czo³gu na wspó³czesnym polu walki. W latach 90-tych panowa³o przekonanie, ¿e czasy tego rodzaju broni ju¿ przemijaj¹, jednak ostatnie konflikty zbrojne pokaza³y, ¿e wcale tak nie jest. Broñ pancerna w dalszym ci¹gu intensywnie siê rozwija, tak pod k¹tem koncepcji mechanicznych, jak i stosowania zaawansowanej techniki do coraz wiêkszej iloœci zadañ. Warte odnotowania jest m.in. d¹¿enie do daleko id¹cego zredukowania iloœci za³ogi \cite{programy_rozwoju}. Aby to umo¿liwiæ konieczne jest przejêcie czêœci zadañ za³ogi przez automatyczne systemy, takie jak automatyczne magazyny amunicyjne czy algorytmy s³u¿¹ce do identyfikacji celów w polu widzenia pojazdu. Wspó³czesna elektronika ma tak¿e zastosowanie w takich obszarach jak: maskowanie pojazdu na p³aszczyŸnie optycznej, termicznej oraz radiowej, wsparcie systemów wizyjnych w postaci analizy obrazu u³atwiaj¹cej jego interpretacjê przez za³ogê, rozbudowane systemy komunikacyjne na ró¿nych poziomach dowodzenia czy z³o¿one systemy stabilizuj¹ce ruch dzia³a \cite{czolg_przyszlosci}.
+W chwili obecnej trwajÄ… dalsze prace nad udoskonaleniem koncepcji czoÅ‚gu na wspÃ³Å‚czesnym polu walki. W latach 90-tych panowaÅ‚o przekonanie, Å¼e czasy tego rodzaju broni juÅ¼ przemijajÄ…, jednak ostatnie konflikty zbrojne pokazaÅ‚y, Å¼e wcale tak nie jest. BroÅ„ pancerna w dalszym ciÄ…gu intensywnie siÄ™ rozwija, tak pod kÄ…tem koncepcji mechanicznych, jak i stosowania zaawansowanej techniki do coraz wiÄ™kszej iloÅ›ci zadaÅ„. Warte odnotowania jest m.in. dÄ…Å¼enie do daleko idÄ…cego zredukowania iloÅ›ci zaÅ‚ogi \cite{programy_rozwoju}. Aby to umoÅ¼liwiÄ‡ konieczne jest przejÄ™cie czÄ™Å›ci zadaÅ„ zaÅ‚ogi przez automatyczne systemy, takie jak automatyczne magazyny amunicyjne czy algorytmy sÅ‚uÅ¼Ä…ce do identyfikacji celÃ³w w polu widzenia pojazdu. WspÃ³Å‚czesna elektronika ma takÅ¼e zastosowanie w takich obszarach jak: maskowanie pojazdu na pÅ‚aszczyÅºnie optycznej, termicznej oraz radiowej, wsparcie systemÃ³w wizyjnych w postaci analizy obrazu uÅ‚atwiajÄ…cej jego interpretacjÄ™ przez zaÅ‚ogÄ™, rozbudowane systemy komunikacyjne na rÃ³Å¼nych poziomach dowodzenia czy zÅ‚oÅ¼one systemy stabilizujÄ…ce ruch dziaÅ‚a \cite{czolg_przyszlosci}.
 
-Analizuj¹c kierunki rozwoju broni pancernej da siê zauwa¿yæ ich zbie¿noœæ z tematem przedstawianej pracy in¿ynierskiej. Autonomiczna praca pojazdu, wyrêczaj¹ca za³ogê z czêœci obowi¹zków oraz automatyczne systemy poszukiwania oraz identyfikacji celu na podstawie danych zbieranych przez systemy wizyjne pojazdu s¹ tematami rozwijanymi w wielu oœrodkach konstrukcyjnych zaanga¿owanych w rozwój systemów wojskowych.
+AnalizujÄ…c kierunki rozwoju broni pancernej da siÄ™ zauwaÅ¼yÄ‡ ich zbieÅ¼noÅ›Ä‡ z tematem przedstawianej pracy inÅ¼ynierskiej. Autonomiczna praca pojazdu, wyrÄ™czajÄ…ca zaÅ‚ogÄ™ z czÄ™Å›ci obowiÄ…zkÃ³w oraz automatyczne systemy poszukiwania oraz identyfikacji celu na podstawie danych zbieranych przez systemy wizyjne pojazdu sÄ… tematami rozwijanymi w wielu oÅ›rodkach konstrukcyjnych zaangaÅ¼owanych w rozwÃ³j systemÃ³w wojskowych.
+
