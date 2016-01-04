@@ -1,0 +1,75 @@
+\namedchapter{Algorytm rozpoznawania celu}
+\namedsection[Daniel Łukwiński]{Rodzaj celu}
+Zadanie, jakie miał realizować robot polegało na namierzeniu oraz śledzeniu celu w swoim otoczeniu. Na początkowym etapie pracy należało ustalić, co ma być poszukiwanym przez czołg celem. Ostateczny wybór padł na czerwony okrąg, a więc obiekt o określonym kolorze oraz geometrycznym kształcie. Przy jego wyborze kierowano się tym, aby dany obiekt nie występował przypadkowo w otoczeniu, a jednocześnie nie odróżniał się od niego w nadzwyczajny sposób. Założeniem było także to, aby algorytm robota potrafił znajdować cel przy zróżnicowanym oświetleniu oraz na różnej odległości (tj. niezależnie od jego rozmiaru na obrazie). Ważne było także, aby celem mógł być każdy obiekt spełniający podstawowe warunki koloru i kształtu, a więc algorytm nie mógł być tworzony pod jeden konkretny obiekt służący za cel.
+
+\namedsection[Daniel Łukwiński]{OpenCV}
+OpenCV jest biblioteką służącą do wszechstronnej obróbki obrazu, wydaną na licencji BSD (\textit{Berkeley Software Distribution}), będącej zgodną z zasadami wolnego oprogramowania. Została ona napisana w C oraz C++, jednak możliwe jest je wykorzystywanie także w języku \textit{Python} oraz \textit{Java}. Wspiera ona takie systemy operacyjne jak: \textit{Windows, Linux, Mac OS, iOS} oraz \textit{Android}. Posiada ona moduły służące do pracy tak z obrazem dwuwymiarowym, jak i trójwymiarowym. Ponadto zawiera szereg modułów, służących między innymi do rozpoznawania twarzy, gestów czy systemów uczących się (ang. \textit{machine learning}).
+
+O jej wykorzystaniu, poza darmową licencją, zdecydowała optymalizacja zastosowanych rozwiązań oraz mnogość funkcji, spełniających większość zadań związanych z analizą obrazu. Wykorzystywana w projekcie wersja nosi oznaczenie 3.0.0 i została opublikowana 4 czerwca 2015 roku. W przedstawianym algorytmie wykorzystywane są trzy moduły z tej biblioteki:
+\begin{itemize}
+\item \texttt{core.hpp} - zawiera podstawowe klasy oraz funkcje związane z pracą na obrazach dwuwymiarowych;
+\item \texttt{imgproc.hpp} - zawiera bardziej zaawansowane funkcje służące to przetwarzania obrazów, np.: filtrację obrazu czy progowanie;
+\item \texttt{highgui.hpp} - w tym pliku znajdują się funkcje związane z interface'm programu, które zostały wykorzystane jedynie na etapie tworzenia algorytmu, do testowania jego efektów efektów (wyświetlenie obrazu, odczyt oraz zapis do pliku).
+\end{itemize}
+
+\namedsection[Daniel Łukwiński]{Inicjalizacja}
+Działający na Raspberry Pi program składa się z dwóch części. Pierwsza z nich jest odpowiedzialna za inicjalizację sprzętowych generatorów sygnału PWM na Raspberry oraz łączenie się z kamerą oraz rozpoczęcie jej pracy z ustalonymi parametrami.
+
+Inicjalizacja sygnałów PWM na Raspberry jest wykonywana z wykorzystaniem biblioteki \textit{wiringPi}. Jest to napisana w języku C biblioteka obsługująca piny GPIO mini komputera Raspberry Pi. Została ona wydana na licencji \textit{GNU LGPLv3}, umożliwiającej darmowy dostęp dla wszystkich zainteresowanych użytkowników. Pierwszym krokiem inicjalizacji sygnałów PWM jest wywołanie funkcji \texttt{int wiringPiSetupGpio()}. Znajdują się w niej deklaracje niezbędne do poprawnej pracy z biblioteką. Odpowiada ona także za umożliwienie bezpośredniego dostępu do pinów GPIO Raspberry. Wartością zwracaną przez tą funkcję jest kod, informujący o poprawności wywołania. Jego wartość równa -1 oznacza błąd uniemożliwiający dalszą prawidłową pracę. Następnie należy wywołać funkcję \textit{void pinMode (int pin, int mode)}, której zadaniem jest ustawienie jednego z pinów GPIO Rasppbery w odpowiedni tryb: wejścia, wyjścia, wyjścia zegara lub wyjścia sygnału PWM. W tym przypadku koniecznie jest ustawienie pinów numer 18 oraz 19 jako wyjścia sygnału PWM. Kolejną wywoływaną funkcją z tej biblioteki jest void \texttt{pwmSetMode(int mode)}. Ma ona za zadanie ustalić w którym z dwóch trybów ma pracować generator sygnału PWM: \textit{mark:space} lub \textit{balanced}. Pierwszy z nich jest klasycznym sygnałem PWM, w którym okres sygnału jest równy całemu cyklowi pracy jego licznika. W drugim wartość wypełnienia jest równomiernie rozłożona na cykl liczniki, przez wyjściowa częstotliwość sygnału jest dużo większa. W zastosowanym algorytmie wykorzystany został pierwszy tryb, gdyż dużo lepiej nadaje się on do sterowania serwomechanizmów. Kolejne dwa niezbędne do ustawienia parametry to zakres licznika oraz preskaler zegara. Wykorzystuje się do tego dwie funkcje: \texttt{void pwmSetRange (unsigned int range)} oraz \texttt{void pwmSetClock (int divisor)}. Wpływ tych dwóch parametrów przedstawia wzór
+\begin{equation}
+f_{PWM} = \frac{f_{count}}{range} = \frac{f}{(divisor * range)}
+\label{eq:hard_pwm}
+\end{equation}
+gdzie:
+\begin{equationDescriptor}
+\EQDitem{$f_{PWM}$}{częstotliwość sygnału PWM [$Hz$],}
+\EQDitem{$f_{count}$}{częstotliwość pracy licznika [$Hz$],}
+\EQDitem{$f$}{częstotliwość zegara bazowego [$Hz$],}
+\EQDitem{$divisor$}{Wartość preskalera,}
+\EQDitem{$range$}{Zasięg licznika, }
+\end{equationDescriptor}
+W przypadku zastosowanych serw wymagane $f_{PWM}$ wynosi 50 $Hz$, a $f$ dla Raspberry Pi to 19.2 $MHz$. Przedstawiony wcześniej wzór przyjmuje więc postać:
+\begin{equation}
+50 Hz = \frac{19.2 MHz}{(divisor * range)}
+\label{eq:hard_pwmN}
+\end{equation}
+Widać więc jasno, że wartość preskalera oraz zasięg liczniki są ze sobą powiązane i muszą być ustawiane wspólnie, a wartość ich iloczynu wynosi:
+\begin{equation}
+(divisor * range) = \frac{19.2 MHz}{50 Hz} = 384000
+\label{eq:range_x_presc}
+\end{equation}
+O dokładności sterowania serwomechanizmem decyduje właśnie wartość zasięgu licznika służącego do generowania sygnału PWM. Wspomniane wcześniej funkcje z biblioteki \textit{WiringPi} służące do ustawiania tych dwóch parametrów przyjmują tylko wartości całkowite, więc wybierany zasięg licznika powinien być dzielnikiem liczby $384000$. Wartość zasięgu ustawiono więc na poziomie 6000, co zapewnia wystarczającą dokładność pracy serwomechanizmu, a to z kolei pociągnęło za sobą ustawienie preskalera zegara na 64. Ostatecznie blok kodu odpowiedzialny na inicjalizację sprzętowego generatora sygnału PWM w Raspberry Pi za pomocą biblioteki \textit{WiringPi} przyjmuje postać:
+\begin{lstlisting}
+if (wiringPiSetupGpio() != -1)
+{
+	pinMode(18,PWM_OUTPUT);
+	pinMode(19,PWM_OUTPUT);
+	pwmSetMode(PWM_MODE_MS);
+	pwmSetRange(6000);
+	pwmSetClock(64)
+}
+else
+{
+	return -1;
+}
+\end{lstlisting}
+
+Drugą rzeczą, obok sygnału PWM, wymagającą inicjalizacji na początku pracy programu jest kamera. Do jej obsługi wykorzystana została biblioteka \textit{RaspiCamCV}, udostępniana na zasadach wolnego oprogramowania. Została ona wybrana, ponieważ zapewnia podstawową obsługę dedykowanej kamery Raspberry we współpracy z biblioteką \textit{OpenCV}. Z jej wykorzystaniem możliwe jest pobieranie rejestrowanych obrazów bezpośrednio w formacie umożliwiającym dalszą edycję za pomocą funkcji \textit{OpenCV}. Pierwszy etapem pracy z dedykowaną kamerą, z wykorzystaniem biblioteki \textit{RaspiCamCV} jest utworzenie danych konfiguracyjnych, które posłużą do pracy z kamery. Podstawową ustawieniem, które należy wybrać jest rozdzielczość w jakiej będą rejestrowane obrazy. Jest to o tyle istotne, że podstawowym ograniczeniem w pracach nad algorytmem wykrywającym cel był fakt, że wyniki jego pracy miały na bieżąco sterować ruchami pojazd, przy ograniczonej mocy obliczeniowej platformy Raspberry Pi. Podstawowym ograniczeniem, które spowodowały te warunki, była rozdzielczość analizowanego obrazu. Oferowana przez kamerę rozdzielczość maksymalną wynosi aż 1920 na 1080 pikseli, jednak jest to o wiele za dużo, jak na stawiane przed algorytmem wymagania. Ostatecznie zdecydowano się wykorzystać rozdzielczość 640 na 480 pikseli. Taki rozmiar zapewnia jeszcze zadowalający poziom dokładności zdjęcia oraz relatywnie szybką jego analizę. Pozostałe parametry zostały ustawione na wartości domyślne, ponieważ wtedy są one samoczynnie dobierane na podstawie warunków pracy, co zapewniło zdjęcia bardzo dobrej jakości nawet przy zróżnicowanym oświetleniu.
+
+Po stworzeniu danych konfiguracyjnych pozostało utworzyć obiekt (a właściwie wskaźnik na taki obiekt), który w trakcie pracy programu będzie służył do pobierania ostatniego wykonanego przez kamerę zdjęcia znajdującego się w buforze. Całość kodu wykorzystywanego do inicjalizacji pracy kamery przedstawia się w sposób następujący:
+\begin{lstlisting}
+RASPIVID_CONFIG* config = (RASPIVID_CONFIG*)malloc(sizeof(RASPIVID_CONFIG));
+config->width = 640;
+config->height = 480;
+config->bitrate = 0;
+config->framerate = 0;
+config->monochrome = 0;
+RaspiCamCvCapture* capture =
+	(RaspiCamCvCapture *)raspiCamCvCreateCameraCapture2(0, config);
+free(config); 
+\end{lstlisting}
+
+\namedsection[Daniel Łukwiński]{Analiza obrazu}
+
+
+\namedsection[Daniel Łukwiński]{Sterowanie}
