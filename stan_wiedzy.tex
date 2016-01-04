@@ -33,8 +33,7 @@ Korpus czołgu (B na ilustracji \ref{podzal}) jest jednostką napędową całej 
   \end{figure}
   \footnotetext{\emph{Monografia IS-3}, Publikacja rosyjska, 2010~r.}
 
-\namedsection[Daniel Łukwiński]{Przetwarzanie obrazu}
-\namedsubsection{Reprezentacja obrazu}
+\namedsection[Daniel Łukwiński]{Reprezentacja obrazu}
 Obraz cyfrowy, w dalszej części pracy nazywany po prostu obrazem, jest narzędziem reprezentowania grafiki za pomocą urządzeń cyfrowych. Podstawową składową takiego obrazu są piksele, czyli możliwie małe punkty jednakowej wielkości, posiadające jednolitą barwę. W pamięci komputera obrazy cyfrowe są zapisywane jako tablice, których każda komórka przechowuje informację o jednym pikselu. Tablicę taką można także przedstawić za pomocą funkcji:
 \begin{equation}
 \label{funkcja_obrazu}
@@ -62,7 +61,7 @@ W przypadku obrazów kolorowych do ich przedstawienia stosuje się kilka takich 
 Obrazy, na których będą wykonywane operacje na potrzeby tego projektu, będą rejestrowane przez kamerę zamontowaną na robocie, a więc będą obrazami odzwierciedlającymi rzeczywiste otoczenie. Rejestracja rzeczywistego obrazu na postać cyfrową polega na dyskretyzacji obrazu oraz kwantyzacji jasności koloru\cite{Malina}. Kamera cyfrowa cyfrowa (lub aparat cyfrowy) jest urządzeniem pozwalającym na zarejestrowanie energii promieniowania elektromagnetycznego pochodzącego od obserwowanego obiektu. Przestrzenny rozkład energii jest rzutowany na dwuwymiarową płaszczyznę zbudowaną z elementów optoelektronicznych - matrycę. Powoduje to odłożenie się na każdym segmencie ładunku elektrycznego, którego wartość mierzymy, kwantujemy oraz zapisujemy w pamięci komputera. Wielkość matrycy oraz jej podzespołów decyduje o jakości wykonanego "pomiaru". W przypadku kolorowych obrazów rejestrowanie ich odbywa się poprzez jednoczesny pomiar trzech wartości, tzn. natężenia promieniowania fali o długości około 450 nm - kolor niebieski, 550 nm - zielony i 700 nm - czerwony. Jest to możliwe dzięki zastosowaniu odpowiednich filtrów pasmowoprzepustowych dla poszczególnych optoelementów matrycy.
 Wynik tej operacji jest najczęściej zapisywany na 8 bitach, a więc posiada wartości od 0 do 255 ($2^8$ daje 256 kombinacji). Pamiętając, że tworzone są trzy tablice, osobna dla każdego z kolorów RGB, a więc dane każdego piksela zapisywane są na $3 x 8 = 24$ bitach. Daje to kombinację $2^{24} = 16777216$ kolorów, czyli ilość przekraczającą już możliwości percepcji ludzkiego oka.
 
-\namedsubsection{Analiza obrazu}
+\namedsection[Daniel Łukwiński]{Analiza obrazu}
 \textit{Celem sztucznego przetwarzania lub analizy obrazu jest takie automatyczne przetworzenie i przeanalizowanie obrazu obiektów lub całego otoczenia systemu zautomatyzowanego, aby uzyskać użyteczną informację na temat interesujących obiektów (...) lub na temat otoczenia, które może wpływać (...) na sterowany automatycznie proces.}\cite{Tadeusiewicz}
 
 Czytając powyższą definicję należy być świadomym, że obraz rzeczywistego otoczenia posiada olbrzymią ilość informacji, w znacznej mierze nadmiarowych, nie mających związku z poszukiwanymi informacjami. Analizowanie obrazów dokonywane w ludzkim mózgu jest dla człowieka czynnością naturalną, ćwiczoną od chwili narodzin. Wydaje się więc być czymś prostym. W rzeczywistości próba powtórzenia tych procesów w sposób sztuczny jest rzeczą niezwykle trudną i złożoną. Cały proces wydobywania informacji obrazu można podzielić na trzy etapy: przetwarzanie, analizę oraz rozpoznawanie.
