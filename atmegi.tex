@@ -4,7 +4,7 @@ Sterownik silników został zaimplementowany na dwóch mikrokontrolerach z rodzi
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.45]{imgs/sterowanie.png}
- 	\caption[Schemat pętli sterowania silnikami.]{\small{Schemat przedstawia koncepcję pętli sterowania silnikami napędowymi. Ujemne sprzężenie zwrotne realizowane jest przy wykorzystaniu enkodera impulsowego. Sygnały: $u(t)$ - wartość zadana, $r(t)$ - uchyb, $y(t)$ wyjście układu.}}
+ 	\caption[Schemat pętli sterowania silnikami.]{\small{Schemat przedstawia koncepcję pętli sterowania silnikami napędowymi. Ujemne sprzężenie zwrotne realizowane jest przy wykorzystaniu enkodera impulsowego. Sygnały: $u(t)$ - wartość zadana, $r(t)$ - uchyb, $y(t)$ wyjście układu, $y_1(t)$ - sygnał wyjściowy enkodera.}}
 	\label{schem_ster}
     \end{center}
   \end{figure}  
@@ -132,4 +132,55 @@ case TWI_SRX_ADR_DATA_ACK: // 0x80
 	break;
 \end{lstlisting}
 
+\namedsection{Implementacja regulatora P}
+Sterowanie napędem odbywa się przy wykorzystaniu regulatora P, składającego się jedynie z członu proporcjonalnego. Transmitancja, czyli zależność pomiędzy wyjściem a wejściem układu, opisana jest wzorem:
+\begin{equation}
+	G_{p}(s) =  k_p 
+   \label{eq:reg}
+ \end{equation}
+ gdzie:  
+ \begin{equationDescriptor}
+   \EQDitem{$G_{p}(s)$}{transmitancja,}
+ 	\EQDitem{$k_{p}$}{wzmocnienie członu proporcjonalnego.}
+ \end{equationDescriptor}
+ \noindent
+ Na rysunku \ref{schem_ster_2} przedstawiony został schemat blokowy przedstawiający strukturę zaimplementowanego sterownika.
+   \begin{figure}[H]
+    \begin{center}
+      \includegraphics[scale=0.45]{imgs/sterowanie2.png}
+ 	\caption[Schemat zrealizowanego sterownika.]{\small{Schemat przedstawia układ sterowania silnikami napędowymi. Ujemne sprzężenie zwrotne realizowane jest przy wykorzystaniu enkodera impulsowego, którego sygnał jest interpretowany przez mikrokontroler. Sygnały: $u(t)$ - wartość zadana, $r(t)$ - uchyb, $y(t)$ wyjście układu, $y_1(t)$ - sygnał wyjściowy enkodera.}}
+	\label{schem_ster_2}
+    \end{center}
+  \end{figure}  
+Układ charakteryzuje się niezerowym uchybem ustalonym, co w tym przypadku jest do zaakceptowania. Sygnał sterujący regulatora $r(t)$ możemy zapisać jako:
+\begin{equation}
+	r(t)=u(t)-y_1(t)
+   \label{eq:reg1}
+ \end{equation}
+ gdzie:  
+ \begin{equationDescriptor}
+   \EQDitem{$r(t)$}{sygnał sterujący regulatorem,}
+ 	\EQDitem{$u_{t}$}{wartość zadana,}
+ 	 \EQDitem{$y_1(t)$}{sygnał otrzymany z sprzężenia zwrotnego.}
+ \end{equationDescriptor}
+ \noindent
+ Wartość $r(t)$ nazywana jest uchybem, czyli różnicą pomiędzy wartością zadaną a rzeczywistą. Zadaniem regulatora P jest zapewnienie odpowiedniego wzmocnienia tego sygnału. Wartość wypełnienia sygnału PWM zawiera się w przedziale od 0 do 255. W związku z tym sygnał wyjściowy z regulatora należało odpowiednio ograniczyć. Fragment kodu zaprogramowanego na Atmegach został przedstawiony poniżej.
+\begin{lstlisting}
+char regulator(char we, char wy)  // we - zadana wartosc, wy - odczytana
+{
+	int k_p = 30;                 // deklaracja wzmocnienia czlonu P
+	int uchyb = 0;                // deklaracja zmiennej uchybu
+	int p = 0;                    // deklaracja zmiennej odpowiedzi regulatora
+	unsigned char wyjscie = 0;    // deklaracja zmiennej wyjsciowej
+	uchyb = (int)(we) - (int)(wy);// obliczanie uchybu
+	p = k_p*uchyb;                // obliczanie odpowiedzi regulatora
+	if (p > 255)                  // jezeli odpowiedz jest wieksza od 255
+	    wyjscie = 0xFF;           // ustaw na wyjsciu wartosc 255
+	else if(p < 0)                // jezeli odpowiedz jest mniejsza od 0
+	    wyjscie = 0x00;           // ustaw na wyjsciu wartosc 0
+	else                          // w przeciwnym wypadku
+        wyjscie = (unsigned char)(p);
+	return wyjscie;               // zwrocenie wartosci przez funkcje
+}
+\end{lstlisting}
 
