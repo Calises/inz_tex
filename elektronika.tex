@@ -1,7 +1,7 @@
 \namedchapter[Adam Zieliński]{Projekt elektroniki}
 Podstawowym zadaniem projektu jest budowa robota mobilnego, na którą składa się część mechaniczna, elektroniczna oraz programowa. Pierwsza z nich została omówiona w poprzednim rozdziale. Następnym krokiem jest zaprojektowanie oraz wykonanie części wykonawczej, która pozwoli połączyć platformę \textit{Raspberry Pi} z rzeczywistym modelem i umożliwi sterowanie nim. 
 \namedsection{Założenia}
-Sterowanie pojazdem odbywa się poprzez wykorzystanie dwóch silników \textit{Pololu 37Dx52L} oraz dwóch serwomechanizmów \textit{TowerPro SG-5010}. Każdy z nich sterowany jest przy pomocy sygnału PWM (ang. \textit{Pulse-Width Modulation}), czyli sygnału prostokątnego o zmiennym współczynniku wypełnienia, co zostało pokazane na rysunku \ref{sygnal_PWM}. Aby jak najbardziej zoptymalizować proces sterowania należało wykorzystać sprzętowe generatory sygnału PWM. W odróżnieniu od programowych rozwiązań, nie obciąża to pracy procesora. Jest to o tyle istotne ,iż głównym zadaniem czołgu jest analiza obrazu pochodzącego z kamery w czasie rzeczywistym, co jest bardzo czasochłonnym procesem. Wybrana platforma \textit{Raspberry Pi} posiada dwa sprzętowe kanały PWM, z czego jeden przeznaczony jest do generowania sygnału audio. Z pojedynczego źródła możliwe jest wytworzenie dwóch przebiegów, o tej samej częstotliwości lecz różnym wypełnieniu, które posłużą do sterowania położeniem wieżyczki. Sterowanie silnikami napędowymi wymaga użycia jeszcze dodatkowo czterech sygnałów PWM. W związku z czym zaprojektowany został osobny układ elektroniczny, który pozwolił na ich obsługę. Zbudowany został w oparciu o dwa mikrokontrolery z rodziny AVR, łączące się przy pomocy magistrali szeregowej magistrali TWI(ang. \textit{2-wire Serial Interface}) z \textit{Raspberry Pi}. Komunikacja z robotem będzie wykorzystać sieć WLAN(ang. \textit{Wireless Local Area Network,}) oraz protokoł SSH (ang. \textit{secure shell}). Schemat blokowy elektroniki czołgu przedstawiony został na rysunku poniżej:
+Sterowanie pojazdem odbywa się poprzez wykorzystanie dwóch silników \textit{Pololu 37Dx52L} oraz dwóch serwomechanizmów \textit{TowerPro SG-5010}. Każdy z nich sterowany jest przy pomocy sygnału PWM (ang. \textit{Pulse-Width Modulation}), czyli sygnału prostokątnego o zmiennym współczynniku wypełnienia, co zostało pokazane na rysunku \ref{sygnal_PWM}. Aby jak najbardziej zoptymalizować proces sterowania należało wykorzystać sprzętowe generatory sygnału PWM. W odróżnieniu od programowych rozwiązań, nie obciąża to pracy procesora. Jest to o tyle istotne ,iż głównym zadaniem robota jest analiza obrazu pochodzącego z kamery w czasie rzeczywistym, co jest bardzo czasochłonnym procesem. Wybrana platforma \textit{Raspberry Pi} posiada dwa sprzętowe kanały PWM, z czego jeden przeznaczony jest do generowania sygnału audio. Z pojedynczego źródła możliwe jest wytworzenie dwóch przebiegów, o tej samej częstotliwości lecz różnym wypełnieniu, które posłużą do sterowania położeniem wieżyczki. Sterowanie silnikami napędowymi wymaga użycia jeszcze dodatkowo czterech sygnałów PWM. W związku z czym zaprojektowany został osobny układ elektroniczny, który pozwolił na ich obsługę. Zbudowany został w oparciu o dwa mikrokontrolery z rodziny AVR, łączące się przy pomocy magistrali szeregowej magistrali TWI(ang. \textit{2-wire Serial Interface}) z \textit{Raspberry Pi}. Komunikacja z robotem będzie wykorzystać sieć WLAN(ang. \textit{Wireless Local Area Network,}) oraz protokoł SSH (ang. \textit{secure shell}). Schemat blokowy elektroniki przedstawiony został na rysunku poniżej:
 
   \begin{figure}[H]
     \begin{center}
@@ -40,7 +40,6 @@ Do napędzenia pojazdu użyte zostały szczotkowe silniki prądu stałego firmy 
  	 \EQDitem{$I$}{natężenie prądu [A],}
  	  \EQDitem{$L$}{długość przewodu [m].}
  \end{equationDescriptor}
- \newpage
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.7]{imgs/silnik_p_stalego.png}
@@ -84,7 +83,6 @@ Do tego celu wykorzystany został tzw. sygnał PWM, czyli sygnał prostokątny o
  	\EQDitem{$T$}{okres sygnału [s],}
  	\EQDitem{$k$}{współczynnik wypełnienia [\%].}
  \end{equationDescriptor}
- \newpage
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.65]{imgs/wykres.png}
@@ -109,7 +107,7 @@ Do tego celu wykorzystany został tzw. sygnał PWM, czyli sygnał prostokątny o
 Serwomechanizm jest kompaktowym urządzeniem mechaniczno-elektronicznym (rys. \ref{serwomechanizm}) składającym się z silnika prądu stałego oraz sterownika. Najczęściej układy tego typu realizują sterowanie położeniem wału wyjściowego i mają ograniczony zakres pracy (np. umożliwiają obrót o 270$^\circ$). Urządzenia posiadają w sobie pętlę sprzężenia zwrotnego (np. przy wykorzystaniu potencjometru połączonego z wałem) oraz zaimplementowany sterownik. 
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[scale=0.8]{imgs/serwo.jpg}
+      \includegraphics[scale=0.7]{imgs/serwo.jpg}
  	\caption[Model sewomechanizmu.]{\small{Ilustracja przedstawia wewnętrzną budowę serwomechanizmu, na którym: A - orczyk, czyli część obrotowa/wykonawcza, B - zespół kół zębatych redukujących prędkość obrotową, C - potencjometr realizujący sprzężenie zwrotne od położenia orczyka, D - układ elektroniczny będący sterownikiem układu, E - silnik prądu stałego.}\footnotemark}
 	\label{serwomechanizm}
     \end{center}
@@ -119,7 +117,7 @@ Serwomechanizm jest kompaktowym urządzeniem mechaniczno-elektronicznym (rys. \r
 Sterowanie, podobnie jak w przypadku napędu, odbywa się przy wykorzystaniu modulacji szerokości impulsu PWM. Jednakże generowany sygnał musi mieć określoną częstotliwość - 50 Hz a zmiana wypełnienia powoduje zmianę położenia orczyka. Przykładowy sposób sterowania przedstawiony został na rysunku \ref{serwomechanizm_sterowanie}. Dla wypełnienia $k=7,5$\% układ ustawia się w położeniu neutralnym, czyli w połowie zakresu działa - 90$^\circ$ względem początkowego położenia. Zmniejszając stopniowo wypełnienie sygnału sterującego orczyk będzie zmniejszał kąt wychylenia (aż dojdzie do 0 $^\circ$), zwiększając - kąt będzie narastał aż do 180$^\circ$.
 \begin{figure}[H]
     \begin{center}
-      \includegraphics[scale=0.8]{imgs/ster_serw.png}
+      \includegraphics[scale=0.7]{imgs/ster_serw.png}
  	\caption[Sterowanie serwomechanizmem.]{\small{Ilustracja przedstawia przykładowe sterowanie serwomechanizmem. Kolumna A przedstawia sygnał wejściowy o częstotliwości 50 Hz, czyli okresie $T=20$ ms, B - wskazuje nam czas trwania sygnału $dT$, C i D - położenie wału wyjściowego.}\footnotemark}
 	\label{serwomechanizm_sterowanie}
     \end{center}
@@ -136,7 +134,6 @@ Interfejs TWI jest protokołem komunikacyjnym pozwalającym połączyć ze sobą
     \end{center}
   \end{figure}  
   	  \footnotetext{\emph{Atmega48 datasheet}, http://atmel.com/,  (data dostępu 20.08.2015 r.)}
-\newpage
 \noindent
 Urządzenia mogą pracować w dwóch trybach :
 \begin{table}[h!tb]
