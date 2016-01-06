@@ -1,48 +1,16 @@
-\namedchapter{Stan aktualnej wiedzy}
-\namedsection[Adam Zieliński]{Konstrukcja i sterowanie}
-W XXI wieku czołgi stały stały się wielozadaniowymi pojazdami, które można dopasować do niemalże każdego pola bitwy. Cały czas pozostają podstawowymi pojazdami zaczepno-obronnymi wojsk lądowych. Coraz częściej pojazdy tego typu mają budowę modułową, dzięki temu ich naprawa jest dużo prostsza. Stwarza to także możliwość doboru różnorodnego wyposażenia pod kątem konkretnych warunków bojowych \cite{kierunek_rozwoju}. Wprowadza się automatyczne mechanizmy ładowania pocisków aby zmniejszyć czas przeładowania działa i liczebność załogi. Podstawowe segmenty, tzn. wieżyczkę (1), do której zamocowane jest działo(A) oraz kadłub(2), w którym umieszczone są wszystkie podzespoły czołgu, przedstawiono na rysunku \ref{podzal}. 
-
-  \begin{figure}[H]
-    \begin{center}
-      \includegraphics[scale=0.5]{imgs/cz_bud.png}
- 	\caption[Czołg \textit{IS-4} - podział]{\small{Radziecki czołg IS-4. Na ilustracji wyróżnione zostały podstawowe segmenty pojazdu : A-wieżyczka, B-kadłub oraz elementy ruchome : 1-działo, 2-gąsiennice.}\footnotemark}
-	\label{podzal}
-    \end{center}
-  \end{figure}
-  \footnotetext{\emph{Monografia IS-3}, Publikacja rosyjska, 2010~r.}
-
-Wieżyczka (A na ilustracji \ref{podzal}) pojazdu umożliwia kierować ogień w dowolną stronę. Jej budowa pozwala na: obrót wokół osi pionowej o 360 stopni, regulację wychylenia działa (odpowiednio: $x^\circ$ w górę, $y^\circ$ w dół - zgodnie z rysunkiem \ref{wez_czolg}).
-
-  \begin{figure}[H]
-    \begin{center}
-      \includegraphics[scale=0.55]{imgs/wiezyczka.png}
- 	\caption[Wieżyczka \textit{T-34-85}]{\small{Wieżyczka czołgu T-34-85 wraz z zaznaczonymi możliwymi wychyleniami. Wartości $x$ i $y$ przyjmują różne wartości, w zależności od modelu.}\footnotemark}
-	\label{wez_czolg}
-    \end{center}
-  \end{figure}
-  \footnotetext{\emph{Czołg T-34 i inne konstrukcje wozów bojowych II Wojny Światowej}, http://facebook.com/, (data dostępu 28.09.2015r.)} 
-
-Korpus czołgu (B na ilustracji \ref{podzal}) jest jednostką napędową całej konstrukcji. Struktura podwozia najczęściej opiera się na gąsienicach. Ich popularność wynika z tego, że równomiernie rozkładają ciężar na dużą powierzchnię. Dzięki temu pojazd mimo ogromnej masy bardzo dobrze radzi sobie w trudnych warunkach terenowych. Aby zapewnić okrętowi lądowemu zadowalającą zwrotność zdecydowano o rozdzieleniu napędu osobno na prawą oraz lewą gąsienice. Sposób sterowania kierunkiem obrotu poszczególnych stron napędu pokazano na ilustracji \ref{ster}. 
-
-  \begin{figure}[H]
-    \begin{center}
-      \includegraphics[scale=0.45]{imgs/ster.png}
- 	\caption[Czołg \textit{IS-3} - sterowanie]{\small{Ilustracja przedstawia sposób sterowania czołgiem na przykładzie IS-3. Kolejno: A-jazda w tył, B-w~przód, C-w~lewo, D-w~prawo.}\footnotemark}
-	\label{ster}
-    \end{center}
-  \end{figure}
-  \footnotetext{\emph{Monografia IS-3}, Publikacja rosyjska, 2010~r.}
-
-\namedsection[Daniel Łukwiński]{Reprezentacja obrazu}
-Obraz cyfrowy, w dalszej części pracy nazywany po prostu obrazem, jest narzędziem reprezentowania grafiki za pomocą urządzeń cyfrowych. Podstawową składową takiego obrazu są piksele, czyli możliwie małe punkty jednakowej wielkości, posiadające jednolitą barwę. W pamięci komputera obrazy cyfrowe są zapisywane jako tablice, których każda komórka przechowuje informację o jednym pikselu. Tablicę taką można także przedstawić za pomocą funkcji:
+\namedchapter[Daniel Łukwiński]{Stan aktualnej wiedzy}
+Podstawową składową obrazu są piksele, czyli możliwie małe punkty jednakowej wielkości, posiadające jednolitą barwę. W pamięci komputera obrazy cyfrowe są zapisywane jako tablice, których każda komórka przechowuje informację o jednym pikselu. Tablicę taką można także przedstawić za pomocą funkcji:
 \begin{equation}
-\label{funkcja_obrazu}
-z = f(x,y), dla: x = 0, 1, 2, ..., N-1; y = 0, 1, 2, ..., M-1
-\end{equation}
-gdzie:\\
-$N$ - szerokość obrazu,\\
-$M$ - wysokość obrazu\\
-$z$ - wartość funkcji w punkcie.\\
+	z = f(x,y), dla: x = 0, 1, 2, ..., N-1; y = 0, 1, 2, ..., M-1
+   \label{funkcja_obrazu}
+ \end{equation}
+ gdzie:  
+ \begin{equationDescriptor}
+   \EQDitem{$N$}{szerokość obrazu,}
+ 	\EQDitem{$M$}{wysokość obrazu,}
+ 	 \EQDitem{$z$}{wartość funkcji w punkcie.}
+ \end{equationDescriptor}
+ 
 W najprostszym przypadku obrazów czarno-białych wartością wyrażaną przez tą funkcję jest stopień szarości każdego piksela. Obraz składa się wtedy z jednej, dwuwymiarowej tablicy o wymiarach $N$ na $M$.
 W przypadku obrazów kolorowych do ich przedstawienia stosuje się kilka takich funkcji. Najpopularniejszym sposobem przedstawiania kolorów w grafice komputerowej jest model RGB. Skrót ten tworzą pierwsze litery angielskich nazw kolorów będących bazą w tym modelu: \textit{red} (czerwony), \textit{green} (zielony) oraz \textit{blue} (niebieski), których odpowiednia kombinacja umożliwia uzyskanie każdego koloru. W przypadku wykorzystania tego modelu obraz zapisany jest jako trzy tablice, przechowujące natężenia kolorów czerwonego, zielonego i niebieskiego. Przykład przedstawienia kolorowego obrazu za pomocą składowych R, G i B przedstawia ilustracja \ref{rgb}.
 
@@ -61,14 +29,13 @@ W przypadku obrazów kolorowych do ich przedstawienia stosuje się kilka takich 
 Obrazy, na których będą wykonywane operacje na potrzeby tego projektu, będą rejestrowane przez kamerę zamontowaną na robocie, a więc będą obrazami odzwierciedlającymi rzeczywiste otoczenie. Rejestracja rzeczywistego obrazu na postać cyfrową polega na dyskretyzacji obrazu oraz kwantyzacji jasności koloru\cite{Malina}. Kamera cyfrowa cyfrowa (lub aparat cyfrowy) jest urządzeniem pozwalającym na zarejestrowanie energii promieniowania elektromagnetycznego pochodzącego od obserwowanego obiektu. Przestrzenny rozkład energii jest rzutowany na dwuwymiarową płaszczyznę zbudowaną z elementów optoelektronicznych - matrycę. Powoduje to odłożenie się na każdym segmencie ładunku elektrycznego, którego wartość mierzymy, kwantujemy oraz zapisujemy w pamięci komputera. Wielkość matrycy oraz jej podzespołów decyduje o jakości wykonanego "pomiaru". W przypadku kolorowych obrazów rejestrowanie ich odbywa się poprzez jednoczesny pomiar trzech wartości, tzn. natężenia promieniowania fali o długości około 450 nm - kolor niebieski, 550 nm - zielony i 700 nm - czerwony. Jest to możliwe dzięki zastosowaniu odpowiednich filtrów pasmowoprzepustowych dla poszczególnych optoelementów matrycy.
 Wynik tej operacji jest najczęściej zapisywany na 8 bitach, a więc posiada wartości od 0 do 255 ($2^8$ daje 256 kombinacji). Pamiętając, że tworzone są trzy tablice, osobna dla każdego z kolorów RGB, a więc dane każdego piksela zapisywane są na $3 x 8 = 24$ bitach. Daje to kombinację $2^{24} = 16777216$ kolorów, czyli ilość przekraczającą już możliwości percepcji ludzkiego oka.
 
-\namedsection[Daniel Łukwiński]{Analiza obrazu}
-\textit{Celem sztucznego przetwarzania lub analizy obrazu jest takie automatyczne przetworzenie i przeanalizowanie obrazu obiektów lub całego otoczenia systemu zautomatyzowanego, aby uzyskać użyteczną informację na temat interesujących obiektów (...) lub na temat otoczenia, które może wpływać (...) na sterowany automatycznie proces.}\cite{Tadeusiewicz}
+\namedsection{Analiza obrazu}
 
-Czytając powyższą definicję należy być świadomym, że obraz rzeczywistego otoczenia posiada olbrzymią ilość informacji, w znacznej mierze nadmiarowych, nie mających związku z poszukiwanymi informacjami. Analizowanie obrazów dokonywane w ludzkim mózgu jest dla człowieka czynnością naturalną, ćwiczoną od chwili narodzin. Wydaje się więc być czymś prostym. W rzeczywistości próba powtórzenia tych procesów w sposób sztuczny jest rzeczą niezwykle trudną i złożoną. Cały proces wydobywania informacji obrazu można podzielić na trzy etapy: przetwarzanie, analizę oraz rozpoznawanie.
+Obraz rzeczywistego otoczenia posiada dużą ilość informacji, w znacznej mierze nadmiarowych, nie mających związku z poszukiwanym obiektem. Analizowanie obrazów dokonywane w ludzkim mózgu jest dla człowieka czynnością naturalną, ćwiczoną od chwili narodzin. Wydaje się więc być czymś prostym. W rzeczywistości próba powtórzenia tych procesów w sposób sztuczny jest rzeczą niezwykle trudną i złożoną. Cały proces wydobywania informacji obrazu można podzielić na trzy etapy: przetwarzanie, analizę oraz rozpoznawanie.
 
-Przetwarzanie obrazu jest to proces, charakteryzujący się tym, że na jego wyjściu, tak samo jak na wejściu, znajduje się obraz cyfrowy. Operacje te wykonuje się w celu poprawy jakości samego obrazu lub uwypukleniu jego cech. Oba te cele mogą iść w parze - jak np. w przypadku filtrów usuwających szumy lub wyostrzających krawędzie. Czasem jednak istnieje potrzeba takiego przetworzenia obrazu, które uwypukli pewne cechy lub dostosuje obraz od wymogów dalszej analizy, jednak pociągnie za sobą pogorszenie wizualnej jakości samego obrazu. Przykładem może być ograniczenie palety kolorów. W danej chwili znanych oraz stosowanych jest bardzo duża ilość różnego rodzaju metod przetwarzania obrazu. Niektóre z nich są uniwersalnymi, powszechnie stosowanymi metodami, wiele innych jednak dostosowane jest do pewnych bardzo sprecyzowanych zadań.
+Przetwarzanie obrazu jest to proces, charakteryzujący się tym, że na jego wyjściu, tak samo jak na wejściu, znajduje się obraz cyfrowy. Operacje te wykonuje się w celu poprawy jakości samego obrazu lub uwypukleniu jego cech. Oba te cele mogą iść w parze - jak np. w przypadku filtrów usuwających szumy lub wyostrzających krawędzie. Czasem jednak istnieje potrzeba takiego przetworzenia obrazu, które uwypukli pewne cechy lub dostosuje obraz od wymogów dalszej analizy. Przykładem może być ograniczenie palety kolorów. Obecnie znanych oraz stosowanych jest bardzo duża liczba różnego rodzaju metod przetwarzania obrazu. Niektóre z nich są uniwersalnymi, powszechnie stosowanymi metodami, wiele innych jednak dostosowane jest do pewnych bardzo sprecyzowanych zadań.
 
-Obraz otoczenia rzeczywistego charakteryzuje się dużą nadmiarowością informacji. W celu ograniczenia ich tylko do tych, potrzebnych w danym procesie oraz ilości możliwej do przetworzenia, stosuje się analizę obrazu, czyli inaczej wydobycie cech z obrazu. Określić tak można operacje, które wejściowy obraz zamieniają na szereg danych. Powstaje w ten sposób zbiór (wektor) charakterystycznych cech obrazu. Najmniejszy wektor cech może składać się z jednego tylko elementu. Każdemu analizowanemu obrazowi nadawana jest odpowiednia wartość dla każdej z cech. Wartości całego wektora cech dla obrazu można przedstawić za pomocą punktu w przestrzeni (tzw. przestrzeń cech) o ilości wymiarów równej ilości elementów w wektorze cech.
+Obraz otoczenia rzeczywistego charakteryzuje się dużą nadmiarowością informacji. W celu ograniczenia ich tylko do tych, potrzebnych w danym procesie oraz ilości możliwej do przetworzenia, stosuje się analizę obrazu, czyli inaczej wydobycie cech z obrazu. Określić tak można operacje, które wejściowy obraz zamieniają na szereg danych. Powstaje w ten sposób zbiór (wektor) charakterystycznych cech obrazu. Najmniejszy wektor cech może składać się z jednego tylko elementu. Każdemu analizowanemu obrazowi nadawana jest odpowiednia wartość dla każdej z cech. Wartości całego wektora cech dla obrazu można przedstawić za pomocą punktu w przestrzeni (tzw. przestrzeń cech) o liczbie wymiarów równej liczbie elementów w wektorze cech.
 
 Samo zadanie rozpoznawania obrazu jest już operacją wyłącznie na danych pozyskanych w trakcie analizy. W ogólności polega ono na rozpoznaniu przynależności różnego typu obiektów do pewnych klas abstrakcji\cite{Tadeusiewicz_flasinski}. Klasą abstrakcji nazywamy pewien zbiór obiektów mających wspólne cechy, a całą przestrzeń cech można podzielić na obszary odpowiadające konkretnym klasom. Klasy te mogą być tworzone na bieżąco, w oparciu o przyjmowane wartości cech lub ustalone z góry, na bazie pewnego zbioru danych uczących. Zbiorem uczącym z kolei nazywamy pewien zadany z góry ciąg obiektów, z których każdy posiada dwie zmienne: wektor wartości cech obrazu oraz oznaczenie klasy abstrakcji do której należy\cite{Materka}. Za przydzielanie obrazu do jednej z klas abstrakcji odpowiada tzw. reguła decyzyjna, będąca algorytmem kierującym się pewnym określonymi wcześniej zasadami. Przykładowy problem stawiany przed tego typu algorytmem reprezentuje ilustracja \ref{zbior}. Przedstawia on rozmieszczenie obiektów z dwóch klas abstrakcji pochodzących ze zbioru uczącego (czarne oraz białe koła), posiadających dwuelementowy wektor cech, których wartości reprezentowane są na osiach X oraz Y. Ostatni element, przedstawiony jako trójkąt jest nowym obiektem którego należy zakwalifikować do którejś z klas abstrakcji.
 

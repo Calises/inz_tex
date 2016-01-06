@@ -1,10 +1,9 @@
 \namedchapter[Adam Zieliński]{Konstrukcja mechaniczna}
-\namedsection{Model 3D}
 Proces budowy robota rozpoczął się od stworzenia trójwymiarowego modelu pojazdu. Projekt wykonany został przy wykorzystaniu studenckiej wersji oprogramowania Autodesk Inventor Professional 2014. Symulacja 3D miała na celu przede wszystkim ukazanie złożoności całego projektu. Pozwoliła m.in. na dokładne rozmieszczenie wszystkich komponentów wraz z uwzględnionymi rzeczywistymi wymiarami. Na rysunku \ref{mod3d} przedstawiony został uzyskany efekt wraz z naniesionymi oznaczeniami poszczególnych elementów. 
 
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[scale=0.48]{imgs/calosc_2.png}
+      \includegraphics[scale=0.65]{imgs/calosc_2.png}
  	\caption[Model 3D projektowanego czołgu.]{\small{Model 3D projektowanego pojazdu. A - koła, B - mostki H wraz z radiatorami, C - Raspberry 2 Pi Model B, D - bateria, E - silniki prądu stałego, F - wieżyczka}}
 	\label{mod3d}
     \end{center}
@@ -26,12 +25,12 @@ Na rysunku \ref{wieza3d} przedstawiono model omawianego segmentu. Serwo A jest z
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.45]{imgs/wieza_3d.png}
- 	\caption[Model wieżyczki.]{\small{Trójwymiarowy model konstrukcji wieżyczki czołgu. A - serwomechanizm odpowiedzialny za obrót wokół osi OZ, B - serwomechanizm obrotu w osi OY, C - łączenie pomiędzy elementami.}}
+ 	\caption[Model wieżyczki.]{\small{Trójwymiarowy model konstrukcji wieżyczki robota. A - serwomechanizm odpowiedzialny za obrót wokół osi OZ, B - serwomechanizm obrotu w osi OY, C - łączenie pomiędzy elementami.}}
 	\label{wieza3d}
     \end{center}
   \end{figure}
 \namedsection{Napęd}
-Robot mobilny powinien móc swobodnie poruszać się w środowisku w jakim się znajduje. Wymuszna to wykorzystanie możliwie wydajnych napędów o niewielkich gabarytach. W projekcie wykorzystano dwa szczotkowe silniki prądu stałego Pololu 37Dx52L wraz z przekładnią 30:1. Dla napięcia 12 woltów pojedynczy silnik wytwarza moment obrotowy wynoszący 8 kg$\cdot$cm i obracają się z prędkością 350 obrotów na minutę. Rysunek techniczny przedstawiający dokładne wymiary wykorzystanego silnika przedstawiono na ilustracji \ref{wymiary_silnika}. Maksymalny pobór prądu (przy zatrzymaniu wału) może wynieść około 5 amperów.
+W projekcie wykorzystano dwa szczotkowe silniki prądu stałego Pololu 37Dx52L wraz z przekładnią 30:1. Dla napięcia 12 woltów pojedynczy silnik wytwarza moment obrotowy wynoszący 8 kg$\cdot$cm i obracają się z prędkością 350 obrotów na minutę. Rysunek techniczny przedstawiający dokładne wymiary wykorzystanego silnika przedstawiono na ilustracji \ref{wymiary_silnika}. Maksymalny pobór prądu (przy zatrzymaniu wału) może wynieść około 5 amperów.
 
   \begin{figure}[H]
     \begin{center}
@@ -42,7 +41,7 @@ Robot mobilny powinien móc swobodnie poruszać się w środowisku w jakim się 
   \end{figure}
   \footnotetext{http://pololu.com/, (data dostępu 20.10.2015r.)}
 
-Jednym z założeń początkowych było zastosowanie w pojeździe napędu gąsienicowego. Był to dość trudny do rozwiązania problem ze względu na brak dedykowanych rozwiązań w tym kierunku. Dodatkowo sprawę komplikują nietypowe wymiary pojazdu. Ostatecznie robot zbudowany został w oparciu o 4 koła metryczne 27T5/32 - koła pasowe stosowane w przemyśle do przełożenia napędu. Wykonane są z aluminium. Ich średnica to 54 mm. Razem z dedykowanym pasem zębatym T5 o długości 420 mm tworzą układ gąsienic. Na ilustracji \ref{gasienice_elementy} przedstawione zostały wykorzstane elementy.
+Jednym z założeń początkowych było zastosowanie w pojeździe napędu gąsienicowego. Robot zbudowany został w oparciu o 4 koła metryczne 27T5/32 - koła pasowe stosowane w przemyśle do przełożenia napędu. Wykonane są z aluminium. Ich średnica to 54 mm. Razem z dedykowanym pasem zębatym T5 o długości 420 mm tworzą układ gąsienic. Na ilustracji \ref{gasienice_elementy} przedstawione zostały wykorzstane elementy.
 
   \begin{figure}[H]
     \begin{center}
@@ -53,7 +52,7 @@ Jednym z założeń początkowych było zastosowanie w pojeździe napędu gąsie
   \end{figure}
   \footnotetext{http://centrum-cnc.pl/, (data dostępu 29.10.2015r.)}
 
-Wybrane przez nas koła metryczne posiadały na środku otwór o średnicy 8 mm, podczas gdy oś silników ma średnicę 6 mm. Należało zatem wykonać mocowanie, pozwalające na sztywne osadzenie kół na wale. Do tego celu wykorzystaliśmy otrzymane wraz z silnikami sześciokątne nakładki, przedstawione na rysunku \ref{zamocowanie_szesciokatne}. Wycięcie otworu w kształcie sześciokąta w warunkach domowych jest bardzo trudne. W związku z tym, dzięki projektowi w środowisku CAD, możliwe było zlecenie wykonania go firmie zewnętrznej, specjalizującej się w cięciu wodą pod wysokim ciśnieniem.
+Wybrane koła metryczne posiadały na środku otwór o średnicy 8 mm, podczas gdy oś silników ma średnicę 6 mm. Należało zatem wykonać mocowanie, pozwalające na sztywne osadzenie kół na wale. Do tego celu wykorzystano otrzymane wraz z silnikami sześciokątne nakładki, przedstawione na rysunku \ref{zamocowanie_szesciokatne}. Wycięcie otworu w kształcie sześciokąta w warunkach domowych jest bardzo trudne. W związku z tym, dzięki projektowi w środowisku CAD, możliwe było zlecenie wykonania go firmie zewnętrznej, specjalizującej się w cięciu wodą pod wysokim ciśnieniem.
 
   \begin{figure}[H]
     \begin{center}
@@ -68,17 +67,17 @@ Należało także rozważyć projekt mocowania przednich kół. Ze względu na f
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.40]{imgs/moc_kol_prz.png}
- 	\caption[Model mocowania kół przednich.]{\small{Na rysunku przedstawiony został model wykonania mocowań kół przednich pojazdu. A - przedstawia blok łączący oś (B) z podstawą czołgu.}}
+ 	\caption[Model mocowania kół przednich.]{\small{Na rysunku przedstawiony został model wykonania mocowań kół przednich pojazdu. A - przedstawia blok łączący oś (B) z podstawą robota.}}
 	\label{zamocowanie_przod}
     \end{center}
   \end{figure}
   \newpage
 \namedsection{Efekt końcowy}
-Wykonanie oraz ostateczne dopasowanie wszystkich elementów było dość czasochłonne. Należy jednak wspomnieć o tym, że dzięki wykonaniu trójwymiarowego modelu czas ten niewątpliwie uległ znacznemu skróceniu. Większość poszczególnych elementów zostało wykonanych przy pierwszym podejściu. Należało jedynie czasem dokonać niewielkich, milimetrowych korekt związanych z np. niedokładnym nawierceniem otworów. Końcowy efekt, wraz z zamocowaniem części elektronicznej przedstawiony został na zdjęciu poniżej (rys. \ref{czolg_calosc}).
+Wykonanie oraz ostateczne dopasowanie wszystkich elementów było dość czasochłonne. Należy jednak wspomnieć o tym, że dzięki wykonaniu trójwymiarowego modelu czas ten niewątpliwie uległ znacznemu skróceniu. Końcowy efekt, wraz z zamocowaniem części elektronicznej przedstawiony został na zdjęciu poniżej (rys. \ref{czolg_calosc}).
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.13]{imgs/czolg.jpg}
- 	\caption[Zbudowany model.]{\small{Zdjęcie przedstawia kompletny czołg. Jest to całkowicie wykonany model wraz z częścią elektroniczną.}}
+ 	\caption[Zbudowany model.]{\small{Zdjęcie przedstawia kompletny robot typu czołg. Jest to całkowicie wykonany model wraz z częścią elektroniczną.}}
 	\label{czolg_calosc}
     \end{center}
   \end{figure}

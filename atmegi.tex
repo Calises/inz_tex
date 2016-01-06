@@ -21,7 +21,7 @@ Programowanie Atmegi odbywa się przy wykorzystaniu programatora, czyli specjaln
   \end{figure}  
   
 \namedsection{Prędkość obrotowa}
-Prędkość obrotowa, a konkretniej częstotliwość obrotu, jest odczytywana przy wykorzystaniu enkoderów impulsowych. W jego skład wchodzi niewielkie koło, na którego obwodzie obsadzone są magnesy. Urządzenie pomiarowe jest układem scalonym umieszczonym nieco ponad obracającym się kołem. Czujnik działa w oparciu o efekt Halla i na wyjściu generuje falę prostokątną o liczebności około 355 impulsów na jeden pełny obrót koła. Częstotliwość obrotu kół jest obliczana na podstawie częstotliwości wspomnianej fali prostokątnej. Pomiar realizowany jest na przy wykorzystaniu wewnętrznego licznika - Timer1. Jest on taktowany wewnętrznym sygnałem zegarowym CLK. Każdy jego takt zwiększa wartość licznika TCNT1 (ang. \textit{Timer Counter 1}) o 1. Do pinu zewnętrznego pinu ICP1 (ang. \textit{Input Capture 1}) podłączony zostaje enkoder. Zbocze narastające sygnału z enkodera powoduje przepisanie aktualnej wartości z rejestru TCNT1 do rejestru ICR1 (ang. \textit{Input Capture Register 1}). W ten sposób ICR1 przechowuje ilość taktów wewnętrznego zegara przypadających pomiędzy dwoma narastającymi zboczami sygnału z enkodera. Wartość częstotliwości obrotu kół obliczona zostaje z zależności \ref{eq:czest_kola}. Aby zwiększyć dokładność pomiaru wszystkie wyniki zostały pomnożone razy 10.
+Częstotliwość obrotu jest odczytywana przy wykorzystaniu enkoderów impulsowych. W jego skład wchodzi niewielkie koło, na którego obwodzie obsadzone są magnesy. Urządzenie pomiarowe jest układem scalonym umieszczonym nieco ponad obracającym się kołem. Czujnik działa w oparciu o efekt Halla i na wyjściu generuje falę prostokątną o liczebności około 355 impulsów na jeden pełny obrót koła. Częstotliwość obrotu kół jest obliczana na podstawie częstotliwości wspomnianej fali prostokątnej. Pomiar realizowany jest na przy wykorzystaniu wewnętrznego licznika - Timer1. Jest on taktowany wewnętrznym sygnałem zegarowym CLK. Każdy jego takt zwiększa wartość licznika TCNT1 (ang. \textit{Timer Counter 1}) o 1. Do pinu zewnętrznego pinu ICP1 (ang. \textit{Input Capture 1}) podłączony zostaje enkoder. Zbocze narastające sygnału z enkodera powoduje przepisanie aktualnej wartości z rejestru TCNT1 do rejestru ICR1 (ang. \textit{Input Capture Register 1}). W ten sposób ICR1 przechowuje ilość taktów wewnętrznego zegara przypadających pomiędzy dwoma narastającymi zboczami sygnału z enkodera. Wartość częstotliwości obrotu kół obliczona zostaje z zależności \ref{eq:czest_kola}. Aby zwiększyć dokładność pomiaru wszystkie wyniki zostały pomnożone razy 10.
 \begin{equation}
 	f_{kół} =  \frac{f_{cpu} \cdot 10}{p_r \cdot n_i \cdot L_{ICR1} } 
    \label{eq:czest_kola}
@@ -55,6 +55,7 @@ TIMSK1 = _BV(ICIE1) | _BV(TOIE1);    uruchomienie obslugi przerwan
 
 \namedsection{Generacja sygnału PWM}
 Silniki sterowane są przy wykorzystaniu sygnału PWM. Generowany jest on sprzętowo, wykorzystując wewnętrzny licznik mikrokontrolera. Czynny udział w tym procesie bierze udział rejestr TCNT0 oraz OCRA0 (ang. \textit{Output Compare Register}, sekcja A). Tak jak w przypadku pomiaru częstotliwości, rejestr TCNT0 przechowuje aktualny stan licznika. Do OCRA0 wpisujemy dowolną, 8-bitową liczbę. W momencie gdy wartość TCNT0 oraz OCRA0 są sobie równe, stan na wyjściu mikrokontrolera (na pinie OC0A) ulega zmienia. W przypadku wpisania do rejestru porównującego wartości 128, otrzymujemy na wyjściu sygnał o wypełnieniu 50~\%. Działanie układu przedstawiono na rysunku \ref{gen_pwn}.
+\newpage
 \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.9]{imgs/pwm_gen.png}
@@ -82,7 +83,43 @@ Dodatkowo należy także wybrać częstotliwość generowanego przebiegu, która
  	 \EQDitem{$N$}{wartość prekalera licznika.}
  \end{equationDescriptor}
 \noindent
-Jest to najwyższa częstotliwość jaką byliśmy w stanie uzyskać dla zastosowanych w mostkach H tranzystorach. Dla wyższych częstotliwości pozostawały one w stanie nasycenia - nie realizowały kluczowania. 
+Dla wyższych częstotliwości pozostawały one w stanie nasycenia - nie realizowały kluczowania. 
+
+Funkcja sterująca generowanym sygnałem pobiera dwa argumenty odpowiedzialne kolejno za obrót w przód oraz w tył. Przez wzgląd na konstrukcję mostka H należało wykonać sterowanie przy wykorzystaniu dwóch osobnych sygnałów PWM. Konstrukcja Atmegi pozwala na wytworzenie dwóch przebiegów przy wykorzystaniu jednego licznika, o tej samej częstotliwości ale innym wypełnieniu. Argumenty pwm\_1 oraz pwm\_2 to wartości porównujące licznika i są przypisywane do rejestrów OCR. Sterują one wypełnieniem sygnału uzyskanego na pinach OC2A (ang. \textit{Output Compare}) i OC2B. Wytworzenie przebiegu jednocześnie na obu pinach zakończyłoby się zwarciem oraz zniszczeniem mostka H. Warunkowa struktura funkcji zabezpiecza układ przed tą możliwością. Dopuszcza generację tylko jednego, określonego sygnału. 
+\begin{lstlisting}
+void ster_silnik(unsigned char pwm_1, unsigned char pwm_2)
+{
+	if (pwm_1 == 0x00 && pwm_2 != 0x00 ) //obrot w tyl
+	{
+		TCCR2A &= ~(_BV(COM2A1)); // zaprzestanie generacji sygnalu
+		DDRB &= ~(_BV(PB3)); 	  // ustawienie pinu OCR2A jako wejscie
+		PORTB &= ~(_BV(PB3));     // przypisanie wartosci 0
+		//ustawienie OCR2B
+		TCCR2A |= _BV(COM2B1);    // uruchomienie pinu wyjsciowego
+		DDRD |= _BV(PD3);         // ustawienie go jako wyscie
+		OCR2B = pwm_2;            // przypisanie wartosci porownujacej
+	}
+	else if (pwm_2 == 0x00 && pwm_1 != 0x00 ) // obrot w przod
+	{
+		TCCR2A &= ~(_BV(COM2B1)); // zaprzestanie generacji sygnalu
+		DDRD &= ~(_BV(PD3));      // ustawienie pinu OCR2A jako wejscie
+		PORTD &= ~(_BV(PD3));     // sciagniecie do GND
+		//ustawienie OCR2A
+		TCCR2A |= _BV(COM2A1);    // uruchomienie pinu wyjsciowego
+		DDRB |= _BV(PB3);         // ustawienie go jako wyjscie
+		OCR2A = pwm_1;            // przypisanie wartosci porownujacej
+	}
+	else // rozlaczenie pinow
+	{
+		TCCR2A &= ~(_BV(COM2A1) | _BV(COM2A0)); 
+		DDRB &= ~(_BV(PB3)); 
+		PORTB &= ~(_BV(PB3)); 
+		TCCR2A &= ~(_BV(COM2B1) | _BV(COM2B0)); 
+		DDRD &= ~(_BV(PD3)); 
+		PORTD &= ~(_BV(PD3)); 
+	}
+}
+\end{lstlisting}
 
 \namedsection{Implementacja TWI}
 Zastosowane mikrokontrolery posiadają sprzętowe wsparcie dla realizacji komunikacji TWI. Dzięki niej nie ma potrzeby implementowania całej komunikacji od podstaw. Wystarczy jedynie odpowiednia konfiguracja poszczególnych bitów znajdujących się w rejestrze konfiguracyjnym TWCR (ang. \textit{TWI Control Register})\cite{nota}. Flaga: TWEN (ang. \textit{TWI Enable}) ,,uruchamia" TWI, TWIE (ang. \textit{TWI Interrupt Enable}) włącza obsługę przerwania związanego z tym interfejsem, TWEA (ang. \textit{TWI Enable Acknowlage}) steruje generowaniem bitu potwierdzającego. Kolejnym etapem jest przygotowanie 7 bitowego adresu urządzenia. Znajduje się on w rejestrze TWAR (ang. \textit{TWI Address Register}), zapisany na bitach 7..1. W związku z tym jego wartość, zapisaną w zmiennej ad\_s, należy przesunąć o jedną pozycję w lewo. 
@@ -108,7 +145,7 @@ switch(TWI_TWSR)
 		break;
 }
 \end{lstlisting}
-Poniżej natomiast znajduje się ciąg dalszy kodu, odpowiedzialny za odbiór informacji. Kod dostosowany jest do przyjmowania dwóch bajtów danych. Kod 0x60 sygnalizuje poprawną identyfikację adresu podanego na magistrali. TWI\_INT\_licznik jest zmienną zliczającą ilość odebranych danych. Jest ona zerowana a następnie poprzez ustawienie bitów rejestru TWCR układ sygnalizuje gotowość do odbioru danych. W kolejnym kroku, po odebraniu pierwszego bajtu, realizuje zadania opisane w kodzie 0x80 - wysyła potwierdzenie odbioru oraz zapisuje odebraną, przechowywaną w rejestrze TWDR informację. Odebranie bitu stopu oznacza zakończenie transmisji (0xA0) oraz (w tym przypadku) przekazanie odebranych parametrów do obsługi sterownika.
+Poniżej znajduje się ciąg dalszy kodu, który jest odpowiedzialny za odbiór informacji. Kod dostosowany jest do przyjmowania dwóch bajtów danych zapisywanych w tablicy TWI\_Buf. Kod 0x60 sygnalizuje poprawną identyfikację adresu podanego na magistrali. Następnie poprzez ustawienie bitów rejestru TWCR układ sygnalizuje gotowość do odbioru. Odbiór danych realizowany się po wystąpieniu kodu 0x80. Zmienna TWI\_INT\_licznik odlicza ilość odebranych danych. Jest ona zerowana przed rozpoczęciem transmisji. Łączność kończy odebranie przez układ sygnału stopu (kod 0xA0). W nim odebrane dane są przypisywane do zmiennych zad\_f\_1 oraz zad\_f\_2, które następnie są przetwarzane w pętli głównej programu.
 \begin{lstlisting}
 case TWI_SRX_ADR_ACK: //0x60
 	TWI_INT_licznik = 0;
@@ -121,7 +158,6 @@ case TWI_SRX_STOP_RESTART: //0xA0
 	{
 		zad_f_1 = TWI_Buf[0];
 		zad_f_2 = TWI_Buf[1];
-		ster_silnik(zad_f_1, zad_f_2);
 	}
 	break;
 
