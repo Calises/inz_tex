@@ -1,1 +1,100 @@
 \namedchapter[Daniel Łukwiński]{Algorytm sterujący}
+
+Omówiona w poprzednim rozdziale analiza obrazu dążąca do detekcji czerwonych okręgów jest pierwszy etapem kodu wykonującego się w pętli sterującej programu. Drugim etapem jest wykorzystanie wyników tej detekcji do sterowania całym czołgiem. Ogólny graf obrazujący działanie kodu sterującego robotem przedstawia ilustracja \ref{graf}. Punktem wyjścia dla algorytmu sterującego jest wynik detekcji okręgów przeprowadzonej za pomocą transformacji Haougha, z kolei końcowym etapem jest zawsze koniec aktualnej iteracji pętli, a więc i rozpoczęcie kolejnej, zaczynającej się od pobrania nowego obrazu i jego analizy.
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=white!20, 
+    text width=6em, text badly centered, node distance=3cm, inner sep=1pt]
+\tikzstyle{block} = [rectangle, draw, fill=white!20, 
+    text width=8em, text centered, node distance=3cm, minimum height=3em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=white!20, node distance=4cm,
+    minimum width=8em, minimum height=4em]
+    
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[node distance = 2cm, auto]
+    \node [block] (init) {Analiza obrazu};
+    \node [decision, below of=init] (wykrycie) {Wykryto okrąg?};
+    \node [block, below left of=wykrycie] (przeszukiwanie) {Przeszukiwanie};
+    \node [decision, below right of=wykrycie] (osKamery) {Kamera wycentrowana?};
+    \node [block, below left of=osKamery] (centrowanieKamery) {Centrowanie kamery};
+    \node [decision, below right of=osKamery] (osKandluba) {Kadłub wycentrowany?};
+    \node [block, below left of=osKandluba] (centrowanieKadluba) {Centrowanie kadłuba};
+    \node [decision, below right of=osKandluba] (rozmiar) {Rozmiar koła};
+    \node [block, below left of=rozmiar] (jazdaTyl) {Jazda w tył};
+    \node [block, below right of=rozmiar] (jazdaPrzod) {Jazda w przód};
+   	\node [cloud, below of=rozmiar] (koniec) {Koniec pętli};
+    
+    \path [line] (init) -- (wykrycie);
+    \path [line] (wykrycie) -- node [midway, above, sloped] {Nie} (przeszukiwanie);
+    \path [line] (wykrycie) -- node [very near start, sloped] {Tak} (osKamery);
+    \path [line] (osKamery) -- node [midway, above, sloped] {Nie} (centrowanieKamery);
+    \path [line] (osKamery) -- node [very near start, sloped] {Tak} (osKandluba);
+    \path [line] (osKandluba) -- node [midway, above, sloped] {Nie} (centrowanieKadluba);
+    \path [line] (osKandluba) -- node [very near start, sloped] {Tak} (rozmiar);
+    \path [line] (rozmiar) -- node [midway, above, sloped] {Za duże} (jazdaTyl);
+    \path [line] (rozmiar) -- node [at start, sloped] {Za małe} (jazdaPrzod);    
+    \path [line] (rozmiar) -- node [midway, above, sloped] {Odpowiednie} (koniec);
+    
+    \path [line] (przeszukiwanie) |- (koniec);
+    \path [line] (centrowanieKamery) |- (koniec);
+    \path [line] (centrowanieKadluba) |- (koniec);
+    \path [line] (jazdaTyl) |- (koniec);
+    \path [line] (jazdaPrzod) |- (koniec);
+\end{tikzpicture}
+\caption[Graf algorytmu sterującego.]\small{Ilustracja przedstawia graf algorytmu sterowania robotem.}
+\label{graf}
+\end{center}
+\end{figure}
+
+\namedsection{Przeszukiwanie}
+Pierwszym rozgałęzieniem na grafie jest sprawdzenie, czy na obrazie wykryty został okrąg. Dokonywane jest to poprzez sprawdzenie długości wektora, w którym zapisywane są parametry znalezionych okręgów. W przypadku jego zerowej długości algorytm przechodzi do sekcji kodu odpowiedzialnej za przeszukiwanie otoczenia.
+
+Przeszukiwanie ma za zadanie przeanalizować pod kątem obecności celu całe otoczenie robota. Stosowana kamera umożliwia rejestrację obrazu w zakresie $41,4^\circ$ w poziomie oraz $53,5^\circ$ w pionie. Ponadto należy uwzględnić fakt, że wieża posiada możliwość obrotu w zakresie $180^\circ$. W celu rejestracji całego otoczenia robota zdecydowano się więc, że najpierw przeszukana będzie przestrzeń możliwa do rejestracji w jednym położeniu korpusu czołgu, a w przypadku braku efektów cały pojazd zostanie obrócony o $180^\circ$, aby móc przeanalizować otoczenie znajdujące się wcześniej poza zasięgiem kamery na wieży. 
+
+Realizacja powyższego algorytmu polega na podzieleniu go na sześć etapów. Każde żądanie przeszukania, przedstawione na grafie, polega na wykonaniu jednego z tych etapów. Pierwszych pięć polega na kolejnym ustawianiu wieży w pięciu położeniach umożliwiających obserwację dostępnego otoczenia. Pierwsza pozycja wychyla wierzę o $72^\circ$ w lewo względem osi kadłuba, a każdy kolejny etap zakłada obrócenie wieży o $36^\circ$ w prawo. Kolejne ustawienia we wszystkich etapach przedstawia tabela \ref{tab:przeszukiwanie}.
+\begin{table}[h!tb]
+\centering
+\small
+\caption{Pięć etapów przeszukiwania}
+\begin{tabularx}{\linewidth}[c]{|l|X|X|X|X|X|} 
+\hline
+	Etap przeszukiwania & 1 & 2 & 3 & 4 & 5 \\ \hline
+	Kąt względem osi kadłuba & $-72^\circ$ & $-36^\circ$ & $0^\circ$ & $36^\circ$ & $72^\circ$ \\ \hline
+ 	\noalign{\smallskip}
+\end{tabularx}
+\label{tab:przeszukiwanie}
+\vspace{-8pt}
+\end{table}
+Ostatni, szósty etap przeszukiwania polega na powrocie wieży do pozycji pierwszej, oraz obróceniu całego pojazdu o $180^\circ$. W przypadku kolejnego żądania przeszukania algorytm zaczyna ponownie od pierwszego etapu.
+
+Realizacja programowa przedstawionych zasad opiera się na przechowywaniu w zmiennej globalnej informacji o ostatnim wykonanym etapie przeszukiwania. Wywołanie funkcji przeszukującej polega więc w pierwszej kolejności na iteracji tej zmiennej, a następnie, za pomocą instrukcji \texttt{switch}, przejściu do fragmentu kodu ustawiającego wieżę (lub wieżę i kadłub) w żądanej pozycji.
+
+Do ustawiania wieży służy, omawiana we wcześniejszej części pracy, biblioteka \textit{WiringPi}. Dokonywana na początku pracy programu inicjalizacja przygotowuje Raspberry do zmiany wypełnienia generowanego sygnału PWM w dowolnym miejscu kodu.  Służy do tego funkcja \texttt{void pwmWrite(int pin, int value);}, w której zmienna \texttt{pin} oznacza numer portu na szynie GPIO Raspberry (w przypadku sygnałów PWM jest to port 18 oraz 19), a wartość \texttt{value} definiuje poziom wypełnienia sygnału. Wykonanie obrotu czołgu z kolei wymaga wysłania odpowiednich sygnałów sterujących do mikrokontrolerów ATmega, odpowiedzialnych za sterowanie mostkami H przypisanymi do silników. Komunikacja odbywa się poprzez magistralę TWI, obsługiwaną także za pomocą biblioteki \textit{WiringPi}. Do nawiązania połączenia z urządzeniem po tej magistrali służy funkcja \texttt{int wiringPiI2CSetup(int devId);}, w której wartość \texttt{devId} oznacza adres urządzenia na magistrali TWI, a zwracana wartość typu \texttt{int} jest standardowym deskryptorem (identyfikatorem) pliku, stosowanym w systemie Linux, który w tym przypadku wskazuje na adresowane urządzenie. Parametr ten jest wykorzystywany w kolejnej funkcji, służącej bezpośrednio do wysyłania danych po magistrali. Jej deklaracja przedstawia się następująco: \texttt{int wiringPiI2CWriteReg8(int fd, int data);}. Argument \texttt{fd} jest wspomnianym wcześniej deskryptorem identyfikującym urządzenie w systemie Linux, z kolei \texttt{data}
+zawierać ma przesyłane do urządzenia dane. W omawianym programie do każdego z mikrokontrolerów jako dane przesyłane są dwie liczby 8-bitowe: pierwsza z nich odpowiada za prędkość poruszania się silnika w przód, druga prędkość poruszania się silnika w tył. Wysłane w ten sposób ustawienia powodują rozpoczęcie generowania przez ATmegi odpowiednich wypełnień sygnałów PWM, decydujących o prędkości obrotowej silników napędzających robota. W celu zatrzymania ruchu należy ponownie wysłać do obu urządzeń dane sterujące, tym razem wypełnione zerami. Obrót korpusu pojazdu o $180^\circ$ polega więc na wysłaniu do mikrontrolerów polecenia obrotu jednego silnika w przód, a drugiego w tył z taką samą prędkością, a następnie, po czasie koniecznym dla wykonania żądanego obrotu, zatrzymania pracy obu silników.
+
+
+
+\namedsection{Centrowanie kamery i kadłuba}
+
+\namedsection{Jazda}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
