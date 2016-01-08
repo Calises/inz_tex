@@ -51,6 +51,7 @@ Temporary Items
 *.gz
 *.lot
 *.toc
+*.lol
 *praca.pdf
 *main.pdf
 Podsumowanie.tex

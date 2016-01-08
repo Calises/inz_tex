@@ -1,6 +1,6 @@
 \namedchapter[Daniel Łukwiński]{Algorytm sterujący}
 
-Omówiona w poprzednim rozdziale analiza obrazu, dążąca do detekcji czerwonych okręgów, jest pierwszy etapem kodu wykonującego się w pętli sterującej programu. Drugim etapem jest wykorzystanie wyników tej detekcji do sterowania całym czołgiem. Ogólny graf obrazujący działanie kodu sterującego robotem przedstawia ilustracja \ref{graf}. Punktem wyjścia dla algorytmu sterującego jest wynik detekcji okręgów przeprowadzonej za pomocą transformacji Hougha, z kolei końcowym etapem jest zawsze koniec aktualnej iteracji pętli, a więc i rozpoczęcie kolejnej, zaczynającej się od pobrania nowego obrazu i jego analizy.
+Pętla sterująca robotem podzielona została na dwie części. Pierwsza z nich, omówiona w poprzednim rozdziale polegała na przetwarzaniu i analizie obrazu z kamery w celu wykrycia czerwonych kół znajdujących się w otoczeniu robota. Uzyskane w ten sposób informacje wykorzystywane są w drugiej części pętli, sterującej ruchem robota. Ogólny graf obrazujący działanie algorytmu sterującego robotem przedstawia ilustracja \ref{graf}. Punktem wyjścia dla algorytmu sterującego jest wynik detekcji okręgów przeprowadzonej za pomocą transformacji Hougha, z kolei końcowym etapem jest zawsze koniec aktualnej iteracji pętli, a więc i rozpoczęcie kolejnej, zaczynającej się od pobrania nowego obrazu i jego analizy.
 
 % Define block styles
 \tikzstyle{decision} = [diamond, draw, fill=white!20, 
@@ -48,8 +48,8 @@ Omówiona w poprzednim rozdziale analiza obrazu, dążąca do detekcji czerwonyc
 \end{center}
 \end{figure}
 
-\namedsection{Przeszukiwanie}
-Pierwszym rozgałęzieniem na grafie jest sprawdzenie, czy na obrazie wykryty został okrąg. Dokonywane jest to poprzez sprawdzenie długości wektora, w którym zapisywane są parametry znalezionych okręgów. W przypadku jego zerowej długości algorytm przechodzi do sekcji kodu odpowiedzialnej za przeszukiwanie otoczenia.
+\namedsection{Algorytm szukania celu}
+Pierwszym zadaniem algorytmu sterującego robotem jest sprawdzenie, czy za pomocą analizy obrazu z kamery wykryte zostało czerwone koło. Dokonywane jest to poprzez sprawdzenie długości wektora, w którym zapisywane są parametry znalezionych okręgów. W przypadku jego zerowej długości algorytm przechodzi do sekcji kodu odpowiedzialnej za przeszukiwanie otoczenia.
 
 Przeszukiwanie ma za zadanie przeanalizować pod kątem obecności celu całe otoczenie robota. Stosowana kamera umożliwia rejestrację obrazu w zakresie $41,4^\circ$ w poziomie oraz $53,5^\circ$ w pionie. Ponadto należy uwzględnić fakt, że wieża posiada możliwość obrotu w zakresie $180^\circ$, a więc całkowity zasięg rejestracji obrazu w poziomie bez poruszania korpusem wynosi $180^\circ + 2 * (\frac{1}{2} \cdot 41,4^\circ) = 221,4^\circ$. W celu rejestracji całego otoczenia robota zdecydowano się więc, że najpierw przeszukana będzie przestrzeń możliwa do rejestracji w jednym położeniu korpusu czołgu, a w przypadku braku efektów cały pojazd zostanie obrócony o $180^\circ$, aby móc przeanalizować otoczenie znajdujące się wcześniej poza zasięgiem kamery na wieży. 
 
