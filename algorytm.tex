@@ -38,7 +38,7 @@ Widać więc jasno, że wartość preskalera oraz zasięg liczniki są ze sobą 
 \label{eq:range_x_presc}
 \end{equation}
 O dokładności sterowania serwomechanizmem decyduje właśnie wartość zasięgu licznika służącego do generowania sygnału PWM. Wspomniane wcześniej funkcje z biblioteki \textit{WiringPi} służące do ustawiania tych dwóch parametrów przyjmują tylko wartości całkowite, więc wybierany zasięg licznika powinien być dzielnikiem liczby $384000$. Wartość zasięgu ustawiono więc na poziomie 6000, co zapewnia wystarczającą dokładność pracy serwomechanizmu, a to z kolei pociągnęło za sobą ustawienie preskalera zegara na 64. Ostatecznie blok kodu odpowiedzialny na inicjalizację sprzętowego generatora sygnału PWM w Raspberry Pi za pomocą biblioteki \textit{WiringPi} przyjmuje postać:
-\begin{lstlisting}[caption=Inicjalizacja sygnałów PWM]
+\begin{lstlisting}[caption=Inicjalizacja sygnałów PWM Raspberry]
 if (wiringPiSetupGpio() != -1)
 {
 	pinMode(18,PWM_OUTPUT);
