@@ -2,20 +2,15 @@
 Celem pracy była budowa robota mobilnego typu czołg oraz implementacja algorytmu sterującego. Jego zadaniem było zlokalizowanie czerwonego koła na podstawie obrazu z kamery. Realizacja projektu wymagała:
 \begin{itemize}
 \item doboru elementów wykonawczych robota (silniki, serwomechanizmy) pod kątem założeń projektowych oraz wybór platformy, na której oparty zostanie system wizyjny,
-\item zaprojektowania konstrukcji robota, wykonania modelu 3D oraz jego fizyczna realizacja,
+\item zaprojektowania konstrukcji robota, wykonania modelu 3D oraz jego fizycznej realizacji,
 \item stworzenia projektu sterownika silników napędowych, wykonania płytki drukowanej oraz implementacji regulatora,
 \item zapewnienia komunikacji pomiędzy system wizyjnym a mikrokontrolerem,
-\item zaimplementowania algorytmu sterującego robotem,
-\item przygotowania programu służącego do analizy obrazu pozyskanego z kamery.
+\item przygotowania programu służącego do analizy obrazu pozyskanego z kamery,
+\item zaimplementowania algorytmu sterującego robotem.
 \end{itemize}
+Zakończenie każdego z etapów kończyło się weryfikacją, czy spełnia on założenia projektowe. Tak więc w przypadku konstrukcji mechanicznej należało przede wszystkim sprawdzić jakość dopasowania poszczególnych elementów. Po wykonaniu płytki drukowanej w pierwszej kolejności sprawdzone zostały połączenia pomiędzy komponentami (na wypadek gdyby któraś ze ścieżek była przerwana, bądź element źle zlutowany) oraz pomierzyć napięcia w poszczególnych miejscach. Następnie możliwe było przejście do implementacji sterownika silników, którego wykonanie oceniane było poprzez analizę odpowiedzi skokowej silnika odczytanej przy pomocy mikrokontrolera oraz \textit{Raspberry Pi}. Kolejnym etapem było zapewnienie stałej łączności pomiędzy systemem wizyjnym oraz sterownikiem. W przypadku, gdy określoną sekwencję bitów udało się odczytać na Atmedze, podpunkt uznano za zrealizowany. Prace nad analizą obrazu można było prowadzić równolegle do pozostały zadań. Wynika to z faktu, iż platformę \textit{Raspberry Pi} oraz moduł \textit{Raspberry Pi Camera HD} wystarczyło jedynie połączyć ze sobą oraz odpowiednio przygotować środowisko pracy. Program analizujący obraz testowany był na wielu różnorodnych zdjęciach. Gdy osiągnął zadowalający poziom - rozpoczęły się prace nad integracją wszystkich poszczególnych systemów. Wszystkie poprzednie prace wykonane były z dużą starannością więc połączenie ich ze sobą nie przyniosło większych problemów. Ostatnim etapem były testy polegające na pozostawieniu w różnych miejscach pomieszczenia arkuszy formatu A4, na których znajdowały się czerwone koła o różnych rozmiarach, oraz obserwacja zachowania robota. Parametrami podlegającymi ocenie to: szybkość działania, dokładność sterowania oraz skuteczność wykrywania okręgu.
 
-Każdy z powyższych etapów pracy kończony był testami pojedynczych modułów. Jednak dopiero po zrealizowaniu całości prac przystąpiono do testów, oceniających całością pracę robota. Testy polegały na pozostawianiu w różnych miejscach pomieszczenia arkuszy formatu A4 z czerwonymi kołami różnych rozmiarów i obserwacji zachowania robota, który miał ich poszukiwać. Parametry pracy podlegające ocenie to: szybkość działania, dokładność sterowania oraz skuteczność wykrywania okręgu.
-
-
-
-
-
-%na czym polegał test, co podlegało ocenie
-%sugestia czemu to działa tak a nie inaczej
-%jakby to poprawic
-%czy coś byś zmienił robiąc on nowa
+% tutaj opisz efekt :)
+% sugestia czemu to działa tak a nie inaczej
+% jakby to poprawic
+% czy coś byś zmienił robiąc on nowa
