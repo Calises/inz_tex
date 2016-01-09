@@ -44,7 +44,7 @@ Częstotliwość obrotu jest odczytywana przy wykorzystaniu enkoderów impulsowy
   \end{figure}  
   Poniższy kod inicjalizuje opisany wcześniej licznik. Makrodefinicja \_BV() zwraca 8-bitową liczbę z wartością 1 na wskazanej w nawiasie pozycji, np. \_BV(3) = 0000 0100. Pin ICP1 jest 14 pinem mikrokontrolera, najmniej znaczącym bitem rejestru wyjściowego PB. Z racji tego, że może pełnić kilka funkcji należy go odpowiednio zdefiniować. Ustawiany jest jako wejście (poprzez wpisanie do rejestru DDRB (ang. \textit{Data Direction Register B}) wartości 1 na jego pozycji PB0) oraz wewnętrznie ściągany do stanu logicznego 0 (poprzez przypisanie wartości 0 w rejestrze PORTB). Znak '\textasciitilde' tworzy bitową negację zapisanej za nią liczby. Operator '\&=' realizuje operację iloczynu bitowego. Kolejnym etapem jest konfiguracja licznika. Służy do tego rejestr TCCR1 (ang. \textit{Timer Counter Control Register 1}) dzielący się na dwie 8-bitowe sekcje: A i B. Ustawienie flagi ICNC1 (ang. \textit{Input Capture Noise Canceler}) rozpoczyna realizację usuwania szumów z odbieranego sygnału. Proces polega na zapamiętywaniu czterech kolejnych próbek sygnału podawanego na pin ICP1. Aktualizacja odczytanego poziomu sygnału przez mikrokontroler odbędzie się dopiero po odebraniu czterech, jednakowych próbek. Ustawienie bitu ICES1 (ang. \textit{Input Capture Edge Select}) nastawia wyzwalanie przechwycenia przy wystąpieniu zbocza narastającego. Timer1 jest licznikiem 16-bitowym. Aby móc prawidłowo odczytać częstotliwość nie można dopuścić aby pomiędzy kolejnymi zboczami sygnału enkodera doszło do przepełnienia licznika (sytuacja ta odpowiada najmniejszej możliwej do odczytania przez układ częstotliwości $f=\frac{f_{cpu}}{2^{16}}$).
 Dolna granica pomiaru może zostać przesunięta przy wykorzystaniu preskalera, czyli układu realizującego podział częstotliwości. Jego wartość ustawia się w rejestrze TCCR1B poprzez odpowiednią, znajdującą się w nocie katalogowej układu \cite{nota}, konfigurację bitów CS (ang. \textit{Clock Select}). Odbierane z enkodera sygnały mogą pojawić się w dowolnej chwili z dowolną częstotliwością. W związku z tym niezbędne obliczenia wykonywane będą w przerwaniach. Uruchomienie ich obsługi odbywa się poprzez ustawienie bitu ICIE (ang. \textit{Input Capture Interrupt Enable}) odpowiedzialnego za uruchomienie przerwania związanego z wystąpieniem zdarzenia związanego z wejściem przechwytującym oraz TOIE (ang. \textit{Timer Overflow Interrupt Enable}) związanego z przepełnieniem licznika.
-  \begin{lstlisting}
+\begin{lstlisting}[caption=Inicjalizacja pomiaru częstotliwości obrotu silnika]
 DDRB &= ~(_BV(PB0));                 ustawienie pinu ICP1 jako wejscie 
 PORTB &= ~(_BV(PB0))                 pin przyjmuje wartosc logiczna 0
 TCCR1B = _BV(ICNC1) | _BV(ICES1);    ICNC1 - ustawienie filtrowania wejscia ICNC1
@@ -66,7 +66,7 @@ Silniki sterowane są przy wykorzystaniu sygnału PWM. Generowany jest on sprzę
   	  \footnotetext{\emph{Aplikasi PWM Mikrokontroler ATmega8535}, http://ediamon.files.wordpress.com/,  (data dostępu 03.01.2016 r.)}
 \noindent
 Poniżej przedstawiono proces inicjalizacji trybu PWM licznika. Kod sprowadza się do odpowiedniego ustawienia bitów rejestrów kontrolnych TCCR. Flagi WGM (ang. \textit{Waveform Generation Mode}) służą do wyboru trybu pracy licznika - zgodnie z dokumentacją techniczną mikrokontrolera\cite{nota}. 
-  \begin{lstlisting}
+  \begin{lstlisting}[caption=Inicjalizacja trybu PWM mikrokontrolera]
 TCCR2A |= _BV(WGM20) | _BV(WGM21);   // tryb PWM
 TCCR2B =  _BV(CS21) | _BV(CS20);     // preskaler 32
 \end{lstlisting}
@@ -86,7 +86,7 @@ Dodatkowo należy także wybrać częstotliwość generowanego przebiegu, która
 Dla wyższych częstotliwości pozostawały one w stanie nasycenia - nie realizowały kluczowania. 
 
 Funkcja sterująca generowanym sygnałem pobiera dwa argumenty odpowiedzialne kolejno za obrót w przód oraz w tył. Przez wzgląd na konstrukcję mostka H należało wykonać sterowanie przy wykorzystaniu dwóch osobnych sygnałów PWM. Konstrukcja Atmegi pozwala na wytworzenie dwóch przebiegów przy wykorzystaniu jednego licznika, o tej samej częstotliwości ale innym wypełnieniu. Argumenty pwm\_1 oraz pwm\_2 to wartości porównujące licznika i są przypisywane do rejestrów OCR. Sterują one wypełnieniem sygnału uzyskanego na pinach OC2A (ang. \textit{Output Compare}) i OC2B. Wytworzenie przebiegu jednocześnie na obu pinach zakończyłoby się zwarciem oraz zniszczeniem mostka H. Warunkowa struktura funkcji zabezpiecza układ przed tą możliwością. Dopuszcza generację tylko jednego, określonego sygnału. 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Genracja sygnałów PWM mikrokontrolera na mostek H]
 void ster_silnik(unsigned char pwm_1, unsigned char pwm_2)
 {
 	if (pwm_1 == 0x00 && pwm_2 != 0x00 ) //obrot w tyl
@@ -123,13 +123,13 @@ void ster_silnik(unsigned char pwm_1, unsigned char pwm_2)
 
 \namedsection{Implementacja TWI}
 Zastosowane mikrokontrolery posiadają sprzętowe wsparcie dla realizacji komunikacji TWI. Dzięki niej nie ma potrzeby implementowania całej komunikacji od podstaw. Wystarczy jedynie odpowiednia konfiguracja poszczególnych bitów znajdujących się w rejestrze konfiguracyjnym TWCR (ang. \textit{TWI Control Register})\cite{nota}. Flaga: TWEN (ang. \textit{TWI Enable}) ,,uruchamia" TWI, TWIE (ang. \textit{TWI Interrupt Enable}) włącza obsługę przerwania związanego z tym interfejsem, TWEA (ang. \textit{TWI Enable Acknowlage}) steruje generowaniem bitu potwierdzającego. Kolejnym etapem jest przygotowanie 7 bitowego adresu urządzenia. Znajduje się on w rejestrze TWAR (ang. \textit{TWI Address Register}), zapisany na bitach 7..1. W związku z tym jego wartość, zapisaną w zmiennej ad\_s, należy przesunąć o jedną pozycję w lewo. 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Konfiguracja komunikacji TWI mikrokontrolera]
 TWCR = _BV(TWEN) | _BV(TWIE) | _BV(TWEA);
 ad_s = ad_s<<1;  //przesuniecie adresu o jedna pozycje bitowa w lewo
 TWAR = ad_s;     //wpisanie przygotowanego adresu
 \end{lstlisting}
 Układ pracuje w trybie \textit{Slave}, co oznacza, że nie będzie nigdy pierwszy rozpoczynał transmisji a jedynie odpowiadał na zapytania od \textit{Mastera}. Odbiór przez urządzenie swojego adresu powoduje wyzwolenie przerwania związanego z transmisją TWI. Zmienna TWI\_TWSR zawiera w sobie definicje kodów związanych z poszczególnymi etapami komunikacji. Kody są ściśle określone przez producenta oraz zawarte w nocie katalogowej\cite{nota}. Rejestr TWDR (ang. \textit{TWI Shift Data Register}) przechowuje,odbiera oraz wysyła dane na magistralę. Poniższy kod służy implementacji trybu nadawczego układu podrzędnego. Kod 0xA8 informuje o tym, że urządzenie nadrzędne chce odczytać z ,,nas" daną (wybrany\_pomiar), którą należy umieścić w rejestrze TWDR. Gotowość urządzenia do transmisji sygnalizujemy ustawieniem flag TWINT, TWEA, TWIE oraz TWEN. Kod 0xB8 służy do wygenerowania bitu potwierdzającego. Natomiast 0xC0 odpowiada za zakończenie transmisji.
-\begin{lstlisting}
+\begin{lstlisting}[caption=Wysłanie informacji za pomocą TWI mikrokontrolera]
 switch(TWI_TWSR)
 {
 	//slave transmiter
@@ -146,7 +146,7 @@ switch(TWI_TWSR)
 }
 \end{lstlisting}
 Poniżej znajduje się ciąg dalszy kodu, który jest odpowiedzialny za odbiór informacji. Kod dostosowany jest do przyjmowania dwóch bajtów danych zapisywanych w tablicy TWI\_Buf. Kod 0x60 sygnalizuje poprawną identyfikację adresu podanego na magistrali. Następnie poprzez ustawienie bitów rejestru TWCR układ sygnalizuje gotowość do odbioru. Odbiór danych realizowany się po wystąpieniu kodu 0x80. Zmienna TWI\_INT\_licznik odlicza ilość odebranych danych. Jest ona zerowana przed rozpoczęciem transmisji. Łączność kończy odebranie przez układ sygnału stopu (kod 0xA0). W nim odebrane dane są przypisywane do zmiennych zad\_f\_1 oraz zad\_f\_2, które następnie są przetwarzane w pętli głównej programu.
-\begin{lstlisting}
+\begin{lstlisting}[caption=Odbiór informacji za pomocą TWI mikrokontrolera]
 case TWI_SRX_ADR_ACK: //0x60
 	TWI_INT_licznik = 0;
 	TWCR = _BV(TWINT) | _BV(TWEA) | _BV(TWIE) | _BV(TWEN);
@@ -201,7 +201,7 @@ Układ charakteryzuje się niezerowym uchybem ustalonym, co w tym przypadku jest
  \end{equationDescriptor}
  \noindent
  Wartość $r(t)$ nazywana jest uchybem, czyli różnicą pomiędzy wartością zadaną a rzeczywistą. Zadaniem regulatora P jest zapewnienie odpowiedniego wzmocnienia tego sygnału. Wartość wypełnienia sygnału PWM zawiera się w przedziale od 0 do 255. W związku z tym sygnał wyjściowy z regulatora należało odpowiednio ograniczyć. Fragment kodu zaprogramowanego na Atmegach został przedstawiony poniżej.
-\begin{lstlisting}
+\begin{lstlisting}[caption=Implementacja regulatora P.]
 char regulator(char we, char wy)  // we - zadana wartosc, wy - odczytana
 {
 	int k_p = 30;                 // deklaracja wzmocnienia czlonu P
