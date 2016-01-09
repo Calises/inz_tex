@@ -38,7 +38,7 @@ Widać więc jasno, że wartość preskalera oraz zasięg liczniki są ze sobą 
 \label{eq:range_x_presc}
 \end{equation}
 O dokładności sterowania serwomechanizmem decyduje właśnie wartość zasięgu licznika służącego do generowania sygnału PWM. Wspomniane wcześniej funkcje z biblioteki \textit{WiringPi} służące do ustawiania tych dwóch parametrów przyjmują tylko wartości całkowite, więc wybierany zasięg licznika powinien być dzielnikiem liczby $384000$. Wartość zasięgu ustawiono więc na poziomie 6000, co zapewnia wystarczającą dokładność pracy serwomechanizmu, a to z kolei pociągnęło za sobą ustawienie preskalera zegara na 64. Ostatecznie blok kodu odpowiedzialny na inicjalizację sprzętowego generatora sygnału PWM w Raspberry Pi za pomocą biblioteki \textit{WiringPi} przyjmuje postać:
-\begin{lstlisting}
+\begin{lstlisting}[caption=Inicjalizacja sygnałów PWM]
 if (wiringPiSetupGpio() != -1)
 {
 	pinMode(18,PWM_OUTPUT);
@@ -56,7 +56,7 @@ else
 Drugą rzeczą, obok sygnału PWM, wymagającą inicjalizacji na początku pracy programu jest kamera. Do jej obsługi wykorzystana została biblioteka \textit{RaspiCamCV}, udostępniana na zasadach wolnego oprogramowania. Została ona wybrana, ponieważ zapewnia podstawową obsługę dedykowanej kamery Raspberry we współpracy z biblioteką \textit{OpenCV}. Z jej wykorzystaniem możliwe jest pobieranie rejestrowanych obrazów bezpośrednio w formacie umożliwiającym dalszą edycję za pomocą funkcji \textit{OpenCV}. Pierwszy etapem pracy z dedykowaną kamerą, z wykorzystaniem biblioteki \textit{RaspiCamCV} jest utworzenie danych konfiguracyjnych, które posłużą do pracy z kamery. Podstawową ustawieniem, które należy wybrać jest rozdzielczość w jakiej będą rejestrowane obrazy. Jest to o tyle istotne, że podstawowym ograniczeniem w pracach nad algorytmem wykrywającym cel był fakt, że wyniki jego pracy miały na bieżąco sterować ruchami pojazd, przy ograniczonej mocy obliczeniowej platformy Raspberry Pi. Podstawowym ograniczeniem, które spowodowały te warunki, była rozdzielczość analizowanego obrazu. Oferowana przez kamerę rozdzielczość maksymalną wynosi aż 1920 na 1080 pikseli, jednak jest to o wiele za dużo, jak na stawiane przed algorytmem wymagania. Ostatecznie zdecydowano się wykorzystać rozdzielczość 640 na 480 pikseli. Taki rozmiar zapewnia jeszcze zadowalający poziom dokładności zdjęcia oraz relatywnie szybką jego analizę. Pozostałe parametry zostały ustawione na wartości domyślne, ponieważ wtedy są one samoczynnie dobierane na podstawie warunków pracy, co zapewniło zdjęcia bardzo dobrej jakości nawet przy zróżnicowanym oświetleniu.
 
 Po stworzeniu danych konfiguracyjnych pozostało utworzyć obiekt (a właściwie wskaźnik na taki obiekt), który w trakcie pracy programu będzie służył do pobierania ostatniego wykonanego przez kamerę zdjęcia znajdującego się w buforze. Całość kodu wykorzystywanego do inicjalizacji pracy kamery przedstawia się w sposób następujący:
-\begin{lstlisting}
+\begin{lstlisting}[caption=Inicjalizacja pracy kamery]
 RASPIVID_CONFIG* config = (RASPIVID_CONFIG*)malloc(sizeof(RASPIVID_CONFIG));
 config->width = 640;
 config->height = 480;
@@ -137,7 +137,7 @@ gdzie:
 \EQDitem{$t$}{wybrany próg.}
 \end{equationDescriptor}
 Do przeprowadzenia progowania wykorzystana zostanie funkcja \texttt{threshold(InputArray src, OutputArray dst, double thresh, double maxval, int type)} z biblioteki \textit{OpenCV}. Dwa pierwsze argumenty, które są jej przekazywane to obraz wejściowy oraz wyjściowy. Kolejny, nazwany \texttt{thresh} jest wartością progu, dla której ma być przeprowadzona operacja. W przedstawianym algorytmie wartość ta została uzależniona od jasności samego obrazu, aby uzyskać poprawne działanie algorytmie przy różnych rodzajach oświetlenia otoczenia robota. Zdecydowano się na wartość równą 0.75 poziomu najjaśniejszego piksela występującego na obrazie, co jest wartością dobraną na podstawie obserwacji wykonanych w szeregu testów na różnorodnych obrazach. Kolejnym wprowadzanym do funkcji argumentem jest \texttt{maxVal}, za którego pomocą można ustalić poziom jasności dla pikseli wcześniej omawiany próg. Przy tym użyciu zastosowano wartość 255, a więc maksymalną jasność dla obrazów 8-bitowych. Ostatnim wprowadzanym do funkcji argumentem jest typ progowania który ma być zastosowany z wykorzystaniem powyższych parametrów. Poza zastosowanym w algorytmie progowaniem binarnym istnieje możliwość odwróconego progowania binarnego (gdzie pikselom nieprzekraczającym progu przypisywana jest ustalona wartość maksymalna, a te przekraczające próg są zerowane) lub zastosowania któregoś z tych progowań jedynie dla wartości poniżej albo powyżej progu. Ostateczny kształt wywołanej funkcji przyjął więc formę:
-\begin{lstlisting}
+\begin{lstlisting}[caption=Funkcja realizująca progowanie]
 cvThreshold(new IplImage(redImage), thresholdedImage, 0.75*maxValue, 255,
 	CV_THRESH_BINARY);
 \end{lstlisting}
@@ -183,7 +183,7 @@ Opis poszczególnych argumentów przedstawia się następująco:
 \end{itemize}
 
 Ostatecznie zaimplementowana wersja tej funkcji przyjęła postać:
-\begin{lstlisting}
+\begin{lstlisting}[caption=Funckja realizująca transformację Hougha]
 HoughCircles(thresholdedImage, circles, HOUGH_GRADIENT, 2.3, 10, 200, 80, 0, 0);
 \end{lstlisting}
 
