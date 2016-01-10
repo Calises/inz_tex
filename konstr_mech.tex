@@ -19,8 +19,8 @@ Wszystkie elementy zgrupowane na rysunku \ref{mod3d} tworzą korpus pojazdu, kt�
     \end{center}
   \end{figure}
 \namedsection{Wieżyczka}
-Wieża pojazdu zbudowana została w oparciu o 2 serwa modelarskie TowerPro SG-5010. Serwomechanizmy są zintegrowanymi układami elektronicznymi zawierającymi sekcję mechaniczną - silnik wraz z przekładnią oraz układ sterowania położeniem.
-Na rysunku \ref{wieza3d} przedstawiono model omawianego segmentu. Serwo A jest zamocowane bezpośrednio do podstawy pojazdu i dzięki niemu realizowany jest obrót prawo/lewo wieży. Do orczyka, czyli obrotowej części mechanizmu, zamocowane zostało mocowanie drugiego serwa(B), które zostało wykonane z aluminiowego kątownika. Jest to materiał, który bardzo dobrze nadaje się do tego typu rozwiązań ponieważ jest tani, łatwo dostępny, lekkie i stosunkowo wytrzymały.  
+Wieża pojazdu zbudowana została w oparciu o 2 serwa modelarskie TowerPro SG-5010. Serwomechanizmy są zintegrowanymi układami elektronicznymi zawierającymi sekcję mechaniczną (silnik wraz z przekładnią) oraz układ sterowania położeniem.
+Na rysunku \ref{wieza3d} przedstawiono model omawianego segmentu. Serwo A jest zamocowane bezpośrednio do podstawy pojazdu i dzięki niemu realizowany jest obrót prawo/lewo wieży. Do orczyka, czyli obrotowej części mechanizmu, zamocowane zostało mocowanie serwa B, które zostało wykonane z aluminiowego kątownika. Jest to materiał, który bardzo dobrze nadaje się do tego typu rozwiązań ponieważ jest tani, łatwo dostępny, lekki i stosunkowo wytrzymały.  
 
   \begin{figure}[H]
     \begin{center}
@@ -30,18 +30,18 @@ Na rysunku \ref{wieza3d} przedstawiono model omawianego segmentu. Serwo A jest z
     \end{center}
   \end{figure}
 \namedsection{Napęd}
-W projekcie wykorzystano dwa szczotkowe silniki prądu stałego Pololu 37Dx52L wraz z przekładnią 30:1. Dla napięcia 12 woltów pojedynczy silnik wytwarza moment obrotowy wynoszący 8 kg$\cdot$cm i obracają się z prędkością 350 obrotów na minutę. Rysunek techniczny przedstawiający dokładne wymiary wykorzystanego silnika przedstawiono na ilustracji \ref{wymiary_silnika}. Maksymalny pobór prądu (przy zatrzymaniu wału) może wynieść około 5 amperów.
+W projekcie wykorzystano dwa szczotkowe silniki prądu stałego Pololu 37Dx52L wraz z przekładnią 30:1. Dla napięcia 12 V pojedynczy silnik wytwarza moment obrotowy wynoszący 8 kg$\cdot$cm i obraca się z prędkością 350 obrotów na minutę. Rysunek techniczny przedstawiający dokładne wymiary wykorzystanego silnika przedstawiono na rysunku \ref{wymiary_silnika}. Maksymalny pobór prądu (przy zatrzymaniu wału) może wynieść około 5 A.
 
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.7]{imgs/silnik_wymiary.png}
- 	\caption[Wymiary silnika Pololu 37Dx52L ]{\small{Wymiary wykorzystane silnika - Pololu 37Dx52L }\footnotemark}
+ 	\caption[Wymiary silnika Pololu 37Dx52L ]{\small{Wymiary wykorzystanego silnika - Pololu 37Dx52L }\footnotemark}
 	\label{wymiary_silnika}
     \end{center}
   \end{figure}
   \footnotetext{http://pololu.com/, (data dostępu 20.10.2015r.)}
 
-Jednym z założeń początkowych było zastosowanie w pojeździe napędu gąsienicowego. Robot zbudowany został w oparciu o 4 koła metryczne 27T5/32 - koła pasowe stosowane w przemyśle do przełożenia napędu. Wykonane są z aluminium. Ich średnica to 54 mm. Razem z dedykowanym pasem zębatym T5 o długości 420 mm tworzą układ gąsienic. Na ilustracji \ref{gasienice_elementy} przedstawione zostały wykorzstane elementy.
+Jednym z założeń było zastosowanie w pojeździe napędu gąsienicowego. Robot zbudowany został w oparciu o 4 aluminiowe koła metryczne 27T5/32 - koła pasowe stosowane w przemyśle do przełożenia napędu. Ich średnica to 54 mm. Razem z dedykowanym pasem zębatym T5 o długości 420 mm tworzą układ gąsienic. Na ilustracji \ref{gasienice_elementy} przedstawione zostały wykorzystane elementy.
 
   \begin{figure}[H]
     \begin{center}
@@ -62,12 +62,12 @@ Wybrane koła metryczne posiadały na środku otwór o średnicy 8 mm, podczas g
     \end{center}
   \end{figure}
 
-Należało także rozważyć projekt mocowania przednich kół. Ze względu na fakt, iż gąsienice (prawa/lewa) mogą obracać się jednocześnie w dwóch rożnych kierunkach, należało zastosować osobną oś dla prawego oraz lewego koła. Jej model przedstawiony został na rysunku \ref{zamocowanie_przod}. Element A wykonany został z drewna dębowego, które jest bardzo twarde - co pozwala na dokładne spasowanie z osią, zaznaczoną literą B, która wykonana została na tokarni z aluminium.
+Podczas tworzenia projektu należało także rozważyć sposób mocowania przednich kół. Ze względu na fakt, iż gąsienice (prawa/lewa) mogą obracać się jednocześnie w dwóch rożnych kierunkach, należało zastosować osobną oś dla prawego oraz lewego koła. Jej model przedstawiony został na rysunku \ref{zamocowanie_przod}. Element A wykonany został z drewna dębowego, które jest bardzo twarde i pozwala na dokładne spasowanie z osią B, wykonaną z aluminium.
 
   \begin{figure}[H]
     \begin{center}
       \includegraphics[scale=0.40]{imgs/moc_kol_prz.png}
- 	\caption[Model mocowania kół przednich.]{\small{Na rysunku przedstawiony został model wykonania mocowań kół przednich pojazdu. A - przedstawia blok łączący oś (B) z podstawą robota.}}
+ 	\caption[Model mocowania kół przednich.]{\small{Na rysunku przedstawiony został model mocowań kół przednich pojazdu. A - przedstawia blok łączący oś B z podstawą robota.}}
 	\label{zamocowanie_przod}
     \end{center}
   \end{figure}
