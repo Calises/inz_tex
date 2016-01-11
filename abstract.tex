@@ -1,15 +1,18 @@
-
 \chapter*{Streszczenie}
-Celem projektu inżynierskiego jest zaprojektowanie i wykonanie autonomicznego robota typu czołg. Pojazd oparty będzie o mikrokomputer Raspberry Pi 2 model B wraz z dedykowaną kamerą umieszczoną na wieżyczce. Na podstawie pozyskanego z niej obrazu wykrywane będzie znajdujące się w  pomieszczeniu czerwone koło. Zadaniem wieżyczki jest ustawienie kamery w taki sposób, aby znaleziony obiekt znajdował się w centrum kadru. Następnie cały pojazd ustawia się przodem do celu i podjeżdża do niego. Dodatkowo sterownik silników wykonany będzie na podstawie mikrokontrolerów Atmel AVR. Wpływ jakości oświetlenia na obraz kompensowany będzie przy wykorzystaniu algorytmu wykonującego odpowiednie operacje na poszczególnych pikselach. Na tak spreparowanym obrazie dokonywana będzie operacja transformacji Hougha. Dzięki niej na obrazie wyodrębniającym czerwone obiekty planowane jest znalezienie jedynie czerwonych kół. Przetwarzanie i analiza obrazu oparta będzie o funkcjonalności oferowane przez bibliotekę \textit{OpenCV}.
+Celem projektu inżynierskiego jest zaprojektowanie i wykonanie autonomicznego robota typu czołg. Pojazd oparty będzie na mikrokomputerze Raspberry Pi 2 model B wraz z dedykowaną kamerą umieszczoną na obrotowej wieży. Na podstawie pozyskanego z niej obrazu robot będzie aktywnie poszukiwał okrągłych czerwonych obiektów. Zadaniem wieży jest ustawienie kamery w taki sposób, aby znaleziony obiekt znajdował się w centrum kadru. Następnie cały pojazd ustawia się frontem do celu i zmierza w jego kierunku. Robot napędzany jest dwoma silnikami prądu stałego, sterowanymi za pomocą pary mikrokontrolerów Atmel AVR. Wyodrębnienie koloru czerwonego oraz kompensacja wpływu oświetlenia wykonywane są przy wykorzystaniu szeregu operacji macierzowych. Tak przetworzony obraz poddawany jest transformacji Hougha, w celu wyodrębnienia z obrazu obiektów o pożądanym kształcie. Przetwarzanie i analizę obrazu zaimplementowano z wykorzystaniem biblioteki \textit{OpenCV}.
 \\\\
 \noindent
 \textbf{Słowa kluczowe}: Raspberry Pi, OpenCV, robot mobilny, przetwarzanie obrazu, analiza obrazu
 \\
-
 \noindent
 \textbf{Dziedzina nauki i techniki, zgodnie z wymogami OECD}: automatyka i robotyka
+
 \chapter*{Abstract}
-And here we type the abstract of our thesis on 1 page max.
+
+The goal of the engineering project is to design and construct an autonomous tank-type robot. The vehicle will be based on a Raspberry Pi 2 Model B microcomputer with a dedicated camera on the turret. Basing on the image captured the robot will be detecting red circle-shaped objects. The turret is designed to keep the detected object in the center of the camera frame. Then the vehicle turns to face the object and drives forward to it. The robot is equipped in two DC motors with custom drivers controlled by a pair of Atmel AVR microcontrollers. Separation of red color and compensation the impact of lighting quality are performed using a range of matrix operations. Such prepared image will be then processed using Hough transform to extract objects of a given shape. Image processing and analysis is implemented using the \textit{OpenCV} library.
 \\\\
 \noindent
 \textbf{Keywords}:Raspberry Pi, OpenCV, mobile robot, image processing, image analysis
+\\
+\noindent
+\textbf{Field of science and technology, accordance with OECD}: control engineering and robotics
