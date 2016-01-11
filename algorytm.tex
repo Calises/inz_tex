@@ -2,7 +2,7 @@
 Zadanie, jakie miał realizować robot polegało na namierzeniu oraz śledzeniu celu w swoim otoczeniu. Założeniem było także to, aby algorytm robota potrafił znajdować cel przy zróżnicowanym oświetleniu oraz na różnej odległości (tj. niezależnie od jego rozmiaru na obrazie). Ważne było także, aby celem mógł być każdy obiekt spełniający podstawowe warunki koloru i kształtu. Algorytm przetwarzania i analizy obrazu ma więc za zadanie poszukiwać na dostarczanym przez kamerę obrazie celu i uzyskiwane w ten sposób informacje przesyłać do części programu odpowiedzialnej za sterowanie robotem.
 
 \namedsection{OpenCV}
-OpenCV jest biblioteką służącą do wszechstronnej obróbki obrazu, wydaną na licencji BSD (\textit{Berkeley Software Distribution}), będącej zgodną z zasadami wolnego oprogramowania. Została ona napisana w C oraz C++, jednak możliwe jest je wykorzystywanie także w języku \textit{Python} oraz \textit{Java}. Wspiera ona takie systemy operacyjne jak: \textit{Windows, Linux, Mac OS, iOS} oraz \textit{Android}. Posiada ona moduły służące do pracy tak z obrazem dwuwymiarowym, jak i trójwymiarowym. Ponadto zawiera szereg modułów, służących między innymi do rozpoznawania twarzy, gestów czy systemów uczących się (ang. \textit{machine learning}).
+OpenCV jest biblioteką służącą do wszechstronnej obróbki obrazu, wydaną na licencji BSD (\textit{Berkeley Software Distribution}), będącej zgodną z zasadami wolnego oprogramowania. Została ona napisana w C oraz C++, jednak możliwe jest je wykorzystywanie także w językach \textit{Python} oraz \textit{Java}. Wspiera ona takie systemy operacyjne jak: \textit{Windows, Linux, Mac OS, iOS} oraz \textit{Android}. Posiada ona moduły służące do pracy tak z obrazem dwuwymiarowym, jak i trójwymiarowym. Ponadto zawiera szereg modułów, służących między innymi do rozpoznawania twarzy, gestów czy systemów uczących się (ang. \textit{machine learning}).
 
 O jej wykorzystaniu, poza darmową licencją, zdecydowała optymalizacja zastosowanych rozwiązań oraz mnogość funkcji, spełniających większość zadań związanych z analizą obrazu. Wykorzystywana w projekcie wersja nosi oznaczenie 3.0.0 i została opublikowana 4 czerwca 2015 roku. W przedstawianym algorytmie wykorzystywane są trzy moduły z tej biblioteki:
 \begin{itemize}
@@ -12,9 +12,9 @@ O jej wykorzystaniu, poza darmową licencją, zdecydowała optymalizacja zastoso
 \end{itemize}
 
 \namedsection{Inicjalizacja}
-Działający na Raspberry Pi program składa się z dwóch części. Pierwsza z nich jest odpowiedzialna za inicjalizację sprzętowych generatorów sygnału PWM na Raspberry oraz łączenie się z kamerą oraz rozpoczęcie jej pracy z ustalonymi parametrami.
+Działający na \textit{Raspberry Pi} program składa się z dwóch części. Pierwsza z nich jest odpowiedzialna za inicjalizację sprzętowych generatorów sygnału PWM na \textit{Raspberry Pi}, łączenie się z kamerą oraz rozpoczęcie jej pracy z ustalonymi parametrami.
 
-Inicjalizacja sygnałów PWM na Raspberry jest wykonywana z wykorzystaniem biblioteki \textit{wiringPi}. Jest to napisana w języku C biblioteka obsługująca piny GPIO mini komputera Raspberry Pi. Została ona wydana na licencji \textit{GNU LGPLv3}, umożliwiającej darmowy dostęp dla wszystkich zainteresowanych użytkowników. Pierwszym krokiem inicjalizacji sygnałów PWM jest wywołanie funkcji \texttt{int wiringPiSetupGpio()}. Znajdują się w niej deklaracje niezbędne do poprawnej pracy z biblioteką. Odpowiada ona także za umożliwienie bezpośredniego dostępu do pinów GPIO Raspberry. Wartością zwracaną przez tą funkcję jest kod, informujący o poprawności wywołania. Jego wartość równa -1 oznacza błąd uniemożliwiający dalszą prawidłową pracę. Następnie należy wywołać funkcję \textit{void pinMode (int pin, int mode)}, której zadaniem jest ustawienie jednego z pinów GPIO Rasppbery w odpowiedni tryb: wejścia, wyjścia, wyjścia zegara lub wyjścia sygnału PWM. W tym przypadku koniecznie jest ustawienie pinów numer 18 oraz 19 jako wyjścia sygnału PWM. Kolejną wywoływaną funkcją z tej biblioteki jest void \texttt{pwmSetMode(int mode)}. Ma ona za zadanie ustalić w którym z dwóch trybów ma pracować generator sygnału PWM: \textit{mark:space} lub \textit{balanced}. Pierwszy z nich jest klasycznym sygnałem PWM, w którym okres sygnału jest równy całemu cyklowi pracy licznika. W drugim wartość wypełnienia jest równomiernie rozłożona na cykl licznika, przez co wyjściowa częstotliwość sygnału jest dużo większa. W zastosowanym algorytmie wykorzystany został pierwszy tryb, gdyż dużo lepiej nadaje się on do sterowania serwomechanizmów. Kolejne dwa niezbędne do ustawienia parametry to zakres licznika oraz preskaler zegara. Wykorzystuje się do tego dwie funkcje: \texttt{void pwmSetRange (unsigned int range)} oraz \texttt{void pwmSetClock (int divisor)}. Wpływ tych dwóch parametrów przedstawia wzór:
+Inicjalizacja sygnałów PWM na \textit{Raspberry Pi} jest wykonywana z wykorzystaniem biblioteki \textit{wiringPi}. Jest to napisana w języku C biblioteka obsługująca piny GPIO mini komputera \textit{Raspberry Pi}. Została ona wydana na licencji \textit{GNU LGPLv3}, umożliwiającej darmowy dostęp dla wszystkich zainteresowanych użytkowników. Pierwszym krokiem inicjalizacji sygnałów PWM jest wywołanie funkcji \texttt{int wiringPiSetupGpio()}. Znajdują się w niej deklaracje niezbędne do poprawnej pracy z biblioteką. Odpowiada ona także za umożliwienie bezpośredniego dostępu do pinów GPIO \textit{Raspberry Pi}. Wartością zwracaną przez tą funkcję jest kod, informujący o poprawności wywołania. Jego wartość równa -1 oznacza błąd uniemożliwiający dalszą prawidłową pracę. Następnie należy wywołać funkcję \textit{void pinMode (int pin, int mode)}, której zadaniem jest ustawienie jednego z pinów GPIO Rasppbery w odpowiedni tryb: wejścia, wyjścia, wyjścia zegara lub wyjścia sygnału PWM. W tym przypadku koniecznie jest ustawienie pinów numer 18 oraz 19 jako wyjścia sygnału PWM. Kolejną wywoływaną funkcją z tej biblioteki jest void \texttt{pwmSetMode(int mode)}. Ma ona za zadanie ustalić w którym z dwóch trybów ma pracować generator sygnału PWM: \textit{mark:space} lub \textit{balanced}. Pierwszy z nich jest klasycznym sygnałem PWM, w którym okres sygnału jest równy całemu cyklowi pracy licznika. W drugim wartość wypełnienia jest równomiernie rozłożona na cykl licznika, przez co wyjściowa częstotliwość sygnału jest dużo większa. W zastosowanym algorytmie wykorzystany został pierwszy tryb, gdyż dużo lepiej nadaje się on do sterowania serwomechanizmów. Kolejne dwa niezbędne do ustawienia parametry to zakres licznika oraz preskaler zegara. Wykorzystuje się do tego dwie funkcje: \texttt{void pwmSetRange (unsigned int range)} oraz \texttt{void pwmSetClock (int divisor)}. Wpływ tych dwóch parametrów przedstawia wzór:
 \begin{equation}
 f_{PWM} = \frac{f_{count}}{range} = \frac{f}{(divisor * range)}
 \label{eq:hard_pwm}
@@ -27,7 +27,7 @@ gdzie:
 \EQDitem{$divisor$}{Wartość preskalera,}
 \EQDitem{$range$}{Zasięg licznika, }
 \end{equationDescriptor}
-W przypadku zastosowanych serw wymagane $f_{PWM}$ wynosi 50 $Hz$, a $f$ dla Raspberry Pi to 19.2 $MHz$. Przedstawiony wcześniej wzór przyjmuje więc postać:
+W przypadku zastosowanych serwomechanizmów wymagane $f_{PWM}$ wynosi 50 $Hz$, a $f$ dla \textit{Raspberry Pi} to 19.2 $MHz$. Przedstawiony wcześniej wzór przyjmuje więc postać:
 \begin{equation}
 50 Hz = \frac{19.2 MHz}{(divisor * range)}
 \label{eq:hard_pwmN}
@@ -37,8 +37,8 @@ Widać więc jasno, że wartość preskalera oraz zasięg liczniki są ze sobą 
 (divisor * range) = \frac{19.2 MHz}{50 Hz} = 384000
 \label{eq:range_x_presc}
 \end{equation}
-O dokładności sterowania serwomechanizmem decyduje właśnie wartość zasięgu licznika służącego do generowania sygnału PWM. Wspomniane wcześniej funkcje z biblioteki \textit{WiringPi} służące do ustawiania tych dwóch parametrów przyjmują tylko wartości całkowite, więc wybierany zasięg licznika powinien być dzielnikiem liczby $384000$. Wartość zasięgu ustawiono więc na poziomie 6000, co zapewnia wystarczającą dokładność pracy serwomechanizmu, a to z kolei pociągnęło za sobą ustawienie preskalera zegara na 64. Ostatecznie blok kodu odpowiedzialny na inicjalizację sprzętowego generatora sygnału PWM w Raspberry Pi za pomocą biblioteki \textit{WiringPi} przyjmuje postać:
-\begin{lstlisting}[caption=Inicjalizacja sygnałów PWM Raspberry]
+O dokładności sterowania serwomechanizmem decyduje właśnie wartość zasięgu licznika służącego do generowania sygnału PWM. Wspomniane wcześniej funkcje z biblioteki \textit{WiringPi} służące do ustawiania tych dwóch parametrów przyjmują tylko wartości całkowite, więc wybierany zasięg licznika powinien być dzielnikiem liczby $384000$. Wartość zasięgu ustawiono więc na poziomie 6000, co zapewnia wystarczającą dokładność pracy serwomechanizmu, a to z kolei pociągnęło za sobą ustawienie preskalera zegara na 64. Ostatecznie blok kodu odpowiedzialny na inicjalizację sprzętowego generatora sygnału PWM w \textit{Raspberry Pi} za pomocą biblioteki \textit{WiringPi} przyjmuje postać:
+\begin{lstlisting}[caption=Inicjalizacja sygnałów PWM \textit{Raspberry Pi}]
 if (wiringPiSetupGpio() != -1)
 {
 	pinMode(18,PWM_OUTPUT);
@@ -53,7 +53,7 @@ else
 }
 \end{lstlisting}
 
-Drugą rzeczą, obok sygnału PWM, wymagającą inicjalizacji na początku pracy programu jest kamera. Do jej obsługi wykorzystana została biblioteka \textit{RaspiCamCV}, udostępniana na zasadach wolnego oprogramowania. Została ona wybrana, ponieważ zapewnia podstawową obsługę dedykowanej kamery Raspberry we współpracy z biblioteką \textit{OpenCV}. Z jej wykorzystaniem możliwe jest pobieranie rejestrowanych obrazów bezpośrednio w formacie umożliwiającym dalszą edycję za pomocą funkcji \textit{OpenCV}. Pierwszym etapem pracy z dedykowaną kamerą, z wykorzystaniem biblioteki \textit{RaspiCamCV}, jest utworzenie danych konfiguracyjnych, które posłużą do pracy z kamery. Podstawowym ustawieniem, które należy wybrać jest rozdzielczość w jakiej będą rejestrowane obrazy. Jest to o tyle istotne, że podstawowym ograniczeniem w pracach nad algorytmem wykrywającym cel był fakt, że wyniki jego pracy miały na bieżąco sterować ruchami pojazdu, przy ograniczonej mocy obliczeniowej platformy Raspberry Pi. Podstawowym ograniczeniem, które spowodowały te warunki, była rozdzielczość analizowanego obrazu. Oferowana przez kamerę rozdzielczość maksymalna wynosi aż 1920 na 1080 pikseli, jednak jest to o wiele za dużo, jak na stawiane przed algorytmem wymagania. Ostatecznie zdecydowano się wykorzystać rozdzielczość 640 na 480 pikseli. Taki rozmiar zapewnia jeszcze zadowalający poziom dokładności zdjęcia oraz relatywnie szybką jego analizę. Pozostałe parametry zostały ustawione na wartości domyślne, ponieważ wtedy są one samoczynnie dobierane na podstawie warunków pracy, co zapewniło zdjęcia bardzo dobrej jakości nawet przy zróżnicowanym oświetleniu.
+Drugą rzeczą, obok sygnału PWM, wymagającą inicjalizacji na początku pracy programu jest kamera. Do jej obsługi wykorzystana została biblioteka \textit{RaspiCamCV}, udostępniana na zasadach wolnego oprogramowania. Została ona wybrana, ponieważ zapewnia podstawową obsługę dedykowanej kamery \textit{Raspberry Pi} we współpracy z biblioteką \textit{OpenCV}. Z jej wykorzystaniem możliwe jest pobieranie rejestrowanych obrazów bezpośrednio w formacie umożliwiającym dalszą edycję za pomocą funkcji \textit{OpenCV}. Pierwszym etapem pracy z dedykowaną kamerą, z wykorzystaniem biblioteki \textit{RaspiCamCV}, jest utworzenie danych konfiguracyjnych, które posłużą do ustawienia parametrów pracy kamery. Podstawowym ustawieniem, które należy wybrać jest rozdzielczość w jakiej będą rejestrowane obrazy. Jest to o tyle istotne, że podstawowym ograniczeniem w pracach nad algorytmem wykrywającym cel był fakt, że wyniki jego pracy miały na bieżąco sterować ruchami pojazdu, przy ograniczonej mocy obliczeniowej platformy \textit{Raspberry Pi}. Podstawowym ograniczeniem, które spowodowały te warunki, była rozdzielczość analizowanego obrazu. Oferowana przez kamerę rozdzielczość maksymalna wynosi aż 1920 na 1080 pikseli, jednak jest to o wiele za dużo, jak na stawiane przed algorytmem wymagania. Ostatecznie zdecydowano się wykorzystać rozdzielczość 640 na 480 pikseli. Taki rozmiar zapewnia jeszcze zadowalający poziom dokładności zdjęcia oraz relatywnie szybką jego analizę. Pozostałe parametry zostały ustawione na wartości domyślne, ponieważ wtedy są one samoczynnie dobierane na podstawie warunków pracy, co zapewniło zdjęcia bardzo dobrej jakości nawet przy zróżnicowanym oświetleniu.
 
 Po stworzeniu danych konfiguracyjnych pozostało utworzyć obiekt (a właściwie wskaźnik na taki obiekt), który w trakcie pracy programu będzie służył do pobierania ostatniego wykonanego przez kamerę zdjęcia znajdującego się w buforze. Całość kodu wykorzystywanego do inicjalizacji pracy kamery przedstawia się w sposób następujący:
 \begin{lstlisting}[caption=Inicjalizacja pracy kamery]
@@ -77,7 +77,7 @@ Dalsza część algorytmu poświęcona jest wyodrębnieniu czerwonych obiektów.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.42]{imgs/imgBase+Red.jpg}
-\caption[Uzyskany kanał czerwony wraz z oryginalny obrazem.]\small{"A" - oryginalne zdjęcie wykonane przez kamerę Raspberry Pi, "B" - kanał czerwony tego zdjęcia.}
+\caption[Uzyskany kanał czerwony wraz z oryginalny obrazem.]\small{A - oryginalne zdjęcie wykonane przez kamerę \textit{Raspberry Pi}, B - kanał czerwony tego zdjęcia.}
 \label{red}
 \end{center}
 \end{figure}
@@ -114,7 +114,7 @@ Usunięcie z kanału czerwonego obszarów, w których czerwień jest tylko mniej
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.42]{imgs/imgBase+sumBG.jpg}
-\caption[Kanał czerwony minus zielony oraz niebieski.]\small{"A" - przedstawiony dla porównania oryginalny obraz, "B" - obraz powstały z odjęcia od kanału czerwone sumy kanałów zielonego oraz niebieskiego.}
+\caption[Kanał czerwony minus zielony oraz niebieski.]\small{A - przedstawiony dla porównania oryginalny obraz, B - obraz powstały z odjęcia od kanału czerwone sumy kanałów zielonego oraz niebieskiego.}
 \label{red-b+g}
 \end{center}
 \end{figure}
@@ -137,7 +137,7 @@ Wynik operacji wyznaczającej maksimum kanału zielonego i niebieskiego oraz odj
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.42]{imgs/imgMax+RwoBG.jpg}
-\caption[Kanał czerwony minus maksimum zielonego i niebieskiego.]\small{"A" - obraz powstały jako maksimum kanałów zielonego i niebieskiego, "B" - wynik odjęcia wspomnianego maksimum od kanału czerwonego.}
+\caption[Kanał czerwony minus maksimum zielonego i niebieskiego.]\small{A - obraz powstały jako maksimum kanałów zielonego i niebieskiego, B - wynik odjęcia wspomnianego maksimum od kanału czerwonego.}
 \label{red-max}
 \end{center}
 \end{figure}
@@ -145,11 +145,11 @@ Jak widać, poza bardziej jednolitym przedstawieniem jednorodnych obiektów, uda
 
 Odejmowanie od siebie zróżnicowanych obrazów może powodować jednak powstanie dużych różnic jasności blisko położonych pikseli.  Efekt ten powoduje na dalszych etapach analizy obrazu problemy z odnajdywaniem regularnych geometrycznych kształtów, co sprowadza się do trudności z wykrywaniem okręgów. Problem ten rozwiązuje zastosowanie filtru medianowego na macierzy maksimów koloru niebieskiego i zielonego.
 
-Filtr medianowy jest narzędziem wykorzystujący jedną z podstawowych wartości statystycznych jaką jest mediana. Polega ona na wyznaczaniu środkowego elementu w monotoniczne uporządkowanym ciągu\cite{Malina}. W przypadku filtru medianowego ciągiem tym jest zbiór pikseli, który na obrazie pokrywa maska filtru. Przykłady stosowanych masek przedstawia ilustracja \ref{maski}. Element zaznaczony na niej jako "X", jest elementem do którego wpisany zostanie wynik mediany.\newpage
+Filtr medianowy jest narzędziem wykorzystujący jedną z podstawowych wartości statystycznych jaką jest mediana. Polega ona na wyznaczaniu środkowego elementu w monotoniczne uporządkowanym ciągu\cite{Malina}. W przypadku filtru medianowego ciągiem tym jest zbiór pikseli, który na obrazie pokrywa maska filtru. Przykłady stosowanych masek przedstawia ilustracja \ref{maski}. Element zaznaczony na niej jako ,,X", jest elementem do którego wpisany zostanie wynik mediany.\newpage
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.8]{imgs/maski.png}
-\caption[Przykład masek filtru medianowego.]\small{Przykład masek wykorzystywanych w filtrze medianowym: a) maska 5-elementowa, b) maska 9-elementowa. Znakiem "X" oznaczono element docelowy wyniku mediany.}
+\caption[Przykład masek filtru medianowego.]\small{Przykład masek wykorzystywanych w filtrze medianowym: A - maska 5-elementowa, B - maska 9-elementowa. Znakiem ,,X" oznaczono element docelowy wyniku mediany.}
 \label{maski}
 \end{center}
 \end{figure}
@@ -157,17 +157,17 @@ Filtr ten ujednolica obraz, usuwając z niego piksele o wartościach skrajnych. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.42]{imgs/imgMax+RwoBG_med.jpg}
-\caption[Kanał czerwony po odjęciu maksimum kanału zielonego i niebieskiego z filtrem medianowym.]\small{"A" - obraz powstały jako maksimum kanałów zielonego i niebieskiego oraz z filtrem medianowym, "B" - wynik odjęcia wspomnianego maksimum od kanału czerwonego.}
+\caption[Kanał czerwony po odjęciu maksimum kanału zielonego i niebieskiego z filtrem medianowym.]\small{A - obraz powstały jako maksimum kanałów zielonego i niebieskiego oraz z filtrem medianowym, B - wynik odjęcia wspomnianego maksimum od kanału czerwonego.}
 \label{red-maxM}
 \end{center}
 \end{figure}
-Porównując obrazy "B" z ilustracji \ref{red-max} i \ref{red-maxM} widać oczekiwany efekt działania filtru. Krawędzie są bardziej dokładnie, a same obiekty posiadają bardziej jednolity poziom jasności.
+Porównując obrazy B z ilustracji \ref{red-max} i \ref{red-maxM} widać oczekiwany efekt działania filtru. Krawędzie są bardziej dokładnie, a same obiekty posiadają bardziej jednolity poziom jasności.
 
 Na tym etapie udało się uzyskać obraz z wyróżnionymi obszarami czerwonego koloru o dużym poziomie szczegółowości. Kolejny etap algorytmu zakłada podzielenie obrazu na obszary z wyróżniającym się kolorem czerwonym oraz na pozostałe, nie zawierające istotnych informacji. Operacja, polegająca na podzieleniu obrazu na obszary, posiadające pewne cechy wyróżniające je od sąsiedztwa nazywana jest segmentacją\cite{Malina}. Jedną z podstawowych metod segmentacji, wykorzystaną także w tym przypadku, jest progowanie binarne. Polega ono na porównaniu każdego piksela z pewną wartością progową i, w zależności od wyniku porównania, przypisaniu mu jednego z dwóch poziomów jasności. Do wykonania tej operacji wykorzystywana została funkcja \textit{cvThreshold} z biblioteki \textit{OpenCV}. Do każdego pikseli poniżej wartości progu przypisuje ona poziom 0, z kolei tym przekraczającym próg pewną ustalaną przy jej wywoływaniu wartość. Działanie tego typu progowania można przedstawić za pomocą wzoru \ref{eq:progowanie}.
 \begin{equation}
 J_p(x, y) =
   \begin{cases}
-    a	& \quad \text{dla } J(x, y) < t\\
+    0	& \quad \text{dla } J(x, y) < t\\
     b	& \quad \text{dla } J(x, y) \geq t\\
   \end{cases}
 \label{eq:progowanie}
@@ -177,7 +177,6 @@ gdzie:
 \EQDitem{$J_p(x, y)$}{wartość piksela po progowaniu,}
 \EQDitem{$J(x, y)$}{wartość piksela przed progowaniem,}
 \EQDitem{$t$}{wybrany próg,}
-\EQDitem{$a$}{wartość przypisana do piksela w sytuacji, gdy jego poziom jasności przed progowaniem nie przekroczył progu,}
 \EQDitem{$b$}{wartość przypisana do piksela w sytuacji, gdy jego poziom jasności przed progowaniem przekroczył próg.}
 \end{equationDescriptor}
 W przedstawianym algorytmie wartość progu została uzależniona od jasności samego obrazu, aby uzyskać poprawne działanie algorytmu przy różnych rodzajach oświetlenia otoczenia robota. Zdecydowano się na wartość wynoszącą 0.75 poziomu najjaśniejszego piksela występującego na obrazie, co jest wartością dobraną na podstawie obserwacji wykonanych obrazów. Kolejnym koniecznym do ustalenia parametrem jest poziom jasności piksela w sytuacji, gdy przekroczył on próg. Nie jest ona tutaj aż tak istotnym parametrem i ustawiona została na poziomie 255, czyli maksimum dla przetwarzanego obrazu 8-bitowego. Efektem tak przeprowadzonego progowania jest czarno-biały obraz, na którym obiekty wyróżniające się czerwoną barwą przedstawione są białym kolorem, pozostały obszar jest czarny.
@@ -186,11 +185,11 @@ Operacja progowania wykonywana na obrazie z pełną skalą szarości, przy pomoc
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.6]{imgs/img_prog+med.jpg}
-\caption[Efekt progowania z oraz bez filtru medianowego.]\small{"A" - obraz początkowy bez zastosowanego filtru medianowego, "B" - efektem progowania bez wcześniejszego zastosowania filtru medianowego, "C" - obraz początkowy na którym zastosowano filtr medianowy, "D" - efekt operacji progowania po wcześniejszym zastosowaniu filtru medianowego.}
+\caption[Efekt progowania z oraz bez filtru medianowego.]\small{A - obraz początkowy bez zastosowanego filtru medianowego, B - efektem progowania bez wcześniejszego zastosowania filtru medianowego, C - obraz początkowy na którym zastosowano filtr medianowy, D - efekt operacji progowania po wcześniejszym zastosowaniu filtru medianowego.}
 \label{threshold}
 \end{center}
 \end{figure}
-Na przedstawionych zdjęciach "A" oraz "C" widoczny jest efekt tworzenia obszarów jednolitego koloru na obrazie. Duże obiekty stały się bardziej regularne, za to mniejsze szczegóły uległy zamazaniu. Efekty wykorzystania filtru są także widoczne na obrazach "B" oraz "D", będących efektem progowania. Zachowane białe obszary, reprezentujące czerwone obiekty na oryginalnym zdjęciu, posiadają bardziej regularne krawędzie, zniknęły także ubytki wewnątrz figur oraz pojedyncze białe piksele widoczne w różnych miejscach obrazu "B".
+Na przedstawionych zdjęciach A oraz C widoczny jest efekt tworzenia obszarów jednolitego koloru na obrazie. Duże obiekty stały się bardziej regularne, za to mniejsze szczegóły uległy zamazaniu. Efekty wykorzystania filtru są także widoczne na obrazach B oraz D, będących efektem progowania. Zachowane białe obszary, reprezentujące czerwone obiekty na oryginalnym zdjęciu, posiadają bardziej regularne krawędzie, zniknęły także ubytki wewnątrz figur oraz pojedyncze białe piksele widoczne w różnych miejscach obrazu B.
 
 \namedsection{Analiza obrazu}
 Efektem przetwarzania uzyskanego z kamery zdjęcia jest binarny obraz, który zostaje następnie poddany analizie, mającej za zadanie znaleźć występujące na nim okręgi. Do tego celu wykorzystana została transformacja Hougha. Jej podstawowa wersja została opracowana przez Paula Hougha w 1962 roku i służyła do detekcji linii prostych. Z czasem metodę tę jednak rozwijano, uogólniając o inne, dające się opisać analitycznie, kształty. Jej wariacja służąca do detekcji okręgów została przedstawiona w 1972 przez Richarda Duda oraz Petera Harta.
