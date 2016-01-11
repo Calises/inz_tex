@@ -1,12 +1,12 @@
 \namedchapter{Wstęp i cel pracy}
-Celem projektu inżynierskiego jest budowa autonomicznego robota mobilnego przypominającego czołg. Robot zostanie wyposażony w obrotową wieżyczkę znajdującą się na korpusie pojazdu oraz zamocowane do niej ,,działo" mogące zmieniać swoje położenie. Robot w sposób autonomiczny stara się zlokalizować cel oraz określić jego położenie względem samego siebie. W ramach projektu należy:
+Celem projektu inżynierskiego jest budowa autonomicznego robota mobilnego przypominającego czołg. Robot zostanie wyposażony w obrotową wieżyczkę znajdującą się na korpusie pojazdu oraz zamocowane do niej ,,działo" mogące zmieniać swoje położenie. Robot w sposób autonomiczny stara się zlokalizować czerwony okrąg oraz określić jego położenie względem samego siebie. W ramach projektu należy:
 \begin{itemize}
-\item doboru elementów wykonawczych robota (silniki, serwomechanizmy) pod kątem założeń projektowych oraz wybór platformy, na której oparty zostanie system wizyjny,
-\item zaprojektowania konstrukcji robota, wykonania modelu 3D oraz jego fizycznej realizacji,
-\item stworzenia projektu sterownika silników napędowych, wykonania płytki drukowanej oraz implementacji regulatora,
-\item zapewnienia komunikacji pomiędzy system wizyjnym a mikrokontrolerem,
-\item przygotowania programu służącego do analizy obrazu pozyskanego z kamery,
-\item zaimplementowania algorytmu sterującego robotem.
+\item dobrać elementy wykonawcze robota (silniki, serwomechanizmy) pod kątem założeń projektowych oraz wybrać platformę, na której oparty zostanie system wizyjny,
+\item zaprojektować konstrukcję robota, wykonać model 3D oraz jego fizyczną realizację,
+\item stworzyć projekt sterownika silników napędowych, wykonać płytkę drukowaną oraz zaimplementować regulator,
+\item zapewnić komunikację pomiędzy systemem wizyjnym a mikrokontrolerem,
+\item przygotować program służący do analizy obrazu pozyskanego z kamery,
+\item zaimplementować algorytm sterujący robotem.
 \end{itemize}
 
 Autonomiczne roboty mobilne najczęściej poruszają się w nie do końca znanym im środowisku. Co za tym idzie - muszą być wyposażone w system nawigacyjny, przez który rozumiany jest zespół czujników pełniących funkcję sprzężenia zwrotnego z otaczającego pojazd świata. W naszym przypadku system opierać się będzie głównie o mikrokomputer wyposażony w kamerę video, który dodatkowo będzie wspierany krańcówkami znajdującymi się na przedzie pojazdu. Ich zadaniem będzie przede wszystkim wykrycie możliwych kolizji z przedmiotami znajdującymi się bezpośrednio przed robotem. Projekt oparty będzie o tzw. system wbudowany, czyli kompaktową, multimedialną jednostkę obliczeniową wykorzystywaną do realizacji specjalnych funkcji, takich jak sterowanie pracą silnika czy analiza danych. Systemy wbudowane są (najczęściej) na stałe połączone z elementami wykonawczymi oraz pomiarowymi. Najważniejszą funkcją robota będzie przetwarzanie oraz analizowanie obrazów w czasie rzeczywistym, co wymaga stosunkowo dużej pamięci oraz mocy obliczeniowej. Powyższe wymagania pozwoliły wybrać platformę, na której zrealizowany będzie projekt, mianowicie \textit{Raspberry Pi} wraz z dedykowaną kamerą \textit{Raspberry Pi Camera Board}. 
